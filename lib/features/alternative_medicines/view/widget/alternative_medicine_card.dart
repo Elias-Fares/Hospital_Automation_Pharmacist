@@ -1,13 +1,14 @@
-part of '../medicines_screen.dart';
+part of '../alternative_medicines_screen.dart';
 
-class MedicineCard extends StatelessWidget {
-  const MedicineCard({
+class AlternativeMedicineCard extends StatelessWidget {
+  const AlternativeMedicineCard({
     super.key,
     required this.imageUrl,
     required this.medName,
     required this.medTiter,
     required this.medPrice,
     this.onMedicineTap,
+    this.onDetachTap,
   });
 
   final String imageUrl;
@@ -15,6 +16,7 @@ class MedicineCard extends StatelessWidget {
   final String medTiter;
   final String medPrice;
   final void Function()? onMedicineTap;
+  final void Function()? onDetachTap;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,12 @@ class MedicineCard extends StatelessWidget {
                 color: AppColors.primary,
                 fontWeight: FontWeight.w700,
               ),
+            ),
+            SizedBox(height: 10),
+            CustomOutlinedButton(
+              title: "Detach",
+              height: 30,
+              onTap: onDetachTap,
             ),
           ],
         ),

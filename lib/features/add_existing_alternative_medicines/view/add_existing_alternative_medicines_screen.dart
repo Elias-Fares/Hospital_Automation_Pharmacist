@@ -7,23 +7,26 @@ import 'package:go_router/go_router.dart';
 import 'package:medicare_pharmacy/core/models/medicine_model.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
+import 'package:medicare_pharmacy/core/widgets/appbars/app_bar_with_search.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/custom_inkwell.dart';
-import 'package:medicare_pharmacy/core/widgets/general_image_asset.dart';
+import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
 import 'package:medicare_pharmacy/core/widgets/general_network_image.dart';
 import 'package:medicare_pharmacy/features/medicine_details/view/medicine_details_screen.dart';
-part 'widget/search_for_medicine_text_field.dart';
-part 'widget/medicine_card.dart';
+part 'widget/add_alt_med_card.dart';
 
-class MedicinesScreen extends ConsumerStatefulWidget {
-  const MedicinesScreen({super.key});
-  static const routeName = "/medicines_screen";
+class AddExistingAlternativeMedicinesScreen extends ConsumerStatefulWidget {
+  const AddExistingAlternativeMedicinesScreen({super.key});
+  static const routeName = "/add_existing_alternative_medicines_screen";
 
   @override
-  ConsumerState<MedicinesScreen> createState() => _MedicinesScreenState();
+  ConsumerState<AddExistingAlternativeMedicinesScreen> createState() =>
+      _AddExistingAlternativeMedicinesScreenState();
 }
 
-class _MedicinesScreenState extends ConsumerState<MedicinesScreen> {
-  final searchTextEditingController = TextEditingController();
+class _AddExistingAlternativeMedicinesScreenState
+    extends ConsumerState<AddExistingAlternativeMedicinesScreen> {
+  final TextEditingController searchTextEditingController =
+      TextEditingController();
 
   final jsonString = """ {
             "medicinesId": 3,
@@ -71,41 +74,43 @@ class _MedicinesScreenState extends ConsumerState<MedicinesScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        children: [
-          SearchForMedicineTextField(
-            searchTextEditingController: searchTextEditingController,
-          ),
-          SizedBox(height: 20),
+  void dispose() {
+    searchTextEditingController.dispose();
+    super.dispose();
+  }
 
-          GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: .9,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBarWithSearch(
+        searchTextEditingController: searchTextEditingController,
+      ),
+      body: GridView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: .75,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+        ),
+        itemCount: 10,
+
+        itemBuilder:
+            (context, index) => AddAltMedCard(
+              medName: fakeMedModel.name ?? "",
+              medPrice: fakeMedModel.price?.toString() ?? "",
+              medTiter: fakeMedModel.pharmaceuticalTiter?.toString() ?? "",
+              imageUrl: fakeMedModel.medImageUrl ?? "",
+              onMedicineTap: () {
+                context.push(
+                  MedicineDetailsScreen.routeName,
+                  extra: fakeMedModel,
+                );
+              },
+              onAddAlt: () {
+                //logic
+              },
             ),
-            itemCount: 8,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder:
-                (context, index) => MedicineCard(
-                  medName: fakeMedModel.name ?? "",
-                  medPrice: fakeMedModel.price?.toString() ?? "",
-                  medTiter: fakeMedModel.pharmaceuticalTiter?.toString() ?? "",
-                  imageUrl: fakeMedModel.medImageUrl ?? "",
-                  onMedicineTap: () {
-                    context.push(
-                      MedicineDetailsScreen.routeName,
-                      extra: fakeMedModel,
-                    );
-                  },
-                ),
-          ),
-        ],
       ),
     );
   }

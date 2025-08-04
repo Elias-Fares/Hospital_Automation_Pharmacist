@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medicare_pharmacy/core/enums/medicine_card_type.dart';
+import 'package:medicare_pharmacy/core/models/medicine_model.dart';
+import 'package:medicare_pharmacy/features/add_existing_alternative_medicines/view/add_existing_alternative_medicines_screen.dart';
+import 'package:medicare_pharmacy/features/alternative_medicines/view/alternative_medicines_screen.dart';
+
 import 'package:medicare_pharmacy/features/auth/view/screens/add_pharmacy_address_screen.dart';
 import 'package:medicare_pharmacy/features/auth/view/screens/add_residential_address_screen.dart';
 import 'package:medicare_pharmacy/features/auth/view/screens/login_screen.dart';
@@ -7,10 +12,15 @@ import 'package:medicare_pharmacy/features/auth/view/screens/reset_password_scre
 import 'package:medicare_pharmacy/features/auth/view/screens/sign_up_screen.dart';
 import 'package:medicare_pharmacy/features/auth/view/screens/upload_profile_image_screen.dart';
 import 'package:medicare_pharmacy/features/auth/view/screens/verification_code_screen.dart';
+import 'package:medicare_pharmacy/features/batches/view/batches_screen.dart';
 import 'package:medicare_pharmacy/features/dispense/view/dispense_screen.dart';
+import 'package:medicare_pharmacy/features/edit_medicine/view/edit_medicine_screen.dart';
 import 'package:medicare_pharmacy/features/main/view/main_screen.dart';
+import 'package:medicare_pharmacy/features/medicine_details/view/medicine_details_screen.dart';
 import 'package:medicare_pharmacy/features/medicines/view/medicines_screen.dart';
+import 'package:medicare_pharmacy/features/notifications/view/notifications_screen.dart';
 import 'package:medicare_pharmacy/features/permission_required/view/permission_required_screen.dart';
+import 'package:medicare_pharmacy/features/pharmacy_profile/view/pharmacy_profile_screen.dart';
 import 'package:medicare_pharmacy/features/scanner/view/scanner_screen.dart';
 import 'package:medicare_pharmacy/features/successful_verification/view/successful_verification_screen.dart';
 
@@ -73,11 +83,58 @@ class AppRouter {
       ),
       GoRoute(
         path: MedicinesScreen.routeName,
-        builder: (context, state) => const MedicinesScreen(),
+
+        builder: (context, state) {
+          return const MedicinesScreen();
+        },
       ),
       GoRoute(
         path: MainScreen.routeName,
         builder: (context, state) => const MainScreen(),
+      ),
+      GoRoute(
+        path: MedicineDetailsScreen.routeName,
+        builder: (context, state) {
+          final med = state.extra as MedicineModel?;
+          return MedicineDetailsScreen(med: med);
+        },
+      ),
+      GoRoute(
+        path: AlternativeMedicinesScreen.routeName,
+        builder: (context, state) {
+          return AlternativeMedicinesScreen();
+        },
+      ),
+      GoRoute(
+        path: AddExistingAlternativeMedicinesScreen.routeName,
+        builder: (context, state) {
+          return AddExistingAlternativeMedicinesScreen();
+        },
+      ),
+      GoRoute(
+        path: EditMedicineScreen.routeName,
+        builder: (context, state) {
+          final med = state.extra as MedicineModel?;
+          return EditMedicineScreen(med: med);
+        },
+      ),
+      GoRoute(
+        path: BatchesScreen.routeName,
+        builder: (context, state) {
+          return BatchesScreen();
+        },
+      ),
+      GoRoute(
+        path: PharmacyProfileScreen.routeName,
+        builder: (context, state) {
+          return PharmacyProfileScreen();
+        },
+      ),
+      GoRoute(
+        path: NotificationsScreen.routeName,
+        builder: (context, state) {
+          return NotificationsScreen();
+        },
       ),
     ],
   );

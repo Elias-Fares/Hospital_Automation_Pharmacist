@@ -88,4 +88,7 @@ class Res {
   static const String diagnosis = "$vaccineIconPath/diagnosis$svg";
   static const String medicineTiter = "$vaccineIconPath/medicine_titer$svg";
   static const String medicineCompany = "$vaccineIconPath/medicine_company$svg";
+  static const String alternativeIcon = "$vaccineIconPath/alternative$svg";
+  static const String batchIcon = "$vaccineIconPath/batch_icon$svg";
+  static const String trashIcon = "$vaccineIconPath/trash_icon$svg";
 }

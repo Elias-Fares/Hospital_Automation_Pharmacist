@@ -1,0 +1,124 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../configuration/res.dart';
+import '../../../core/function/get_opening_status.dart';
+import '../../../core/function/join_strings.dart';
+import '../../../core/models/work_day.dart';
+import '../../../core/style/card_container_decoration.dart';
+import '../../../core/widgets/appbars/app_bar_title_widget.dart';
+import '../../../core/widgets/appbars/sub_app_bar.dart';
+import '../../../core/widgets/cards/icon_key_value_widget.dart';
+import '../../../core/widgets/cards/icon_title_navigation_button.dart';
+import '../../../core/widgets/cards/key_value_card.dart';
+import '../../../core/widgets/cards/profile_email_widget.dart';
+import '../../../core/widgets/cards/profile_phone_widget.dart';
+import '../../../core/widgets/custom_error_widget.dart';
+import '../../../core/widgets/custom_loading_widget.dart';
+import '../view_model/pharmacy_profile_view_model.dart';
+part 'widget/pharmacy_profile_details_section.dart';
+part 'widget/pharmacy_profile_navigation_section.dart';
+
+class PharmacyProfileScreen extends ConsumerStatefulWidget {
+  const PharmacyProfileScreen({
+    super.key,
+    this.pharmacyId,
+  });
+  static const routeName = "/pharmacy_profile_screen";
+  final int? pharmacyId;
+
+  @override
+  ConsumerState<PharmacyProfileScreen> createState() =>
+      _PharmacyProfileScreenState();
+}
+
+class _PharmacyProfileScreenState extends ConsumerState<PharmacyProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(
+      () {
+        if (widget.pharmacyId == null) {
+          return;
+        }
+        // ref
+        //     .read(pharmacyProfileViewModelProvider.notifier)
+        //     .getPharmacyDetails(id: widget.pharmacyId.toString());
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final pharmacyProfile = ref.watch(pharmacyProfileViewModelProvider);
+    return Scaffold(
+      appBar: SubAppBar(
+        titleWidget: AppBarTitleWidget(
+          title: joinStrings([
+            pharmacyProfile
+                .pharmacyDetailsResponse?.asData?.value.user?.firstName,
+            pharmacyProfile
+                .pharmacyDetailsResponse?.asData?.value.user?.lastName,
+          ]),
+          imagePath: pharmacyProfile
+              .pharmacyDetailsResponse?.asData?.value.user?.imgurl,
+          subtitle: pharmacyProfile.pharmacyDetailsResponse?.asData?.value.name,
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            pharmacyProfile.pharmacyDetailsResponse?.when(
+                  data: (data) => PharmacyProfileDetailsSection(
+                      // currentState: getOpeningStatus(data.workDays ?? []),
+                      currentState: "",
+                      pharmacyaddress: joinStrings([
+                        data.addressGovernorate,
+                        data.addressCity,
+                        data.addressRegion,
+                        data.addressStreet,
+                      ], joinChart: " - "),
+                      residentialsAddress: "",
+                      phoneNumber: data.phoneNumber ?? "",
+                      // emailAddress: data.user?.email ?? "",
+                      // availabilitySchedule: data.workDays ?? []
+                      emailAddress: "",
+                      availabilitySchedule: [],
+                      ),
+                  error: (error, stackTrace) => CustomErrorWidget(
+                    message: error.toString(),
+                    onTryAgainTap: () {
+                      // ref
+                      //     .read(pharmacyProfileViewModelProvider.notifier)
+                      //     .getPharmacyDetails(id: widget.pharmacyId.toString());
+                    },
+                  ),
+                  loading: () => CustomLoadingWidget(
+                    height: 300.h,
+                  ),
+                ) ??
+                const SizedBox.shrink(),
+            const SizedBox(
+              height: 24,
+            ),
+            // (!(pharmacyProfile.pharmacyDetailsResponse?.isLoading ?? false))
+            //     ? PharmacyProfileNavigationSection(
+            //         onPrescriptionTap: () {},
+            //         onMedicinesTap: () {},
+            //         onContractHistortTap: () {},
+            //       )
+            //     : const SizedBox.shrink(),
+            const SizedBox(
+              height: 40,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -33,7 +33,7 @@ class GeneralNetworkImage extends StatelessWidget {
       print(newUrl);
     }
     if (imgType == "svg") {
-      debugPrint("the image is NetworkImageSvg");
+
       return NetworkImageSvg(
         url: newUrl,
         height: height,
@@ -45,7 +45,7 @@ class GeneralNetworkImage extends StatelessWidget {
         placeHolderWhileLoading: placeHolderWhileLoading,
       );
     } else {
-      debugPrint("the image is NetworkImagePngv2");
+  
       return NetworkImagePngv2(
         url: newUrl,
         height: height,

@@ -12,12 +12,13 @@ class LoadingButton extends StatelessWidget {
     this.color,
     this.borderRaduis,
     this.border,
-    this.textStyle,
+    this.textStyle, this.height,
   });
   final String title;
   final void Function()? onTap;
   final bool? isLoading;
   final double? width;
+  final double? height;
   final Color? color;
   final BorderRadius? borderRaduis;
   final Border? border;
@@ -31,7 +32,7 @@ class LoadingButton extends StatelessWidget {
         borderRadius: borderRaduis ?? BorderRadius.circular(50),
         onTap: !(isLoading ?? false) ? onTap : () {},
         child: Container(
-          height: 45.h,
+          height:height ?? 45.h,
           width: width ?? MediaQuery.of(context).size.width,
           alignment: Alignment.center,
           decoration: BoxDecoration(

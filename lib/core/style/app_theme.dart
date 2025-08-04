@@ -64,6 +64,7 @@ class AppTheme {
             color: AppColors.textColor),
       ),
       // splashColor: AppColors.primary.withOpacity(.2),
+    
       inputDecorationTheme: InputDecorationTheme(
           hintStyle: const TextStyle(
               fontSize: 14.0,
@@ -81,6 +82,7 @@ class AppTheme {
               borderRadius: BorderRadius.circular(4),
               borderSide: BorderSide.none),
           floatingLabelBehavior: FloatingLabelBehavior.auto,
+          
           errorStyle: const TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.w400,
