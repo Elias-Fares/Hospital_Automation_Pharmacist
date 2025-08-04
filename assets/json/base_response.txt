@@ -1,0 +1,32 @@
+the role is always small letter
+
+
+
+{
+    "data":{}
+}
+
+{
+    "data":[]
+}
+
+{
+    "message" : ""
+}
+{
+    "error":""
+}
+
+
+
+patinet: sign up -> verify code -> login -> add address -> home
+ph : sign up -> verify code -> login -> add address -> add profile photo -> home
+
+
+Auth
+
+home (appointments)
+childern get list of children with thier details
+in children profile (4 APIs )
+
+
