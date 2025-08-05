@@ -1,5 +1,8 @@
+import 'package:medicare_pharmacy/features/inventory/view/inventory_screen.dart';
 import 'package:medicare_pharmacy/features/notifications/view/notifications_screen.dart';
+import 'package:medicare_pharmacy/features/orders/view/orders_screen.dart';
 import 'package:medicare_pharmacy/features/pharmacy_profile/view/pharmacy_profile_screen.dart';
+import 'package:medicare_pharmacy/features/update_price/view/update_price_screen.dart';
 
 import '../../../configuration/res.dart';
 
@@ -33,14 +36,26 @@ class AppDrawerModel {
         title: "Notifications",
         routeName: NotificationsScreen.routeName,
       ),
-      AppDrawerElement(iconPath: Res.inventoryIcon, title: "Inventory"),
+      AppDrawerElement(
+        iconPath: Res.inventoryIcon,
+        title: "Inventory",
+        routeName: InventoryScreen.routeName,
+      ),
       AppDrawerElement(
         iconPath: Res.prescriptionsIcon,
         title: "Dispensed Prescriptions",
       ),
       AppDrawerElement(iconPath: Res.statsIcon, title: "Statistics"),
-      AppDrawerElement(iconPath: Res.ordersIcon, title: "Orders"),
-      AppDrawerElement(iconPath: Res.pricesIcon, title: "Bulk Prices Update"),
+      AppDrawerElement(
+        iconPath: Res.ordersIcon,
+        title: "Orders",
+        routeName: OrdersScreen.routeName,
+      ),
+      AppDrawerElement(
+        iconPath: Res.pricesIcon,
+        title: "Bulk Prices Update",
+        routeName: UpdatePriceScreen.routeName,
+      ),
     ];
   }
 }

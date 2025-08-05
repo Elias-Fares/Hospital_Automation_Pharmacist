@@ -6,10 +6,11 @@ class AppBarWithSearch extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWithSearch({
     super.key,
     required this.searchTextEditingController,
-    this.onEditingComplete,
+    this.onEditingComplete, this.actions,
   });
   final TextEditingController searchTextEditingController;
   final void Function()? onEditingComplete;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,8 @@ class AppBarWithSearch extends StatelessWidget implements PreferredSizeWidget {
           onEditingComplete: onEditingComplete,
         ),
       ),
+
+      actions: actions,
     );
   }
 

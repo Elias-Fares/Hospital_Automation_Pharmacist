@@ -1,7 +1,7 @@
-part of '../medicines_screen.dart';
+part of '../dispense_screen.dart';
 
-class SearchForMedicineTextField extends StatelessWidget {
-  const SearchForMedicineTextField({
+class SearchTextField extends StatelessWidget {
+  const SearchTextField({
     super.key,
     required this.searchTextEditingController,
     this.onEditingComplete,
@@ -25,7 +25,7 @@ class SearchForMedicineTextField extends StatelessWidget {
       ),
       child: TextFormField(
         decoration: const InputDecoration(
-          hintText: "Enter medicine name here",
+          hintText: "Enter Prescription code",
           suffixIcon: Icon(Icons.search_rounded, color: AppColors.primary),
         ),
         style: Theme.of(context).textTheme.bodyMedium,

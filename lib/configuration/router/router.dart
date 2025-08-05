@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medicare_pharmacy/core/enums/medicine_card_type.dart';
 import 'package:medicare_pharmacy/core/models/medicine_model.dart';
 import 'package:medicare_pharmacy/features/add_existing_alternative_medicines/view/add_existing_alternative_medicines_screen.dart';
 import 'package:medicare_pharmacy/features/alternative_medicines/view/alternative_medicines_screen.dart';
@@ -14,15 +13,20 @@ import 'package:medicare_pharmacy/features/auth/view/screens/upload_profile_imag
 import 'package:medicare_pharmacy/features/auth/view/screens/verification_code_screen.dart';
 import 'package:medicare_pharmacy/features/batches/view/batches_screen.dart';
 import 'package:medicare_pharmacy/features/dispense/view/dispense_screen.dart';
+import 'package:medicare_pharmacy/features/dispense_alt_medicines/view/dispense_alt_medicines_screen.dart';
+import 'package:medicare_pharmacy/features/dispense_medicines/view/dispense_medicines_screen.dart';
 import 'package:medicare_pharmacy/features/edit_medicine/view/edit_medicine_screen.dart';
+import 'package:medicare_pharmacy/features/inventory/view/inventory_screen.dart';
 import 'package:medicare_pharmacy/features/main/view/main_screen.dart';
 import 'package:medicare_pharmacy/features/medicine_details/view/medicine_details_screen.dart';
 import 'package:medicare_pharmacy/features/medicines/view/medicines_screen.dart';
 import 'package:medicare_pharmacy/features/notifications/view/notifications_screen.dart';
+import 'package:medicare_pharmacy/features/orders/view/orders_screen.dart';
 import 'package:medicare_pharmacy/features/permission_required/view/permission_required_screen.dart';
 import 'package:medicare_pharmacy/features/pharmacy_profile/view/pharmacy_profile_screen.dart';
 import 'package:medicare_pharmacy/features/scanner/view/scanner_screen.dart';
 import 'package:medicare_pharmacy/features/successful_verification/view/successful_verification_screen.dart';
+import 'package:medicare_pharmacy/features/update_price/view/update_price_screen.dart';
 
 import 'my_go_router_observer.dart' show MyGoRouterObserver;
 
@@ -134,6 +138,36 @@ class AppRouter {
         path: NotificationsScreen.routeName,
         builder: (context, state) {
           return NotificationsScreen();
+        },
+      ),
+      GoRoute(
+        path: UpdatePriceScreen.routeName,
+        builder: (context, state) {
+          return UpdatePriceScreen();
+        },
+      ),
+      GoRoute(
+        path: DispenseMedicinesScreen.routeName,
+        builder: (context, state) {
+          return DispenseMedicinesScreen();
+        },
+      ),
+      GoRoute(
+        path: DispenseAltMedicinesScreen.routeName,
+        builder: (context, state) {
+          return DispenseAltMedicinesScreen();
+        },
+      ),
+      GoRoute(
+        path: OrdersScreen.routeName,
+        builder: (context, state) {
+          return OrdersScreen();
+        },
+      ),
+      GoRoute(
+        path: InventoryScreen.routeName,
+        builder: (context, state) {
+          return InventoryScreen();
         },
       ),
     ],

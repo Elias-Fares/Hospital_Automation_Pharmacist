@@ -53,6 +53,8 @@ class _EditMedicineScreenState extends ConsumerState<EditMedicineScreen> {
     companyController = TextEditingController(text: widget.med?.companyName);
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
