@@ -21,7 +21,12 @@ class SharedPreferencesService {
   }
 
   String? getToken() {
-    return _prefs.getString(Constant.ACCESS_TOKEN);
+    //TODO remove it after test
+
+    final testToken =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hcmlhbS5mYXJlcy4yMDAyQGdtYWlsLmNvbSIsInVzZXJJZCI6MTUyLCJpYXQiOjE3NTQ1NzQ5MDJ9.YxIlydJyWv7QQF0g5Ak3tEE8nJ2KSSF9wzGk0wAq7t8";
+    return testToken;
+    // return _prefs.getString(Constant.ACCESS_TOKEN);
   }
 
   Future<void> clearToken() async {
@@ -45,7 +50,7 @@ class SharedPreferencesService {
   }
 
   Future<void> savePassword({required String? password}) async {
-        if (password == null) {
+    if (password == null) {
       debugPrint("Cant save empty password");
       return;
     }
@@ -60,7 +65,7 @@ class SharedPreferencesService {
     await _prefs.remove(Constant.USER_PASSWORD);
   }
 
-   Future<void> saveUserName({required String? userName}) async {
+  Future<void> saveUserName({required String? userName}) async {
     if (userName == null) {
       debugPrint("Cant save empty userName");
       return;

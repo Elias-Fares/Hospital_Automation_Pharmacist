@@ -1,0 +1,5807 @@
+{
+	"info": {
+		"_postman_id": "4c23a57d-c306-477f-b669-4d840165e8d2",
+		"name": "pharmacist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28486968"
+	},
+	"item": [
+		{
+			"name": "sign-up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"role\":\"pharmacist\",\r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"password\":\"elias12345\",\r\n    \"first_name\":\"elias\",\r\n    \"last_name\":\"fares\",\r\n    \"middle_name\":\"philip\",\r\n    \"phone_number\":\"0964911572\",\r\n    \"gender\":\"male\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/sign-up",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"sign-up"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "sign-up",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"role\":\"pharmacist\",\r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"password\":\"elias12345\",\r\n    \"first_name\":\"elias\",\r\n    \"last_name\":\"fares\",\r\n    \"middle_name\":\"philip\",\r\n    \"phone_number\":\"0964911572\",\r\n    \"gender\":\"male\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/sign-up",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"sign-up"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "43"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2b-lABEHHjkkDhC4z2kqWbm4x940rc\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 16:49:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"This Email Exists In Our App!\"\n}"
+				},
+				{
+					"name": "sign-up",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"role\":\"pharmacist\",\r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"password\":\"elias12345\",\r\n    \"first_name\":\"elias\",\r\n    \"last_name\":\"fares\",\r\n    \"middle_name\":\"philip\",\r\n    \"phone_number\":\"0964911572\",\r\n    \"gender\":\"male\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/sign-up",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"sign-up"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "679"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2a7-ZkaDL8HrtxFuIj5efV73bfGpLuU\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 16:50:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"userId\": 5,\n        \"role\": \"pharmacist\",\n        \"email\": \"elias.fares.2002@gmail.com\",\n        \"first_name\": \"elias\",\n        \"last_name\": \"fares\",\n        \"middle_name\": \"philip\",\n        \"verified_reset_password\": false,\n        \"verified_account\": false,\n        \"phone_number\": \"0964911572\",\n        \"address_governorate\": null,\n        \"address_city\": null,\n        \"address_region\": null,\n        \"address_street\": null,\n        \"address_note\": null,\n        \"specialty\": null,\n        \"imgurl\": null,\n        \"medical_license_img_url\": null,\n        \"gender\": \"male\",\n        \"is_suspended\": false,\n        \"suspending_reason\": null,\n        \"is_resigned\": false,\n        \"work_start_date\": null,\n        \"work_end_date\": null,\n        \"createdAt\": \"2025-06-24T16:50:07.000Z\",\n        \"updatedAt\": \"2025-06-24T16:50:07.000Z\",\n        \"clinic_id\": null,\n        \"resigned_by\": null,\n        \"suspended_by\": null,\n        \"accepted_by\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "send-otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/send-otp",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"send-otp"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "send-otp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/send-otp",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"send-otp"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "67"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"43-o+OV3Ewz7RUe8HtR61VuALeFbn8\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 16:50:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Verification OTP Email Sent, Please Check Your Inbox!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "verify-otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"otp\":\"1803\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/verify-otp",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"verify-otp"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "verify-otp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"otp\":\"1805\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/verify-otp",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"verify-otp"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "71"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"47-9KXW7JSKTOBgXICAmN18CyV+4WY\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 16:52:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Invalid OTP Code Please Check Your Inbox And Try Again :(\"\n}"
+				},
+				{
+					"name": "verify-otp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"otp\":\"1803\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/verify-otp",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"verify-otp"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "49"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"31-hE8QFTtdtoL1scgM/JH/+otkscU\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:09:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Your Email Verified Successfully :)\"\n}"
+				},
+				{
+					"name": "verify-otp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"otp\":\"1803\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/verify-otp",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"verify-otp"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "84"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"54-YBxrN4uPDf2Ik15UxQnmOUrj8hg\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:09:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Maybe Your Account Verified Previously Or You Didn't Create An Account\"\n}"
+				}
+			]
+		},
+		{
+			"name": "reset-password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"password\":\"Elias12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/reset-password",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"reset-password"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "reset-password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"password\":\"Elias12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/reset-password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"reset-password"
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"45-pJer+CAIwdr6OxGqmYUAiyns4dg\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:12:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Your Password Updated Successfully :)\",\n    \"updatedData\": [\n        1\n    ]\n}"
+				},
+				{
+					"name": "reset-password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"password\":\"Elias12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/reset-password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"reset-password"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "70"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"46-fUJVemiOsYwDiuN86FImpC5wSW8\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:12:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Verify Reset Password On Your Email Then Change Password\"\n}"
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"password\":\"Elias12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"password\":\"Elias12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "224"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e0-vi9b621TCyMFRCnSzOZZ3Ot/NLY\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:16:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Login Successfully elias fares\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODUzNjR9.YwpbpfZe-w20CopDsgsRRCq5Ulv5ESvspsjUF-ZAZvM\"\n}"
+				},
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"email\":\"elias.fares.2002@gmail.com\",\r\n    \"password\":\"elias12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"login"
+							]
+						}
+					},
+					"status": "Payment Required",
+					"code": 402,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "38"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"26-sEoEpeX+ZPl0eRahWTuECymhmgU\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:16:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Wrong Password Try Again\"\n}"
+				},
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"email\":\"elias.fares.2001@gmail.com\",\r\n    \"password\":\"Elias12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"login"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"32-FagFaLyqXO0wGTzVKGC3U8d7ZRc\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:16:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"I Think You Don't Have An Account :(\"\n}"
+				}
+			]
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODUzNjR9.YwpbpfZe-w20CopDsgsRRCq5Ulv5ESvspsjUF-ZAZvM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/logout",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"logout"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "logout",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"logout"
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "43"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2b-QEq5wx4NM/KIxXLGnqM2TxQxj+Q\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:17:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Logout Successfully, Bye Bye!\"\n}"
+				},
+				{
+					"name": "logout",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"logout"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "38"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"26-heJiwSRO1cTTRjm3EbShAs8ozJ8\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:17:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"You Are Not Logged In :(\"\n}"
+				}
+			]
+		},
+		{
+			"name": "delete-account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/delete-account",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"delete-account"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete-account",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/delete-account",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"delete-account"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "53"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"35-1v0UHPfJ2MajDV2YSprhrDSSFow\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:21:13 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Your Account Is Deleted Successfully :(\"\n}"
+				}
+			]
+		},
+		{
+			"name": "translate-service",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"msg\":\"so proud of you\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/translate-service",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"translate-service"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "translate-service",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"msg\":\"so proud of you\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/translate-service",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"translate-service"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"22-YB42GIhz8flmtd6hQ4dJyZYIiB0\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:22:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"فخور جدا بك\"\n}"
+				}
+			]
+		},
+		{
+			"name": "add-address",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address_governorate\":\"Syria\"\r\n    ,\"address_city\":\"Banias\"\r\n    ,\"address_region\":\"AL-Baida\"\r\n    ,\"address_street\":\"The Church Street\"\r\n    ,\"address_note\":\"It Is A Village\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/add-address",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"add-address"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "add-address",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address_governorate\":\"Syria\"\r\n    ,\"address_city\":\"Banias\"\r\n    ,\"address_region\":\"AL-Baida\"\r\n    ,\"address_street\":\"The Church Street\"\r\n    ,\"address_note\":\"It Is A Village\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/add-address",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"add-address"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "19"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13-dsPauaQFK0/th45Pd0ywVWK3olM\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:24:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"updatedData\": [\n        1\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "upload-file",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/D:/التسويق الأخضر مريم الياس ساعود.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/upload-file",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"upload-file"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "upload-file",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/التسويق الأخضر مريم الياس ساعود.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/upload-file",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"upload-file"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "19"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13-dsPauaQFK0/th45Pd0ywVWK3olM\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:25:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"updatedData\": [\n        1\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "add-image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/D:/1.png"
+						},
+						{
+							"key": "request_type",
+							"value": "PHARMACIST",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/add-image",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"add-image"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "add-image",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/1.png"
+								},
+								{
+									"key": "request_type",
+									"value": "PHARMACIST",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/add-image",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"add-image"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "233"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e9-JaHcg1/59vakSfVkmGKlgpTEyqM\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:27:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"request\": {\n        \"requestId\": 6,\n        \"request_type\": \"PHARMACIST\",\n        \"state\": \"Pending\",\n        \"request_data_time\": \"2025-06-24T17:27:50.580Z\",\n        \"employee_id\": 5,\n        \"updatedAt\": \"2025-06-24T17:27:50.580Z\",\n        \"createdAt\": \"2025-06-24T17:27:50.580Z\"\n    },\n    \"updatedPhoto\": [\n        1\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "user-permissions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/user-permissions",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"user-permissions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "user-permissions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/user-permissions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"user-permissions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"10-zn0rrfMPv1Exq1cFaIwEtz40xj4\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 24 Jun 2025 17:32:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "deactivate-account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deactivation_reason\":\"I want to take break\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/deactivate-account",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"deactivate-account"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "deactivate-account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deactivation_reason\":\"I want to take break\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/deactivate-account",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"deactivate-account"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "19"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13-dsPauaQFK0/th45Pd0ywVWK3olM\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:12:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"updatedData\": [\n        1\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "reactivate-account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/reactivate-account",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"reactivate-account"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "reactivate-account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/reactivate-account",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"reactivate-account"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "70"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"46-3yzg77Ceb+Ct/NMkE3Ir+4A169I\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:17:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"You Can't Reactivate Your Account (Try To Ask The Admin)\"\n}"
+				},
+				{
+					"name": "reactivate-account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/reactivate-account",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"reactivate-account"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "19"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13-dsPauaQFK0/th45Pd0ywVWK3olM\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:18:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"updatedData\": [\n        1\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "add-pharmacy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"name\":\"Fares Pharmacy\",\r\n        \"address_governorate\":\"Syria\",\r\n        \"address_city\":\"Banias\",\r\n        \"address_region\":\"AlBaida\",\r\n        \"address_street\":\"Near A Big Tree Has A Colorful flowers\",\r\n        \"address_note\":\"THE BEST PHARMACY\",\r\n        \"phoneNumber\":\"043244225\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/add-pharmacy",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"add-pharmacy"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "add-pharmacy",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\":\"Fares Pharmacy\",\r\n        \"address_governorate\":\"Syria\",\r\n        \"address_city\":\"Banias\",\r\n        \"address_region\":\"AlBaida\",\r\n        \"address_street\":\"Near A Big Tree Has A Colorful flowers\",\r\n        \"address_note\":\"THE BEST PHARMACY\",\r\n        \"phoneNumber\":\"043244225\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/add-pharmacy",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"add-pharmacy"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "345"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"159-xjUbGBjW1o5ErKK1vEfeSg7kzA0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:21:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"pharmacyId\": 1,\n        \"name\": \"Fares Pharmacy\",\n        \"address_governorate\": \"Syria\",\n        \"address_city\": \"Banias\",\n        \"address_region\": \"AlBaida\",\n        \"address_street\": \"Near A Big Tree Has A Colorful flowers\",\n        \"address_note\": \"THE BEST PHARMACY\",\n        \"phoneNumber\": \"043244225\",\n        \"pharmacist_id\": 5,\n        \"updatedAt\": \"2025-06-25T18:21:45.542Z\",\n        \"createdAt\": \"2025-06-25T18:21:45.542Z\"\n    }\n}"
+				},
+				{
+					"name": "add-pharmacy",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\":\"Fares Pharmacy\",\r\n        \"address_governorate\":\"Syria\",\r\n        \"address_city\":\"Banias\",\r\n        \"address_region\":\"AlBaida\",\r\n        \"address_street\":\"Near A Big Tree Has A Colorful flowers\",\r\n        \"address_note\":\"THE BEST PHARMACY\",\r\n        \"phoneNumber\":\"043244225\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/add-pharmacy",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"add-pharmacy"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "468"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d4-JxjM9GIEqappgzghT108KyM9ta0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:24:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"pharmacyId\": 1,\n        \"name\": \"Fares Pharmacy\",\n        \"address_governorate\": \"Syria\",\n        \"address_city\": \"Banias\",\n        \"address_region\": \"AlBaida\",\n        \"address_street\": \"Near A Big Tree Has A Colorful flowers\",\n        \"address_note\": \"THE BEST PHARMACY\",\n        \"phoneNumber\": \"043244225\",\n        \"is_deactivated\": null,\n        \"deactivation_reason\": null,\n        \"contract_start_date\": null,\n        \"contract_end_date\": null,\n        \"createdAt\": \"2025-06-25T18:21:45.000Z\",\n        \"updatedAt\": \"2025-06-25T18:21:45.000Z\",\n        \"deactivated_by\": null,\n        \"pharmacist_id\": 5\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "show-ph-profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/show-profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"show-profile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "show-ph-profile",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/show-profile",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"show-profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1653"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"675-WB6JI4+OnctGpC/qMoEho69U+00\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:28:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"profile\": {\n        \"pharmacyId\": 1,\n        \"name\": \"Fares Pharmacy\",\n        \"address_governorate\": \"Syria\",\n        \"address_city\": \"Banias\",\n        \"address_region\": \"AlBaida\",\n        \"address_street\": \"Near A Big Tree Has A Colorful flowers\",\n        \"address_note\": \"THE BEST PHARMACY\",\n        \"phoneNumber\": \"043244225\",\n        \"is_deactivated\": null,\n        \"deactivation_reason\": null,\n        \"contract_start_date\": null,\n        \"contract_end_date\": null,\n        \"createdAt\": \"2025-06-25T18:21:45.000Z\",\n        \"updatedAt\": \"2025-06-25T18:21:45.000Z\",\n        \"deactivated_by\": null,\n        \"pharmacist_id\": 5,\n        \"user\": {\n            \"userId\": 5,\n            \"first_name\": \"elias\",\n            \"last_name\": \"fares\",\n            \"imgurl\": \"public\\\\images\\\\1750786070542-1.png\"\n        },\n        \"work_days\": [\n            {\n                \"work_DaysId\": 1,\n                \"day\": \"Sunday\",\n                \"work_start_time\": \"11:11\",\n                \"work_end_time\": \"22:22\",\n                \"createdAt\": \"2025-06-17T07:18:10.000Z\",\n                \"updatedAt\": \"2025-06-17T07:18:10.000Z\",\n                \"pharmacy_id\": 1,\n                \"doctor_id\": null,\n                \"clinic_id\": null\n            },\n            {\n                \"work_DaysId\": 2,\n                \"day\": \"Monday\",\n                \"work_start_time\": \"09:00\",\n                \"work_end_time\": \"20:20\",\n                \"createdAt\": \"2025-06-17T07:18:10.000Z\",\n                \"updatedAt\": \"2025-06-17T07:18:10.000Z\",\n                \"pharmacy_id\": 1,\n                \"doctor_id\": null,\n                \"clinic_id\": null\n            },\n            {\n                \"work_DaysId\": 3,\n                \"day\": \"Tuesday\",\n                \"work_start_time\": \"08:33\",\n                \"work_end_time\": \"21:21\",\n                \"createdAt\": \"2025-06-17T07:18:10.000Z\",\n                \"updatedAt\": \"2025-06-17T07:18:10.000Z\",\n                \"pharmacy_id\": 1,\n                \"doctor_id\": null,\n                \"clinic_id\": null\n            },\n            {\n                \"work_DaysId\": 4,\n                \"day\": \"Thursday\",\n                \"work_start_time\": \"12:12\",\n                \"work_end_time\": \"22:22\",\n                \"createdAt\": \"2025-06-17T07:18:10.000Z\",\n                \"updatedAt\": \"2025-06-17T07:18:10.000Z\",\n                \"pharmacy_id\": 1,\n                \"doctor_id\": null,\n                \"clinic_id\": null\n            },\n            {\n                \"work_DaysId\": 5,\n                \"day\": \"Saturday\",\n                \"work_start_time\": \"13:13\",\n                \"work_end_time\": \"23:23\",\n                \"createdAt\": \"2025-06-17T07:18:10.000Z\",\n                \"updatedAt\": \"2025-06-17T07:18:10.000Z\",\n                \"pharmacy_id\": 1,\n                \"doctor_id\": null,\n                \"clinic_id\": null\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Edit Profile Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjoyLCJpYXQiOjE3NDM0Nzc1NjJ9.aCEBXwurDNYOVu1641Ty7-IW9iw4IFsUa5SeAVrR1Ys",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/D:/MyAllPhotos/git check version.png"
+						},
+						{
+							"key": "email",
+							"value": "elias.fares.2002@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "first_name",
+							"value": "Elias",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Fares",
+							"type": "text"
+						},
+						{
+							"key": "middle_name",
+							"value": "Philip",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "0937794354",
+							"type": "text"
+						},
+						{
+							"key": "address_governorate",
+							"value": "Syria",
+							"type": "text"
+						},
+						{
+							"key": "address_city",
+							"value": "Banias",
+							"type": "text"
+						},
+						{
+							"key": "address_region",
+							"value": "AL-Baida",
+							"type": "text"
+						},
+						{
+							"key": "address_street",
+							"value": "The Church Street",
+							"type": "text"
+						},
+						{
+							"key": "address_note",
+							"value": "It Is A Village",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "male",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/employee/edit-profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"employee",
+						"edit-profile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Edit Profile",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/MyAllPhotos/git check version.png"
+								},
+								{
+									"key": "email",
+									"value": "elias.fares.2002@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Elias",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Fares",
+									"type": "text"
+								},
+								{
+									"key": "middle_name",
+									"value": "Philip",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "0937794354",
+									"type": "text"
+								},
+								{
+									"key": "address_governorate",
+									"value": "Syria",
+									"type": "text"
+								},
+								{
+									"key": "address_city",
+									"value": "Banias",
+									"type": "text"
+								},
+								{
+									"key": "address_region",
+									"value": "AL-Baida",
+									"type": "text"
+								},
+								{
+									"key": "address_street",
+									"value": "The Church Street",
+									"type": "text"
+								},
+								{
+									"key": "address_note",
+									"value": "It Is A Village",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/employee/edit-profile",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"employee",
+								"edit-profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2e-PELJtYAEFZwyKNk0caM7ibjZeng\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 02 Apr 2025 00:39:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Updated With Image Successfully!\"\n}"
+				},
+				{
+					"name": "Edit Profile",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "elias.fares.2002@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "Elias",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Fares",
+									"type": "text"
+								},
+								{
+									"key": "middle_name",
+									"value": "Philip",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "0937794354",
+									"type": "text"
+								},
+								{
+									"key": "address_governorate",
+									"value": "Syria",
+									"type": "text"
+								},
+								{
+									"key": "address_city",
+									"value": "Banias",
+									"type": "text"
+								},
+								{
+									"key": "address_region",
+									"value": "AL-Baida",
+									"type": "text"
+								},
+								{
+									"key": "address_street",
+									"value": "The Church Street",
+									"type": "text"
+								},
+								{
+									"key": "address_note",
+									"value": "It Is A Village",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/employee/edit-profile",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"employee",
+								"edit-profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"23-4eheBNnLI1uNvPB/rOeWMXk/sng\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 02 Apr 2025 00:41:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Updated Successfully!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "add-medicine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Librax",
+							"type": "text"
+						},
+						{
+							"key": "expiredAt",
+							"value": "2026-04-04",
+							"type": "text"
+						},
+						{
+							"key": "pharmaceuticalTiter",
+							"value": "300",
+							"type": "text"
+						},
+						{
+							"key": "pharmaceuticalIndications",
+							"value": "for stomachache",
+							"type": "text"
+						},
+						{
+							"key": "pharmaceuticalComposition",
+							"value": "libraxmed 500 mg",
+							"type": "text"
+						},
+						{
+							"key": "company_Name",
+							"value": "OPM",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "11000",
+							"type": "text"
+						},
+						{
+							"key": "isAllowedWithoutPrescription",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "barcode",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "lowbound",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/D:/kaggle1.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/add-medicine",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"add-medicine"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "add-medicine",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Librax",
+									"type": "text"
+								},
+								{
+									"key": "expiredAt",
+									"value": "2026-04-04",
+									"type": "text"
+								},
+								{
+									"key": "pharmaceuticalTiter",
+									"value": "300",
+									"type": "text"
+								},
+								{
+									"key": "pharmaceuticalIndications",
+									"value": "for stomachache",
+									"type": "text"
+								},
+								{
+									"key": "pharmaceuticalComposition",
+									"value": "libraxmed 500 mg",
+									"type": "text"
+								},
+								{
+									"key": "company_Name",
+									"value": "OPM",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "11000",
+									"type": "text"
+								},
+								{
+									"key": "isAllowedWithoutPrescription",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "barcode",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "lowbound",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/kaggle1.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/add-medicine",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"add-medicine"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "794"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"31a-vqE5OSwqifQKDsbovaZ4BC9Qu6I\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:44:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"medicinesId\": 2,\n        \"name\": \"Librax\",\n        \"pharmaceuticalTiter\": \"300\",\n        \"pharmaceuticalIndications\": \"for stomachache\",\n        \"pharmaceuticalComposition\": \"libraxmed 500 mg\",\n        \"company_Name\": \"OPM\",\n        \"price\": \"11000\",\n        \"isAllowedWithoutPrescription\": true,\n        \"barcode\": \"123456\",\n        \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\",\n        \"updatedAt\": \"2025-06-25T18:44:19.688Z\",\n        \"createdAt\": \"2025-06-25T18:44:19.688Z\"\n    },\n    \"mypharmacy_medicine\": {\n        \"pharmacy_medicineId\": 1,\n        \"lowbound\": \"5\",\n        \"medicine_id\": 2,\n        \"pharmacy_id\": 1,\n        \"updatedAt\": \"2025-06-25T18:44:19.716Z\",\n        \"createdAt\": \"2025-06-25T18:44:19.716Z\"\n    },\n    \"mymedicine_batches\": {\n        \"medicine_batchId\": 1,\n        \"pharmacy_medicine_id\": 1,\n        \"quantity\": \"10\",\n        \"expired_date\": \"2026-04-04\",\n        \"updatedAt\": \"2025-06-25T18:44:19.729Z\",\n        \"createdAt\": \"2025-06-25T18:44:19.729Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "add-existed-medicine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"expired_date\":\"2025-09-09\",\r\n    \"lowbound\":4,\r\n    \"quantity\":15\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/add-existed-medicine/3",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"add-existed-medicine",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "add-existed-medicine",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"expired_date\":\"2025-09-09\",\r\n    \"lowbound\":4,\r\n    \"quantity\":15\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/add-existed-medicine/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"add-existed-medicine",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "348"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"15c-6afnTtwsmcCIGpsmTR4chk8T9Ew\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:54:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"pharmacy_medicineId\": 4,\n        \"lowbound\": 4,\n        \"medicine_id\": \"3\",\n        \"pharmacy_id\": 1,\n        \"updatedAt\": \"2025-06-25T18:54:35.867Z\",\n        \"createdAt\": \"2025-06-25T18:54:35.867Z\"\n    },\n    \"mymedicine_batches\": {\n        \"medicine_batchId\": 4,\n        \"expired_date\": \"2025-09-09\",\n        \"quantity\": 15,\n        \"pharmacy_medicine_id\": 4,\n        \"updatedAt\": \"2025-06-25T18:54:35.899Z\",\n        \"createdAt\": \"2025-06-25T18:54:35.899Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get-medicine-details-by-barcode",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/get-medicine-details-by-barcode?barcode=123456",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"get-medicine-details-by-barcode"
+					],
+					"query": [
+						{
+							"key": "barcode",
+							"value": "123456"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get-medicine-details-by-barcode",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/get-medicine-details-by-barcode?barcode=123456",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"get-medicine-details-by-barcode"
+							],
+							"query": [
+								{
+									"key": "barcode",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "426"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1aa-AKNIoeQ+KsfX9FHQX0SlF+49iuA\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:49:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"medicinesId\": 2,\n        \"name\": \"Librax\",\n        \"expiredAt\": \"2026-04-04T00:00:00.000Z\",\n        \"pharmaceuticalTiter\": 300,\n        \"pharmaceuticalIndications\": \"for stomachache\",\n        \"pharmaceuticalComposition\": \"libraxmed 500 mg\",\n        \"company_Name\": \"OPM\",\n        \"price\": 11000,\n        \"isAllowedWithoutPrescription\": true,\n        \"barcode\": \"123456\",\n        \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\",\n        \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n        \"updatedAt\": \"2025-06-25T18:44:19.000Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "search-for-medicine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/search-for-medicine?name=nos",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"search-for-medicine"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "nos"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "search-for-medicine",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/search-for-medicine?name=nos",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"search-for-medicine"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "nos"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "786"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"312-DdoEXZ1mbvz73WK01DMBMZLNIv8\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:54:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"medicinesId\": 3,\n            \"name\": \"nospa\",\n            \"expiredAt\": \"2026-04-04T00:00:00.000Z\",\n            \"pharmaceuticalTiter\": 300,\n            \"pharmaceuticalIndications\": \"for stomachache\",\n            \"pharmaceuticalComposition\": \"antispa 500 mg\",\n            \"company_Name\": \"OPM\",\n            \"price\": 11000,\n            \"isAllowedWithoutPrescription\": true,\n            \"barcode\": \"123457\",\n            \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\",\n            \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n            \"updatedAt\": \"2025-06-25T18:44:19.000Z\",\n            \"pharmacy_medicines\": [\n                {\n                    \"pharmacy_medicineId\": 4,\n                    \"lowbound\": 4,\n                    \"createdAt\": \"2025-06-25T18:54:35.000Z\",\n                    \"updatedAt\": \"2025-06-25T18:54:35.000Z\",\n                    \"medicine_id\": 3,\n                    \"pharmacy_id\": 1,\n                    \"medicine_batches\": [\n                        {\n                            \"medicine_batchId\": 4,\n                            \"quantity\": 15,\n                            \"expired_date\": \"2025-09-09\",\n                            \"createdAt\": \"2025-06-25T18:54:35.000Z\",\n                            \"updatedAt\": \"2025-06-25T18:54:35.000Z\",\n                            \"pharmacy_medicine_id\": 4\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}"
+				},
+				{
+					"name": "search-for-medicine",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/search-for-medicine?name=a",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"search-for-medicine"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "a"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1565"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"61d-4/pq4MZ1HEs5jg0IP/LlyAwTssU\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:55:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"medicinesId\": 2,\n            \"name\": \"Librax\",\n            \"expiredAt\": \"2026-04-04T00:00:00.000Z\",\n            \"pharmaceuticalTiter\": 300,\n            \"pharmaceuticalIndications\": \"for stomachache\",\n            \"pharmaceuticalComposition\": \"libraxmed 500 mg\",\n            \"company_Name\": \"OPM\",\n            \"price\": 11000,\n            \"isAllowedWithoutPrescription\": true,\n            \"barcode\": \"123456\",\n            \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\",\n            \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n            \"updatedAt\": \"2025-06-25T18:44:19.000Z\",\n            \"pharmacy_medicines\": [\n                {\n                    \"pharmacy_medicineId\": 1,\n                    \"lowbound\": 5,\n                    \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n                    \"updatedAt\": \"2025-06-25T18:44:19.000Z\",\n                    \"medicine_id\": 2,\n                    \"pharmacy_id\": 1,\n                    \"medicine_batches\": [\n                        {\n                            \"medicine_batchId\": 1,\n                            \"quantity\": 10,\n                            \"expired_date\": \"2026-04-04\",\n                            \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n                            \"updatedAt\": \"2025-06-25T18:44:19.000Z\",\n                            \"pharmacy_medicine_id\": 1\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"medicinesId\": 3,\n            \"name\": \"nospa\",\n            \"expiredAt\": \"2026-04-04T00:00:00.000Z\",\n            \"pharmaceuticalTiter\": 300,\n            \"pharmaceuticalIndications\": \"for stomachache\",\n            \"pharmaceuticalComposition\": \"antispa 500 mg\",\n            \"company_Name\": \"OPM\",\n            \"price\": 11000,\n            \"isAllowedWithoutPrescription\": true,\n            \"barcode\": \"123457\",\n            \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\",\n            \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n            \"updatedAt\": \"2025-06-25T18:44:19.000Z\",\n            \"pharmacy_medicines\": [\n                {\n                    \"pharmacy_medicineId\": 4,\n                    \"lowbound\": 4,\n                    \"createdAt\": \"2025-06-25T18:54:35.000Z\",\n                    \"updatedAt\": \"2025-06-25T18:54:35.000Z\",\n                    \"medicine_id\": 3,\n                    \"pharmacy_id\": 1,\n                    \"medicine_batches\": [\n                        {\n                            \"medicine_batchId\": 4,\n                            \"quantity\": 15,\n                            \"expired_date\": \"2025-09-09\",\n                            \"createdAt\": \"2025-06-25T18:54:35.000Z\",\n                            \"updatedAt\": \"2025-06-25T18:54:35.000Z\",\n                            \"pharmacy_medicine_id\": 4\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}"
+				},
+				{
+					"name": "search-for-medicine",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/search-for-medicine?name=z",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"search-for-medicine"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "z"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "11"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b-EFAlOux7Kcr/ZEgGkn2r+oFAbu4\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:55:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "show-all-medicines",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/show-all-medicines",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"show-all-medicines"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "show-all-medicines",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/show-all-medicines",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"show-all-medicines"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "843"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"34b-ZqoPjpAGbJJDlKYyF5f5IVUP208\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 25 Jun 2025 18:59:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"medicinesId\": 2,\n            \"name\": \"Librax\",\n            \"expiredAt\": \"2026-04-04T00:00:00.000Z\",\n            \"pharmaceuticalTiter\": 300,\n            \"pharmaceuticalIndications\": \"for stomachache\",\n            \"pharmaceuticalComposition\": \"libraxmed 500 mg\",\n            \"company_Name\": \"OPM\",\n            \"price\": 11000,\n            \"isAllowedWithoutPrescription\": true,\n            \"barcode\": \"123456\",\n            \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\",\n            \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n            \"updatedAt\": \"2025-06-25T18:44:19.000Z\"\n        },\n        {\n            \"medicinesId\": 3,\n            \"name\": \"nospa\",\n            \"expiredAt\": \"2026-04-04T00:00:00.000Z\",\n            \"pharmaceuticalTiter\": 300,\n            \"pharmaceuticalIndications\": \"for stomachache\",\n            \"pharmaceuticalComposition\": \"antispa 500 mg\",\n            \"company_Name\": \"OPM\",\n            \"price\": 11000,\n            \"isAllowedWithoutPrescription\": true,\n            \"barcode\": \"123457\",\n            \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\",\n            \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n            \"updatedAt\": \"2025-06-25T18:44:19.000Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "delete-from-my-pharmacy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/delete-from-my-pharmacy/5",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"delete-from-my-pharmacy",
+						"5"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete-from-my-pharmacy",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/delete-from-my-pharmacy/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"delete-from-my-pharmacy",
+								"5"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "10"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"a-hTQxZ8cSunaBJ7UZagiCq5uKkGM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 15:42:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": 1\n}"
+				},
+				{
+					"name": "delete-from-my-pharmacy",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/delete-from-my-pharmacy/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"delete-from-my-pharmacy",
+								"5"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"33-kXYDiCwalByQ/csNIWh9FsCvkgQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 15:49:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"This Medicine Is not in your pharmacy\"\n}"
+				}
+			]
+		},
+		{
+			"name": "update-price-percentage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "ids",
+							"value": "[2,5]",
+							"type": "text"
+						},
+						{
+							"key": "percentage",
+							"value": "30",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/update-price-percentage",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"update-price-percentage"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "update-price-percentage",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "ids",
+									"value": "[2,3]",
+									"type": "text"
+								},
+								{
+									"key": "percentage",
+									"value": "30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/update-price-percentage",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"update-price-percentage"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "14"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e-UE7nv0Q3yenAW1wIkrzXknyR7H8\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 15:57:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        1,\n        1\n    ]\n}"
+				},
+				{
+					"name": "update-price-percentage",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "ids",
+									"value": "[2,5]",
+									"type": "text"
+								},
+								{
+									"key": "percentage",
+									"value": "30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/update-price-percentage",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"update-price-percentage"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "12"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c-jqkzPnQl19NPw8fXTRQzhe71HW4\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 15:58:13 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        1\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "sale-process-amount",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "ids",
+							"value": "[2,3]",
+							"type": "text"
+						},
+						{
+							"key": "ammountsIds",
+							"value": "[1,2]",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "addOrder",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/sale-process-amount",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"sale-process-amount"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "sale-process-amount",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "ids",
+									"value": "[2,3]",
+									"type": "text"
+								},
+								{
+									"key": "ammountsIds",
+									"value": "[1,2]",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "seePrice",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/sale-process-amount",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"sale-process-amount"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "14"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e-RDBTCw++2P+EUhei3Rwd/coLtT4\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:04:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": 61347\n}"
+				},
+				{
+					"name": "sale-process-amount",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "ids",
+									"value": "[2,3]",
+									"type": "text"
+								},
+								{
+									"key": "ammountsIds",
+									"value": "[1,2]",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "addOrder",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/sale-process-amount",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"sale-process-amount"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "326"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"146-nbywagCQlOcbzofEpUXLimZqzvE\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:10:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"medicines_orderId\": 1,\n            \"Price\": 24167,\n            \"count\": 1,\n            \"medicine_id\": 2,\n            \"pharmacy_id\": 1,\n            \"updatedAt\": \"2025-06-26T16:10:11.158Z\",\n            \"createdAt\": \"2025-06-26T16:10:11.158Z\"\n        },\n        {\n            \"medicines_orderId\": 2,\n            \"Price\": 37180,\n            \"count\": 2,\n            \"medicine_id\": 3,\n            \"pharmacy_id\": 1,\n            \"updatedAt\": \"2025-06-26T16:10:11.200Z\",\n            \"createdAt\": \"2025-06-26T16:10:11.200Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "add-batch ",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quantity\":3,\r\n    \"expired_date\":\"2027-07-07\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/add-batch/3",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"add-batch",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "add-batch",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\":3,\r\n    \"expired_date\":\"2027-07-07\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/add-batch/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"add-batch",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "175"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"af-PTjaZhdcP4kSuYOWncv6pYXqm0s\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:25:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"medicine_batchId\": 5,\n        \"quantity\": 3,\n        \"expired_date\": \"2027-07-07\",\n        \"pharmacy_medicine_id\": 4,\n        \"updatedAt\": \"2025-06-26T16:25:30.113Z\",\n        \"createdAt\": \"2025-06-26T16:25:30.113Z\"\n    }\n}"
+				},
+				{
+					"name": "add-batch",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\":3,\r\n    \"expired_date\":\"2027-07-07\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/add-batch/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"add-batch",
+								"2"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "38"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"26-stkiJXV8pOxSWk8TQZMe2AHI8RE\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:26:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Don't Have This Relation\"\n}"
+				}
+			]
+		},
+		{
+			"name": "despense-medicine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/despense-medicine/1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"despense-medicine",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "despense-medicine",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/despense-medicine/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"despense-medicine",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "10"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"a-hTQxZ8cSunaBJ7UZagiCq5uKkGM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:31:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": 1\n}"
+				},
+				{
+					"name": "despense-medicine",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/despense-medicine/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"despense-medicine",
+								"1"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"20-3EBXQPQpVCEeJOKgsB2ABP3fyuc\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:32:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"deleted previously\"\n}"
+				}
+			]
+		},
+		{
+			"name": "work-days-processes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "request_objects",
+							"value": "{\"request_objects\":[{\"day\":\"TUESDAY\",\"work_start_time\":\"08:11\",\"work_end_time\":\"23:23\"}]}",
+							"type": "text"
+						},
+						{
+							"key": "request_type",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "ids",
+							"value": "{\"ids\":[22]}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/work-days-processes",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"work-days-processes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "work-days-processes",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "request_objects",
+									"value": "{\"request_objects\":[{\"day\":\"MONDAY\",\"work_start_time\":\"09:11\",\"work_end_time\":\"23:11\"},{\"day\":\"TUESDAY\",\"work_start_time\":\"10:10\",\"work_end_time\":\"22:10\"}]}",
+									"type": "text"
+								},
+								{
+									"key": "request_type",
+									"value": "create",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/work-days-processes",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"work-days-processes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "367"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"16f-4H/G53StEi5N8x1NcSf/p6yL+n4\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:37:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"work_DaysId\": 21,\n            \"day\": \"MONDAY\",\n            \"work_start_time\": \"09:11\",\n            \"work_end_time\": \"23:11\",\n            \"pharmacy_id\": 1,\n            \"updatedAt\": \"2025-06-26T16:37:50.709Z\",\n            \"createdAt\": \"2025-06-26T16:37:50.709Z\"\n        },\n        {\n            \"work_DaysId\": 22,\n            \"day\": \"TUESDAY\",\n            \"work_start_time\": \"10:10\",\n            \"work_end_time\": \"22:10\",\n            \"pharmacy_id\": 1,\n            \"updatedAt\": \"2025-06-26T16:37:50.737Z\",\n            \"createdAt\": \"2025-06-26T16:37:50.737Z\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "work-days-processes",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "request_objects",
+									"value": "{\"request_objects\":[{\"day\":\"MONDAY\",\"work_start_time\":\"08:11\",\"work_end_time\":\"23:23\"}]}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "request_type",
+									"value": "delete",
+									"type": "text"
+								},
+								{
+									"key": "ids",
+									"value": "{\"ids\":[21]}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/work-days-processes",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"work-days-processes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "12"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c-jqkzPnQl19NPw8fXTRQzhe71HW4\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:39:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        1\n    ]\n}"
+				},
+				{
+					"name": "work-days-processes",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "request_objects",
+									"value": "{\"request_objects\":[{\"day\":\"TUESDAY\",\"work_start_time\":\"08:11\",\"work_end_time\":\"23:23\"}]}",
+									"type": "text"
+								},
+								{
+									"key": "request_type",
+									"value": "update",
+									"type": "text"
+								},
+								{
+									"key": "ids",
+									"value": "{\"ids\":[22]}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/work-days-processes",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"work-days-processes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "12"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c-jqkzPnQl19NPw8fXTRQzhe71HW4\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:41:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        1\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "searchPrescription",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/searchPrescription?code=1234&view=number",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"searchPrescription"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "1234"
+						},
+						{
+							"key": "view",
+							"value": "number"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "searchPrescription",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/searchPrescription?code=1234&view=details",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"searchPrescription"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "1234"
+								},
+								{
+									"key": "view",
+									"value": "details"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "963"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3c3-8Kix+8XKF7HuOeTOO81x0pXyMPo\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:45:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"prescriptionsId\": 1,\n        \"code\": \"1234\",\n        \"note\": \"be careful\",\n        \"createdAt\": \"2025-06-21T16:38:58.000Z\",\n        \"updatedAt\": \"2025-06-21T16:38:58.000Z\",\n        \"clinic_id\": 1,\n        \"doctor_id\": 2,\n        \"patient_id\": null,\n        \"child_id\": 1,\n        \"doctorP\": {\n            \"userId\": 2,\n            \"first_name\": \"fake\",\n            \"middle_name\": \"fake\",\n            \"last_name\": \"fake\",\n            \"specialty\": null,\n            \"imgurl\": null\n        },\n        \"prescription_medicines\": [\n            {\n                \"prescription_medicinesId\": 1,\n                \"howToTake\": \"before lunch\",\n                \"createdAt\": \"2025-06-21T16:38:58.000Z\",\n                \"updatedAt\": \"2025-06-21T16:38:58.000Z\",\n                \"pharmacy_id\": null,\n                \"medicines_id\": 2,\n                \"prescription_id\": 1,\n                \"medicine\": {\n                    \"medicinesId\": 2,\n                    \"name\": \"Librax\",\n                    \"expiredAt\": \"2026-04-04T00:00:00.000Z\",\n                    \"pharmaceuticalTiter\": 300,\n                    \"pharmaceuticalIndications\": \"for stomachache\",\n                    \"pharmaceuticalComposition\": \"libraxmed 500 mg\",\n                    \"company_Name\": \"OPM\",\n                    \"price\": 24167,\n                    \"isAllowedWithoutPrescription\": true,\n                    \"barcode\": \"123456\",\n                    \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\",\n                    \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n                    \"updatedAt\": \"2025-06-26T15:58:13.000Z\"\n                }\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "searchPrescription",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/searchPrescription?code=1234&view=number",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"searchPrescription"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "1234"
+								},
+								{
+									"key": "view",
+									"value": "number"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "363"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"16b-NotxFkZ1M/8ZMX9Evz3x6uDQC2E\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 16:48:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"prescriptionsId\": 1,\n        \"code\": \"1234\",\n        \"note\": \"be careful\",\n        \"createdAt\": \"2025-06-21T16:38:58.000Z\",\n        \"updatedAt\": \"2025-06-21T16:38:58.000Z\",\n        \"clinic_id\": 1,\n        \"doctor_id\": 2,\n        \"patient_id\": null,\n        \"child_id\": 1,\n        \"doctorP\": {\n            \"userId\": 2,\n            \"first_name\": \"fake\",\n            \"middle_name\": \"fake\",\n            \"last_name\": \"fake\",\n            \"specialty\": null,\n            \"imgurl\": null\n        },\n        \"prescription_medicines\": [\n            {\n                \"numOfmedicines\": 1\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "medicine-and-alternatives",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/medicine-and-alternatives/3",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"medicine-and-alternatives",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "medicine-and-alternatives",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/medicine-and-alternatives/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"medicine-and-alternatives",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1503"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5df-55qhsGJaNrpk+tGwfGI8D3xcWZc\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 17:01:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"pharmacy_medicineId\": 4,\n        \"lowbound\": 4,\n        \"createdAt\": \"2025-06-25T18:54:35.000Z\",\n        \"updatedAt\": \"2025-06-25T18:54:35.000Z\",\n        \"medicine_id\": 3,\n        \"pharmacy_id\": 1,\n        \"medicine\": {\n            \"medicinesId\": 3,\n            \"name\": \"nospa\",\n            \"expiredAt\": \"2026-04-04T00:00:00.000Z\",\n            \"pharmaceuticalTiter\": 300,\n            \"pharmaceuticalIndications\": \"for stomachache\",\n            \"pharmaceuticalComposition\": \"antispa 500 mg\",\n            \"company_Name\": \"OPM\",\n            \"price\": 18590,\n            \"isAllowedWithoutPrescription\": true,\n            \"barcode\": \"123457\",\n            \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\",\n            \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n            \"updatedAt\": \"2025-06-26T15:57:14.000Z\",\n            \"alternatives\": [\n                {\n                    \"id\": 2,\n                    \"createdAt\": \"2025-06-21T16:38:58.000Z\",\n                    \"updatedAt\": \"2025-06-21T16:38:58.000Z\",\n                    \"alternative_id\": 2,\n                    \"primary_id\": 3,\n                    \"medicine\": {\n                        \"medicinesId\": 3,\n                        \"name\": \"nospa\",\n                        \"expiredAt\": \"2026-04-04T00:00:00.000Z\",\n                        \"pharmaceuticalTiter\": 300,\n                        \"pharmaceuticalIndications\": \"for stomachache\",\n                        \"pharmaceuticalComposition\": \"antispa 500 mg\",\n                        \"company_Name\": \"OPM\",\n                        \"price\": 18590,\n                        \"isAllowedWithoutPrescription\": true,\n                        \"barcode\": \"123457\",\n                        \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\",\n                        \"createdAt\": \"2025-06-25T18:44:19.000Z\",\n                        \"updatedAt\": \"2025-06-26T15:57:14.000Z\"\n                    }\n                }\n            ]\n        },\n        \"medicine_batches\": [\n            {\n                \"medicine_batchId\": 4,\n                \"quantity\": 15,\n                \"expired_date\": \"2025-09-09\",\n                \"createdAt\": \"2025-06-25T18:54:35.000Z\",\n                \"updatedAt\": \"2025-06-25T18:54:35.000Z\",\n                \"pharmacy_medicine_id\": 4\n            },\n            {\n                \"medicine_batchId\": 5,\n                \"quantity\": 3,\n                \"expired_date\": \"2027-07-07\",\n                \"createdAt\": \"2025-06-26T16:25:30.000Z\",\n                \"updatedAt\": \"2025-06-26T16:25:30.000Z\",\n                \"pharmacy_medicine_id\": 4\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "add-alternatives",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "alternativesArray",
+							"value": "[2]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/add-alternatives/3",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"add-alternatives",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "add-alternatives",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "alternativesArray",
+									"value": "[2]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/add-alternatives/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"add-alternatives",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "131"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"83-4Pdt5qnBgjZURTrG1IVgoiEJp/E\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 17:06:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 5,\n            \"primary_id\": 3,\n            \"alternative_id\": 2,\n            \"updatedAt\": \"2025-06-26T17:06:43.077Z\",\n            \"createdAt\": \"2025-06-26T17:06:43.077Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "show-orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/show-orders",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"show-orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "show-orders",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/show-orders",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"show-orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "531"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"213-35HCdp2BtoT9Or8zf+O/bRM99W8\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 17:13:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"medicines_orderId\": 2,\n            \"count\": 2,\n            \"Price\": 37180,\n            \"createdAt\": \"2025-06-26T16:10:11.000Z\",\n            \"updatedAt\": \"2025-06-26T16:10:11.000Z\",\n            \"medicine_id\": 3,\n            \"pharmacy_id\": 1,\n            \"medicine\": {\n                \"medicinesId\": 3,\n                \"name\": \"nospa\",\n                \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\"\n            }\n        },\n        {\n            \"medicines_orderId\": 1,\n            \"count\": 1,\n            \"Price\": 24167,\n            \"createdAt\": \"2025-06-23T16:10:11.000Z\",\n            \"updatedAt\": \"2025-06-23T16:10:11.000Z\",\n            \"medicine_id\": 2,\n            \"pharmacy_id\": 1,\n            \"medicine\": {\n                \"medicinesId\": 2,\n                \"name\": \"Librax\",\n                \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "daily-inventory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/daily-inventory",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"daily-inventory"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "daily-inventory",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/daily-inventory",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"daily-inventory"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "545"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"221-rCi6e4YsvgERBvIGluKD9adJLhg\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 17:25:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"medicines_orderId\": 1,\n            \"count\": 1,\n            \"Price\": 24167,\n            \"createdAt\": \"2025-06-26T16:10:11.000Z\",\n            \"updatedAt\": \"2025-06-26T16:10:11.000Z\",\n            \"medicine_id\": 2,\n            \"pharmacy_id\": 1,\n            \"medicine\": {\n                \"medicinesId\": 2,\n                \"name\": \"Librax\",\n                \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\"\n            }\n        },\n        {\n            \"medicines_orderId\": 2,\n            \"count\": 2,\n            \"Price\": 37180,\n            \"createdAt\": \"2025-06-26T16:10:11.000Z\",\n            \"updatedAt\": \"2025-06-26T16:10:11.000Z\",\n            \"medicine_id\": 3,\n            \"pharmacy_id\": 1,\n            \"medicine\": {\n                \"medicinesId\": 3,\n                \"name\": \"nospa\",\n                \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\"\n            }\n        }\n    ],\n    \"total\": 98527\n}"
+				}
+			]
+		},
+		{
+			"name": "marked-as-bought",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"count\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/marked-as-bought/1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"marked-as-bought",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "marked-as-bought",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"count\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/marked-as-bought/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"marked-as-bought",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "178"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b2-RlfmNu7i1aG0BR36n2znUdNXuAs\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 17:28:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        1\n    ],\n    \"data2\": {\n        \"medicines_orderId\": 3,\n        \"count\": 2,\n        \"Price\": 24167,\n        \"medicine_id\": 2,\n        \"pharmacy_id\": 1,\n        \"updatedAt\": \"2025-06-26T17:28:27.347Z\",\n        \"createdAt\": \"2025-06-26T17:28:27.347Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "update-medicine-details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"LIBRAX\",\r\n        \"pharmaceuticalTiter\":\"500\",\r\n        \"pharmaceuticalIndications\":\"for stomachache\",\r\n        \"pharmaceuticalComposition\":\"libraxmed 500 mg\",\r\n        \"company_Name\":\"OPM\",\r\n        \"price\":\"11000\",\r\n        \"isAllowedWithoutPrescription\":false,\r\n        \"barcode\":\"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/update-medicine-details/2",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"update-medicine-details",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "update-medicine-details",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"LIBRAX\",\r\n        \"pharmaceuticalTiter\":\"500\",\r\n        \"pharmaceuticalIndications\":\"for stomachache\",\r\n        \"pharmaceuticalComposition\":\"libraxmed 500 mg\",\r\n        \"company_Name\":\"OPM\",\r\n        \"price\":\"11000\",\r\n        \"isAllowedWithoutPrescription\":false,\r\n        \"barcode\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/update-medicine-details/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"update-medicine-details",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "12"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c-jqkzPnQl19NPw8fXTRQzhe71HW4\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 17:50:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        1\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "maximin-minimum-sellings",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/pharmacist/maximin-minimum-sellings",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"maximin-minimum-sellings"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "maximin-minimum-sellings",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/maximin-minimum-sellings",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"maximin-minimum-sellings"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "398"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"18e-5tIiKJGxCyulEuYz9QxNXf/vQ5U\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 26 Jun 2025 17:58:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"maximum_selling\": {\n        \"medicine_id\": 2,\n        \"number_of_selling_that_item\": \"3\",\n        \"medicine\": {\n            \"medicinesId\": 2,\n            \"name\": \"LIBRAX\",\n            \"pharmaceuticalTiter\": 500,\n            \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\"\n        }\n    },\n    \"minimum_selling\": {\n        \"medicine_id\": 3,\n        \"number_of_selling_that_item\": \"2\",\n        \"medicine\": {\n            \"medicinesId\": 3,\n            \"name\": \"nospa\",\n            \"pharmaceuticalTiter\": 300,\n            \"medImageUrl\": \"public\\\\images\\\\1750877059599-kaggle1.png\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "monthly-revenu",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/monthly-revenu?date=2025-06",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"monthly-revenu"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2025-06"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "monthly-revenu",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/pharmacist/monthly-revenu?date=2025-06",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"monthly-revenu"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2025-06"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,POST,PUT,PATCH,DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type,Authorization"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "38"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"26-dm0vPzquQODOVc9sAshVYAPs2RA\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 27 Jun 2025 16:45:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"monthlySellings\": \"85514\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "low-bound (not tested)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fcmToken\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/low-bound",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"low-bound"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "expired-date (not tested)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fcmToken\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/expired-date",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"expired-date"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dynamic-notification (not tested)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVsaWFzLmZhcmVzLjIwMDJAZ21haWwuY29tIiwidXNlcklkIjo1LCJpYXQiOjE3NTA3ODU2MDN9.Qstf4mkAQSSnsCyz-ka_9pPZJn5fRaY1UrXXrvkHdzw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fcmToken\":\"\",\r\n    \"title\":\"\",\r\n    \"body\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/pharmacist/dynamic-notification",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"pharmacist",
+						"dynamic-notification"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

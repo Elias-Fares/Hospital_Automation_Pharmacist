@@ -42,7 +42,7 @@ class _BatchesScreenState extends ConsumerState<BatchesScreen> {
             BatchesColumnsTitles(),
 
             ListView.builder(
-              itemCount: 6,
+              itemCount: 10,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder:

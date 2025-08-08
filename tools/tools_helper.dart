@@ -17,9 +17,10 @@ class ToolsHelper {
   static const String white = '\x1B[37m';
   static const String reset = '\x1B[0m';
 
-  static String getfeatureScreenContentString(
-      {required String caseCamelFeatureName,
-      required String lowerCaseFeatureName}) {
+  static String getfeatureScreenContentString({
+    required String caseCamelFeatureName,
+    required String lowerCaseFeatureName,
+  }) {
     return '''
 
 import 'package:flutter/material.dart';
@@ -91,6 +92,29 @@ class ${featureName}ViewModel extends _\$${featureName}ViewModel {
     return result;
   }
 
+  static String varCamelCase(String text, {String comma = "_"}) {
+    if (text.isEmpty) {
+      return '';
+    }
+
+    List<String> words = text.toLowerCase().split(comma);
+    String result = '';
+
+    for (int i = 0; i < words.length; i++) {
+      String word = words[i];
+      if (word.isNotEmpty) {
+        if (i == 0) {
+          // result += word[0].toUpperCase() + word.substring(1);
+          result = word;
+        } else {
+          result += word[0].toUpperCase() + word.substring(1);
+        }
+      }
+    }
+
+    return result.replaceAll(" ", "");
+  }
+
   static bool isValidFeatureName(String name) {
     return !RegExp(r'^[0-9*/_\-]').hasMatch(name);
   }
@@ -102,8 +126,10 @@ class ${featureName}ViewModel extends _\$${featureName}ViewModel {
     }
   }
 
-  static Future<void> createFile(
-      {required String path, required String content}) async {
+  static Future<void> createFile({
+    required String path,
+    required String content,
+  }) async {
     final createdFile = File(path);
     if (!await createdFile.exists()) {
       // Add content to created file
@@ -128,8 +154,10 @@ class ${featureName}ViewModel extends _\$${featureName}ViewModel {
     }
   }
 
-  static Future<void> copyFolder(
-      {required Directory source, required Directory destination}) async {
+  static Future<void> copyFolder({
+    required Directory source,
+    required Directory destination,
+  }) async {
     if (!await source.exists()) {
       print("$red⛔ Source folder does not exist: ${source.path} ⛔");
       print(reset);
@@ -141,9 +169,10 @@ class ${featureName}ViewModel extends _\$${featureName}ViewModel {
     await for (var entity in source.list(recursive: false)) {
       if (entity is File) {
         await createFileV2(
-            fileName: p.basename(entity.path),
-            folderPath: destination.path,
-            fileContent: entity.readAsStringSync());
+          fileName: p.basename(entity.path),
+          folderPath: destination.path,
+          fileContent: entity.readAsStringSync(),
+        );
       } else if (entity is Directory) {
         final newPath = destination.uri.path + p.basename(entity.path);
         final subDir = Directory(newPath);
@@ -153,4 +182,10 @@ class ${featureName}ViewModel extends _\$${featureName}ViewModel {
       }
     }
   }
+
+ static String extractPath(String input) {
+  final regex = RegExp(r'(?<=\}\})/[^?]+');
+  final match = regex.firstMatch(input);
+  return match?.group(0) ?? '';
+}
 }

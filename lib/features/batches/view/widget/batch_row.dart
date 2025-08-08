@@ -1,4 +1,5 @@
 part of '../batches_screen.dart';
+
 class BatchRow extends StatelessWidget {
   const BatchRow({
     super.key,
@@ -15,6 +16,16 @@ class BatchRow extends StatelessWidget {
       return AppColors.error;
     } else if (state == "warning") {
       return AppColors.warning;
+    } else {
+      return AppColors.white;
+    }
+  }
+
+  Color _backgroundColorSelector() {
+    if (state == "expired") {
+      return AppColors.error.withValues(alpha: 0.05);
+    } else if (state == "warning") {
+      return AppColors.warning.withValues(alpha: 0.05);
     } else {
       return AppColors.white;
     }
@@ -51,7 +62,7 @@ class BatchRow extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 4),
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 14),
       decoration: containerCardDecoration().copyWith(
-        color: _colorSelector().withValues(alpha: 0.05),
+        color: _backgroundColorSelector(),
         border: Border.all(color: _colorSelector()),
       ),
 
@@ -78,4 +89,3 @@ class BatchRow extends StatelessWidget {
     );
   }
 }
-

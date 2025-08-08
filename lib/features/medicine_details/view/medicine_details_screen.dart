@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:medicare_pharmacy/core/enums/medicine_card_type.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
 import 'package:medicare_pharmacy/core/widgets/cards/icon_title_navigation_button.dart';
+import 'package:medicare_pharmacy/core/widgets/floating_action_button_with_faded_elevation.dart';
 import 'package:medicare_pharmacy/features/alternative_medicines/view/alternative_medicines_screen.dart';
 import 'package:medicare_pharmacy/features/batches/view/batches_screen.dart';
 import 'package:medicare_pharmacy/features/edit_medicine/view/edit_medicine_screen.dart';
 import 'package:medicare_pharmacy/features/medicines/view/medicines_screen.dart';
+import 'package:medicare_pharmacy/features/specify_sale_amount/view/specify_sale_amount_screen.dart';
 import '../../../configuration/res.dart';
 import '../../../core/constant/constant.dart';
 import '../../../core/models/medicine_model.dart';
@@ -34,6 +36,13 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const SubAppBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButtonFadedElevation(
+        title: "Sell",
+        onTap: () {
+          context.push(SpecifySaleAmountScreen.routeName);
+        },
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
@@ -73,9 +82,7 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
               },
             ),
 
-            SizedBox(height: 24),
-            LoadingButton(title: "Sell"),
-            SizedBox(height: 24),
+            SizedBox(height: 70),
           ],
         ),
       ),

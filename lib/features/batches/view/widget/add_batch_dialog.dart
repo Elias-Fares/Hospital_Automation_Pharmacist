@@ -22,6 +22,7 @@ class _AddBatchDialogState extends State<AddBatchDialog> {
 
       insetPadding: EdgeInsets.symmetric(horizontal: 30),
       backgroundColor: AppColors.backgroundColor,
+    
       child: Container(
         padding: EdgeInsets.all(16),
         height: 380,
@@ -53,7 +54,10 @@ class _AddBatchDialogState extends State<AddBatchDialog> {
 
             Spacer(),
 
-            CustomOutlinedButton(title: "Add Batch"),
+            CustomOutlinedButton(
+              title: "Add Batch",
+              backgroundColor: AppColors.white,
+            ),
             SizedBox(height: 20),
           ],
         ),

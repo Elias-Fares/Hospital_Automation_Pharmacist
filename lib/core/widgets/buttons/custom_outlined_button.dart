@@ -31,16 +31,18 @@ class CustomOutlinedButton extends StatelessWidget {
     return CustomInkwell(
       onTap: onTap,
       color: backgroundColor ?? AppColors.backgroundColor,
+      borderSide: BorderSide(color: borderColor ?? AppColors.primary),
       borderRadius: BorderRadius.circular(radius ?? 50),
-      child: Container(
+      child: SizedBox(
         width: width,
+
         height: height ?? 40.h,
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          border: Border.all(color: borderColor ?? AppColors.primary),
-          borderRadius: BorderRadius.circular(radius ?? 50),
-        ),
+        // padding: const EdgeInsets.symmetric(horizontal: 15),
+        // alignment: Alignment.center,
+        // decoration: BoxDecoration(
+        //   // border: Border.all(color: borderColor ?? AppColors.primary),
+        //   borderRadius: BorderRadius.circular(radius ?? 50),
+        // ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

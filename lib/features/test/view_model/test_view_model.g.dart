@@ -1,57 +1,57 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'scanner_view_model.dart';
+part of 'test_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-@ProviderFor(ScannerViewModel)
-const scannerViewModelProvider = ScannerViewModelProvider._();
+@ProviderFor(TestViewModel)
+const testViewModelProvider = TestViewModelProvider._();
 
-final class ScannerViewModelProvider
-    extends $NotifierProvider<ScannerViewModel, ScannerState> {
-  const ScannerViewModelProvider._()
+final class TestViewModelProvider
+    extends $NotifierProvider<TestViewModel, TestState> {
+  const TestViewModelProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'scannerViewModelProvider',
+        name: r'testViewModelProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$scannerViewModelHash();
+  String debugGetCreateSourceHash() => _$testViewModelHash();
 
   @$internal
   @override
-  ScannerViewModel create() => ScannerViewModel();
+  TestViewModel create() => TestViewModel();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(ScannerState value) {
+  Override overrideWithValue(TestState value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<ScannerState>(value),
+      providerOverride: $SyncValueProvider<TestState>(value),
     );
   }
 }
 
-String _$scannerViewModelHash() => r'e3de7b44d5d41118a34e4e20a73d2b2ff63b83c3';
+String _$testViewModelHash() => r'3b101973adfb9b3eeafc0892b4c8bec390a56133';
 
-abstract class _$ScannerViewModel extends $Notifier<ScannerState> {
-  ScannerState build();
+abstract class _$TestViewModel extends $Notifier<TestState> {
+  TestState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<ScannerState, ScannerState>;
+    final ref = this.ref as $Ref<TestState, TestState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<ScannerState, ScannerState>,
-              ScannerState,
+              AnyNotifier<TestState, TestState>,
+              TestState,
               Object?,
               Object?
             >;

@@ -25,6 +25,7 @@ import 'package:medicare_pharmacy/features/orders/view/orders_screen.dart';
 import 'package:medicare_pharmacy/features/permission_required/view/permission_required_screen.dart';
 import 'package:medicare_pharmacy/features/pharmacy_profile/view/pharmacy_profile_screen.dart';
 import 'package:medicare_pharmacy/features/scanner/view/scanner_screen.dart';
+import 'package:medicare_pharmacy/features/specify_sale_amount/view/specify_sale_amount_screen.dart';
 import 'package:medicare_pharmacy/features/successful_verification/view/successful_verification_screen.dart';
 import 'package:medicare_pharmacy/features/update_price/view/update_price_screen.dart';
 
@@ -36,10 +37,13 @@ class AppRouter {
 
   static final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
 
+  static final RouteObserver<ModalRoute<void>> routeObserver =
+     RouteObserver<ModalRoute<void>>();
+
   static final router = GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: initialRoute,
-    observers: [MyGoRouterObserver()],
+    observers: [MyGoRouterObserver(), routeObserver],
     routes: [
       GoRoute(
         path: SignupScreen.routeName,
@@ -168,6 +172,12 @@ class AppRouter {
         path: InventoryScreen.routeName,
         builder: (context, state) {
           return InventoryScreen();
+        },
+      ),
+      GoRoute(
+        path: SpecifySaleAmountScreen.routeName,
+        builder: (context, state) {
+          return SpecifySaleAmountScreen();
         },
       ),
     ],

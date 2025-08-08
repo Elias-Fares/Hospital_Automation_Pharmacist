@@ -422,40 +422,49 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> lowBound({required String fcmtoken}) async {
-    final response = await baseDio.get(
-      subUrl: "/pharmacist/low-bound",
-      data: {"fcmToken": fcmtoken},
+  //   Future<DataState> lowBound(nottested)(
 
-      model: dynamic,
-    );
+  //     {     required String fcmtoken }
+  //   ) async {
+  //   final response = await baseDio
+  //       .get(subUrl: "/pharmacist/low-bound",
+  //        data : {      "fcmToken": fcmtoken},
 
-    return response;
-  }
+  //       model: dynamic
+  //       );
 
-  Future<DataState> expiredDate({required String fcmtoken}) async {
-    final response = await baseDio.get(
-      subUrl: "/pharmacist/expired-date",
-      data: {"fcmToken": fcmtoken},
+  //   return response;
+  // }
 
-      model: dynamic,
-    );
+  //   Future<DataState> expiredDate(nottested)(
 
-    return response;
-  }
+  //     {     required String fcmtoken }
+  //   ) async {
+  //   final response = await baseDio
+  //       .get(subUrl: "/pharmacist/expired-date",
+  //        data : {      "fcmToken": fcmtoken},
 
-  Future<DataState> dynamicNotification({
-    required String fcmtoken,
-    required String title,
-    required String body,
-  }) async {
-    final response = await baseDio.get(
-      subUrl: "/pharmacist/dynamic-notification",
-      data: {"fcmToken": fcmtoken, "title": title, "body": body},
+  //       model: dynamic
+  //       );
 
-      model: dynamic,
-    );
+  //   return response;
+  // }
 
-    return response;
-  }
+  //   Future<DataState> dynamicNotification(nottested)(
+
+  //     {     required String fcmtoken,
+  //   required String title,
+  //   required String body }
+  //   ) async {
+  //   final response = await baseDio
+  //       .get(subUrl: "/pharmacist/dynamic-notification",
+  //        data : {      "fcmToken": fcmtoken,
+  //     "title": title,
+  //     "body": body},
+
+  //       model: dynamic
+  //       );
+
+  //   return response;
+  // }
 }
