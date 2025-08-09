@@ -14,28 +14,30 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: AppColors.backgroundColor,
       elevation: 0,
       leading: IconButton(
-          onPressed: () {
-            if (context.canPop()) {
-              context.pop();
-            }
-          },
-          icon: const Icon(Icons.arrow_back, color: Colors.black)),
+        onPressed: () {
+          if (context.canPop()) {
+            context.pop();
+          }
+        },
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
+      ),
       titleSpacing: 0,
       title: titleWidget,
-      actions: withSearch
-          ? [
-              IconButton(
+      titleTextStyle: Theme.of(context).textTheme.bodyLarge,
+      actions:
+          withSearch
+              ? [
+                IconButton(
                   onPressed: () {},
                   icon: const Icon(
                     Icons.search,
                     color: AppColors.onSurface,
                     size: 18,
-                  )),
-              const SizedBox(
-                width: 10,
-              )
-            ]
-          : [],
+                  ),
+                ),
+                const SizedBox(width: 10),
+              ]
+              : [],
     );
   }
 

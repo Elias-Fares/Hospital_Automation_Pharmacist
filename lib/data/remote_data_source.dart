@@ -1,5 +1,7 @@
 import 'package:medicare_pharmacy/core/base_dio/base_dio.dart' show BaseDio;
 import 'package:medicare_pharmacy/core/base_dio/data_state.dart';
+import 'package:medicare_pharmacy/data/models/medicine_model.dart';
+import 'package:medicare_pharmacy/data/models/medicine_with_alts_model.dart';
 
 class RemoteDataSource {
   final BaseDio baseDio;
@@ -241,11 +243,17 @@ class RemoteDataSource {
   }
 
   Future<DataState> searchForMedicine({required String name}) async {
-    final response = await baseDio.get(
+    final queryMap = <String, dynamic>{};
+    if (name.isNotEmpty) {
+      queryMap["name"] = name;
+    }
+    final response = await baseDio.get<MedicineModel>(
       subUrl: "/pharmacist/search-for-medicine",
+      isListOfModel: true,
+      needToken: true,
 
-      queryParameters: {"name": name},
-      model: dynamic,
+      queryParameters: queryMap,
+      model: MedicineModel(),
     );
 
     return response;
@@ -261,9 +269,9 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> deleteFromMyPharmacy() async {
+  Future<DataState> deleteFromMyPharmacy({required String medId}) async {
     final response = await baseDio.delete(
-      subUrl: "/pharmacist/delete-from-my-pharmacy/5",
+      subUrl: "/pharmacist/delete-from-my-pharmacy/$medId",
     );
 
     return response;
@@ -327,11 +335,12 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> medicineAndAlternatives() async {
-    final response = await baseDio.get(
-      subUrl: "/pharmacist/medicine-and-alternatives/3",
+  Future<DataState> medicineAndAlternatives({required String medId}) async {
+    final response = await baseDio.get<MedicineWithAltsModel>(
+      subUrl: "/pharmacist/medicine-and-alternatives/$medId",
+      needToken: true,
 
-      model: dynamic,
+      model: MedicineWithAltsModel(),
     );
 
     return response;
@@ -375,17 +384,18 @@ class RemoteDataSource {
   }
 
   Future<DataState> updateMedicineDetails({
+    required String medId,
     required String name,
     required String pharmaceuticaltiter,
     required String pharmaceuticalindications,
     required String pharmaceuticalcomposition,
     required String companyName,
     required String price,
-    required String isallowedwithoutprescription,
-    required String barcode,
+    required bool isallowedwithoutprescription,
+    // required String barcode,
   }) async {
     final response = await baseDio.post(
-      subUrl: "/pharmacist/update-medicine-details/2",
+      subUrl: "/pharmacist/update-medicine-details/$medId",
       data: {
         "name": name,
         "pharmaceuticalTiter": pharmaceuticaltiter,
@@ -394,7 +404,7 @@ class RemoteDataSource {
         "company_Name": companyName,
         "price": price,
         "isAllowedWithoutPrescription": isallowedwithoutprescription,
-        "barcode": barcode,
+        // "barcode": barcode,
       },
     );
 

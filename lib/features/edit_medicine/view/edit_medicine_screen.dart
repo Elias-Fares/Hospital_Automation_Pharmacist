@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:medicare_pharmacy/core/models/medicine_model.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medicare_pharmacy/core/widgets/buttons/custom_inkwell.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
+import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
 import 'package:medicare_pharmacy/core/validators/fields_validator.dart';
@@ -10,6 +14,10 @@ import 'package:medicare_pharmacy/core/widgets/buttons/custom_outlined_button.da
 import 'package:medicare_pharmacy/core/widgets/buttons/custom_text_button.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
 import 'package:medicare_pharmacy/core/widgets/general_network_image.dart';
+import 'package:medicare_pharmacy/features/edit_medicine/view_model/edit_medicine_view_model.dart';
+import 'package:medicare_pharmacy/features/main/view/main_screen.dart';
+import 'package:medicare_pharmacy/features/medicine_details/view_model/medicine_details_view_model.dart';
+import 'package:medicare_pharmacy/features/medicines/view_model/medicines_view_model.dart';
 part 'widget/allownace_section.dart';
 part 'widget/batches_section.dart';
 part 'widget/image_section.dart';
@@ -51,12 +59,42 @@ class _EditMedicineScreenState extends ConsumerState<EditMedicineScreen> {
     );
     lowBoundController = TextEditingController(text: "TODO");
     companyController = TextEditingController(text: widget.med?.companyName);
-  }
 
-  
+    Future.microtask(() {
+      ref
+          .read(editMedicineViewModelProvider.notifier)
+          .changeisAllowedWithoutPrescription(
+            widget.med?.isAllowedWithoutPrescription ?? false,
+          );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final editState = ref.watch(editMedicineViewModelProvider);
+
+    ref.listen(
+      editMedicineViewModelProvider.select((value) => value.editMedResponse),
+      (previous, next) {
+        next?.when(
+          data: (data) {
+            showSnackBarSuccessMessage(
+              context,
+              message: "The Medicine Edited Successfully",
+            );
+            Navigator.of(
+              context,
+            ).popUntil((route) => route.settings.name == MainScreen.routeName);
+
+            ref.read(medicinesViewModelProvider.notifier).getMedicines();
+          },
+          error: (error, stackTrace) {
+            showSnackBarErrorMessage(context, message: error.toString());
+          },
+          loading: () {},
+        );
+      },
+    );
     return Scaffold(
       appBar: SubAppBar(),
       body: SingleChildScrollView(
@@ -127,25 +165,50 @@ class _EditMedicineScreenState extends ConsumerState<EditMedicineScreen> {
 
               AllownaceSection(
                 isAllowedWithoutPrescription:
-                    widget.med?.isAllowedWithoutPrescription ?? false,
+                    editState.isAllowedWithoutPrescription,
+
+                onChanged: (value) {
+                  ref
+                      .read(editMedicineViewModelProvider.notifier)
+                      .changeisAllowedWithoutPrescription(value);
+                },
               ),
               SizedBox(height: 20),
 
-              BatchesSection(),
-              SizedBox(height: 25),
-
+              // BatchesSection(),
+              // SizedBox(height: 25),
               Row(
                 children: [
                   Expanded(
                     child: CustomOutlinedButton(
                       title: "Discard Changes",
-                      onTap: () {},
+                      onTap: () {
+                        context.pop();
+                      },
                     ),
                   ),
 
                   SizedBox(width: 8),
                   Expanded(
-                    child: LoadingButton(title: "Save Changes", onTap: () {}),
+                    child: LoadingButton(
+                      title: "Save Changes",
+                      isLoading: editState.editMedResponse?.isLoading ?? false,
+                      onTap: () async {
+                        ref
+                            .read(editMedicineViewModelProvider.notifier)
+                            .editMedicinesData(
+                              medId: widget.med?.medicinesId?.toString() ?? "",
+                              name: nameController.text,
+                              pharmaceuticaltiter: titerController.text,
+                              pharmaceuticalindications:
+                                  phIndicationController.text,
+                              pharmaceuticalcomposition:
+                                  phCompositionController.text,
+                              companyName: companyController.text,
+                              price: priceController.text,
+                            );
+                      },
+                    ),
                   ),
                 ],
               ),

@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medicare_pharmacy/core/enums/medicine_card_type.dart';
-import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
+
 import 'package:medicare_pharmacy/core/widgets/cards/icon_title_navigation_button.dart';
 import 'package:medicare_pharmacy/core/widgets/floating_action_button_with_faded_elevation.dart';
 import 'package:medicare_pharmacy/features/alternative_medicines/view/alternative_medicines_screen.dart';
 import 'package:medicare_pharmacy/features/batches/view/batches_screen.dart';
 import 'package:medicare_pharmacy/features/edit_medicine/view/edit_medicine_screen.dart';
-import 'package:medicare_pharmacy/features/medicines/view/medicines_screen.dart';
+
 import 'package:medicare_pharmacy/features/specify_sale_amount/view/specify_sale_amount_screen.dart';
 import '../../../configuration/res.dart';
 import '../../../core/constant/constant.dart';
-import '../../../core/models/medicine_model.dart';
+import '../../../data/models/medicine_model.dart';
 import '../../../core/style/app_colors.dart';
 import '../../../core/style/card_container_decoration.dart';
 import '../../../core/widgets/appbars/sub_app_bar.dart';
@@ -37,12 +36,12 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
     return Scaffold(
       appBar: const SubAppBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButtonFadedElevation(
-        title: "Sell",
-        onTap: () {
-          context.push(SpecifySaleAmountScreen.routeName);
-        },
-      ),
+      // floatingActionButton: FloatingActionButtonFadedElevation(
+      //   title: "Sell",
+      //   onTap: () {
+      //     context.push(SpecifySaleAmountScreen.routeName);
+      //   },
+      // ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
@@ -51,7 +50,7 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
               name: widget.med?.name ?? "",
               price:
                   "${widget.med?.price?.toString() ?? ""} ${Constant.appCurrency}",
-              imageUrl: widget.med?.medImageUrl ?? "",
+              imageUrl: "${Constant.baseUrl}/${widget.med?.medImageUrl ?? ""}",
               // imageUrl: "${Constant.baseUrl}/${widget.med?.medImageUrl ?? ""}",
               titer: widget.med?.pharmaceuticalTiter?.toString() ?? "",
               composition: widget.med?.pharmaceuticalComposition ?? "",
@@ -62,6 +61,7 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
                       ? "Prescription not required"
                       : "Prescription required",
 
+              // TODO add batch count
               batchesCount: 2,
 
               onBatchesTap: () {},
@@ -74,7 +74,10 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
                 context.push(BatchesScreen.routeName);
               },
               onAlternativeTap: () {
-                context.push(AlternativeMedicinesScreen.routeName);
+                context.push(
+                  AlternativeMedicinesScreen.routeName,
+                  extra: widget.med?.medicinesId?.toString() ?? "",
+                );
               },
               onDeleteMedTap: () {},
               onEditMedicineDetailsTap: () {

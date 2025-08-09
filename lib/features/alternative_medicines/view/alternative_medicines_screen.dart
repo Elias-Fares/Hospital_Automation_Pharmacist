@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medicare_pharmacy/core/models/medicine_model.dart';
+import 'package:medicare_pharmacy/core/widgets/custom_error_widget.dart';
+import 'package:medicare_pharmacy/core/widgets/custom_loading_widget.dart';
+import 'package:medicare_pharmacy/core/widgets/floating_action_button_with_faded_elevation.dart';
+import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
 import 'package:medicare_pharmacy/core/widgets/appbars/sub_app_bar.dart';
@@ -13,12 +16,15 @@ import 'package:medicare_pharmacy/core/widgets/buttons/custom_outlined_button.da
 import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
 import 'package:medicare_pharmacy/core/widgets/general_network_image.dart';
 import 'package:medicare_pharmacy/features/add_existing_alternative_medicines/view/add_existing_alternative_medicines_screen.dart';
+import 'package:medicare_pharmacy/features/alternative_medicines/view_model/alternative_medicines_view_model.dart';
 import 'package:medicare_pharmacy/features/medicine_details/view/medicine_details_screen.dart';
 part 'widget/alternative_medicine_card.dart';
 
 class AlternativeMedicinesScreen extends ConsumerStatefulWidget {
-  const AlternativeMedicinesScreen({super.key});
+  const AlternativeMedicinesScreen({super.key, required this.medId});
   static const routeName = "/alternative_medicines_screen";
+
+  final String medId;
 
   @override
   ConsumerState<AlternativeMedicinesScreen> createState() =>
@@ -27,95 +33,81 @@ class AlternativeMedicinesScreen extends ConsumerStatefulWidget {
 
 class _AlternativeMedicinesScreenState
     extends ConsumerState<AlternativeMedicinesScreen> {
-  final jsonString = """ {
-            "medicinesId": 3,
-            "name": "nospa",
-            "expiredAt": "2026-04-04T00:00:00.000Z",
-            "pharmaceuticalTiter": 300,
-            "pharmaceuticalIndications": "for stomachache",
-            "pharmaceuticalComposition": "antispa 500 mg",
-            "company_Name": "OPM",
-            "price": 11000,
-            "isAllowedWithoutPrescription": true,
-            "barcode": "123457",
-            "medImageUrl":  "https://tse4.mm.bing.net/th/id/OIP.E6GBbEWNpCzxm1XBVtUCcwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
-            "createdAt": "2025-06-25T18:44:19.000Z",
-            "updatedAt": "2025-06-25T18:44:19.000Z",
-            "pharmacy_medicines": [
-                {
-                    "pharmacy_medicineId": 4,
-                    "lowbound": 4,
-                    "createdAt": "2025-06-25T18:54:35.000Z",
-                    "updatedAt": "2025-06-25T18:54:35.000Z",
-                    "medicine_id": 3,
-                    "pharmacy_id": 1,
-                    "medicine_batches": [
-                        {
-                            "medicine_batchId": 4,
-                            "quantity": 15,
-                            "expired_date": "2025-09-09",
-                            "createdAt": "2025-06-25T18:54:35.000Z",
-                            "updatedAt": "2025-06-25T18:54:35.000Z",
-                            "pharmacy_medicine_id": 4
-                        }
-                    ]
-                }
-            ]
-        }""";
-
-  late MedicineModel fakeMedModel;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
-    fakeMedModel = MedicineModel.fromJson(json.decode(jsonString));
+    Future.microtask(() {
+      ref
+          .read(alternativeMedicinesViewModelProvider.notifier)
+          .getAlternativeMedicines(medId: widget.medId);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: SubAppBar(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        color: AppColors.backgroundColor,
-        child: LoadingButton(
-          onTap: () {
-            context.push(AddExistingAlternativeMedicinesScreen.routeName);
-          },
-          title: "Add New",
-          // width: 160.w,
-          // height: 40.h,
-        ),
-      ),
-      body: GridView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: .75,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-        ),
-        itemCount: 10,
+    final alternativesState = ref.watch(alternativeMedicinesViewModelProvider);
 
-        itemBuilder:
-            (context, index) => AlternativeMedicineCard(
-              medName: fakeMedModel.name ?? "",
-              medPrice: fakeMedModel.price?.toString() ?? "",
-              medTiter: fakeMedModel.pharmaceuticalTiter?.toString() ?? "",
-              imageUrl: fakeMedModel.medImageUrl ?? "",
-              onMedicineTap: () {
-                context.push(
-                  MedicineDetailsScreen.routeName,
-                  extra: fakeMedModel,
-                );
-              },
-              onDetachTap: () {
-                //logic
-              },
-            ),
+    return Scaffold(
+      appBar: SubAppBar(
+        titleWidget: Text(
+          alternativesState.altsResponse?.asData?.value.medicine?.name ?? "",
+        ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButtonFadedElevation(
+        onTap: () {
+          context.push(AddExistingAlternativeMedicinesScreen.routeName);
+        },
+        title: "Add New",
+      ),
+      body:
+          alternativesState.altsResponse?.when(
+            data:
+                (data) => GridView.builder(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: .75,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                  ),
+                  itemCount: data.medicine?.alternative?.length ?? 0,
+
+                  itemBuilder: (context, index) {
+                    final altMed =
+                        data.medicine?.alternative
+                            ?.elementAtOrNull(index)
+                            ?.medicine;
+                    return AlternativeMedicineCard(
+                      medName: altMed?.name ?? "",
+                      medPrice: altMed?.price?.toString() ?? "",
+                      medTiter: altMed?.pharmaceuticalTiter?.toString() ?? "",
+                      imageUrl: altMed?.medImageUrl ?? "",
+                      onMedicineTap: () {
+                        context.push(
+                          MedicineDetailsScreen.routeName,
+                          extra: altMed,
+                        );
+                      },
+                      onDetachTap: () {
+                        //logic
+                      },
+                    );
+                  },
+                ),
+            error:
+                (error, stackTrace) => CustomErrorWidget(
+                  message: error.toString(),
+                  onTryAgainTap: () {
+                    ref
+                        .read(alternativeMedicinesViewModelProvider.notifier)
+                        .getAlternativeMedicines(medId: widget.medId);
+                  },
+                ),
+            loading: () => CustomLoadingWidget(),
+          ) ??
+          SizedBox.shrink(),
     );
   }
 }

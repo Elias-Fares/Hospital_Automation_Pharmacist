@@ -6,10 +6,13 @@ class AppBarWithSearch extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWithSearch({
     super.key,
     required this.searchTextEditingController,
-    this.onEditingComplete, this.actions,
+    this.onEditingComplete,
+    this.actions,
+    this.onChanged,
   });
   final TextEditingController searchTextEditingController;
   final void Function()? onEditingComplete;
+  final void Function(String)? onChanged;
   final List<Widget>? actions;
 
   @override
@@ -30,7 +33,7 @@ class AppBarWithSearch extends StatelessWidget implements PreferredSizeWidget {
               borderRadius: BorderRadius.circular(50),
               borderSide: const BorderSide(
                 color: AppColors.primary, // A color for the focused state
-                width: 2.0,
+                width: 1.0,
               ),
             ),
             // Define the border for the enabled state
@@ -44,6 +47,8 @@ class AppBarWithSearch extends StatelessWidget implements PreferredSizeWidget {
           ),
           controller: searchTextEditingController,
           onEditingComplete: onEditingComplete,
+          onChanged: onChanged,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ),
 

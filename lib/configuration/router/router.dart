@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medicare_pharmacy/core/models/medicine_model.dart';
+import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/features/add_existing_alternative_medicines/view/add_existing_alternative_medicines_screen.dart';
 import 'package:medicare_pharmacy/features/alternative_medicines/view/alternative_medicines_screen.dart';
 
@@ -38,7 +38,7 @@ class AppRouter {
   static final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
 
   static final RouteObserver<ModalRoute<void>> routeObserver =
-     RouteObserver<ModalRoute<void>>();
+      RouteObserver<ModalRoute<void>>();
 
   static final router = GoRouter(
     navigatorKey: rootNavigatorKey,
@@ -110,7 +110,8 @@ class AppRouter {
       GoRoute(
         path: AlternativeMedicinesScreen.routeName,
         builder: (context, state) {
-          return AlternativeMedicinesScreen();
+          final medId = state.extra as String;
+          return AlternativeMedicinesScreen(medId: medId);
         },
       ),
       GoRoute(

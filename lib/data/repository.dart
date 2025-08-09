@@ -216,8 +216,8 @@ class Repository {
     return response;
   }
 
-  Future<DataState> deleteFromMyPharmacy() async {
-    final response = await _remoteDataSource.deleteFromMyPharmacy();
+  Future<DataState> deleteFromMyPharmacy({required String medId}) async {
+    final response = await _remoteDataSource.deleteFromMyPharmacy(medId: medId);
 
     return response;
   }
@@ -270,8 +270,10 @@ class Repository {
     return response;
   }
 
-  Future<DataState> medicineAndAlternatives() async {
-    final response = await _remoteDataSource.medicineAndAlternatives();
+  Future<DataState> medicineAndAlternatives({required String medId}) async {
+    final response = await _remoteDataSource.medicineAndAlternatives(
+      medId: medId,
+    );
 
     return response;
   }
@@ -301,16 +303,18 @@ class Repository {
   }
 
   Future<DataState> updateMedicineDetails({
+    required String medId,
     required String name,
     required String pharmaceuticaltiter,
     required String pharmaceuticalindications,
     required String pharmaceuticalcomposition,
     required String companyName,
     required String price,
-    required String isallowedwithoutprescription,
-    required String barcode,
+    required bool isallowedwithoutprescription,
+    // required String barcode,
   }) async {
     final response = await _remoteDataSource.updateMedicineDetails(
+      medId: medId,
       name: name,
       pharmaceuticaltiter: pharmaceuticaltiter,
       pharmaceuticalindications: pharmaceuticalindications,
@@ -318,7 +322,7 @@ class Repository {
       companyName: companyName,
       price: price,
       isallowedwithoutprescription: isallowedwithoutprescription,
-      barcode: barcode,
+      // barcode: barcode,
     );
 
     return response;

@@ -9,6 +9,7 @@ class AddAltMedCard extends StatelessWidget {
     required this.medPrice,
     this.onMedicineTap,
     this.onAddAlt,
+    required this.attachStatus,
   });
 
   final String imageUrl;
@@ -17,6 +18,7 @@ class AddAltMedCard extends StatelessWidget {
   final String medPrice;
   final void Function()? onMedicineTap;
   final void Function()? onAddAlt;
+  final AttachStatus attachStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +62,17 @@ class AddAltMedCard extends StatelessWidget {
             ),
             SizedBox(height: 10),
             LoadingButton(
-              title: "Attach",
+              title:
+                  attachStatus == AttachStatus.attached ? "Attached" : "Attach",
+              isLoading: attachStatus == AttachStatus.loading,
+              color:
+                  attachStatus == AttachStatus.attached
+                      ? AppColors.hintTextColor
+                      : AppColors.primary,
+
               height: 30,
-              onTap: onAddAlt,
+              onTap:
+                  attachStatus == AttachStatus.notAttached ? onAddAlt : () {},
             ),
           ],
         ),

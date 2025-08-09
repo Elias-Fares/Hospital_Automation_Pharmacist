@@ -4,11 +4,11 @@ class SearchForMedicineTextField extends StatelessWidget {
   const SearchForMedicineTextField({
     super.key,
     required this.searchTextEditingController,
-    this.onEditingComplete,
+    this.onChanged,
   });
 
   final TextEditingController searchTextEditingController;
-  final void Function()? onEditingComplete;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class SearchForMedicineTextField extends StatelessWidget {
         ),
         style: Theme.of(context).textTheme.bodyMedium,
         controller: searchTextEditingController,
-        onEditingComplete: onEditingComplete,
+        onChanged: onChanged,
       ),
     );
   }

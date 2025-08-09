@@ -1,11 +1,14 @@
 part of '../edit_medicine_screen.dart';
+
 class AllownaceSection extends StatelessWidget {
   const AllownaceSection({
     super.key,
     required this.isAllowedWithoutPrescription,
+    required this.onChanged,
   });
 
   final bool isAllowedWithoutPrescription;
+  final void Function(bool) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +23,17 @@ class AllownaceSection extends StatelessWidget {
             _buildElement(
               condition: isAllowedWithoutPrescription == false,
               text: "With Prescription",
+              onTap: () {
+                onChanged(false);
+              },
             ),
             SizedBox(width: 15),
             _buildElement(
               condition: isAllowedWithoutPrescription == true,
               text: "No Prescription",
+              onTap: () {
+                onChanged(true);
+              },
             ),
           ],
         ),
@@ -32,33 +41,44 @@ class AllownaceSection extends StatelessWidget {
     );
   }
 
-  Widget _buildElement({required bool condition, required String text}) {
+  Widget _buildElement({
+    required bool condition,
+    required String text,
+    void Function()? onTap,
+  }) {
     return Expanded(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        decoration: containerCardDecoration().copyWith(
-          color: condition ? AppColors.backgroundColor : AppColors.white,
-          border: Border.all(
-            color: condition ? AppColors.primary : AppColors.transparent,
-          ),
+      child: CustomInkwell(
+        onTap: onTap,
+        borderSide: BorderSide(
+          color: condition ? AppColors.primary : AppColors.transparent,
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 16,
-              height: 16,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  width: 5,
-                  color:
-                      condition ? AppColors.primary : AppColors.outlineVariant,
+        color: condition ? AppColors.backgroundColor : AppColors.white,
+
+        borderRadius: BorderRadius.circular(8),
+
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+
+          child: Row(
+            children: [
+              Container(
+                width: 16,
+                height: 16,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    width: 5,
+                    color:
+                        condition
+                            ? AppColors.primary
+                            : AppColors.outlineVariant,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(width: 8),
-            Text(text),
-          ],
+              SizedBox(width: 8),
+              Text(text),
+            ],
+          ),
         ),
       ),
     );

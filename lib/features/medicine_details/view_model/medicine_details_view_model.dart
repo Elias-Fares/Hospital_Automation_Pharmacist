@@ -2,25 +2,24 @@ import 'package:medicare_pharmacy/configuration/service_locator.dart';
 import 'package:medicare_pharmacy/core/base_dio/data_state.dart';
 import 'package:medicare_pharmacy/data/repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'medicines_state.dart';
-part 'medicines_view_model.g.dart';
+import 'medicine_details_state.dart';
+part 'medicine_details_view_model.g.dart';
 
 @riverpod
-class MedicinesViewModel extends _$MedicinesViewModel {
+class MedicineDetailsViewModel extends _$MedicineDetailsViewModel {
   @override
-  MedicinesState build() => MedicinesState();
-
+  MedicineDetailsState build() => MedicineDetailsState();
   final _repository = getIt<Repository>();
 
-  Future<void> getMedicines({String name = ""}) async {
-    state = state.copyWith(medicinesResponse: AsyncValue.loading());
-    final response = await _repository.searchForMedicine(name: name);
+  Future<void> deleteMedicine({required String medId}) async {
+    state = state.copyWith(deleteMedReposne: AsyncValue.loading());
+    final response = await _repository.deleteFromMyPharmacy(medId: medId);
 
     if (response is DataSuccess) {
-      state = state.copyWith(medicinesResponse: AsyncValue.data(response.data));
+      state = state.copyWith(deleteMedReposne: AsyncValue.data(response.data));
     } else {
       state = state.copyWith(
-        medicinesResponse: AsyncValue.error(
+        deleteMedReposne: AsyncValue.error(
           response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
           StackTrace.current,
         ),
