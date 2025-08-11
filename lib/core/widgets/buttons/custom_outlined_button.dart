@@ -15,6 +15,9 @@ class CustomOutlinedButton extends StatelessWidget {
     this.height,
     this.backgroundColor,
     this.icon,
+    this.isLoading = false,
+    this.loadingIndicatorSize = 25,
+    this.loadingIndicatorStrokeWidth = 3,
   });
   final String title;
   final Color? borderColor;
@@ -25,11 +28,14 @@ class CustomOutlinedButton extends StatelessWidget {
   final Color? backgroundColor;
   final Widget? icon;
   final void Function()? onTap;
+  final bool isLoading;
+  final double loadingIndicatorSize;
+  final double loadingIndicatorStrokeWidth;
 
   @override
   Widget build(BuildContext context) {
     return CustomInkwell(
-      onTap: onTap,
+      onTap: !(isLoading) ? onTap : () {},
       color: backgroundColor ?? AppColors.backgroundColor,
       borderSide: BorderSide(color: borderColor ?? AppColors.primary),
       borderRadius: BorderRadius.circular(radius ?? 50),
@@ -43,18 +49,35 @@ class CustomOutlinedButton extends StatelessWidget {
         //   // border: Border.all(color: borderColor ?? AppColors.primary),
         //   borderRadius: BorderRadius.circular(radius ?? 50),
         // ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null) ...[icon!, SizedBox(width: 5)],
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: textColor ?? AppColors.primary,
-              ),
-            ),
-          ],
-        ),
+        child:
+            isLoading
+                ? Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: loadingIndicatorSize,
+                      height: loadingIndicatorSize,
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                        strokeWidth: loadingIndicatorStrokeWidth,
+                        strokeCap: StrokeCap.round,
+                      ),
+                    ),
+                  ],
+                )
+                : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (icon != null) ...[icon!, SizedBox(width: 5)],
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: textColor ?? AppColors.primary,
+                      ),
+                    ),
+                  ],
+                ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:medicare_pharmacy/core/base_dio/base_dio.dart' show BaseDio;
 import 'package:medicare_pharmacy/core/base_dio/data_state.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
@@ -296,9 +297,10 @@ class RemoteDataSource {
   Future<DataState> addBatch({
     required String quantity,
     required String expiredDate,
+    required String medId,
   }) async {
     final response = await baseDio.post(
-      subUrl: "/pharmacist/add-batch/3",
+      subUrl: "/pharmacist/add-batch/$medId",
       data: {"quantity": quantity, "expired_date": expiredDate},
     );
 
@@ -346,9 +348,13 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> addAlternatives() async {
+  Future<DataState> addAlternatives({
+    required String medicineId,
+    required String altMedId,
+  }) async {
     final response = await baseDio.post(
-      subUrl: "/pharmacist/add-alternatives/3",
+      subUrl: "/pharmacist/add-alternatives/$medicineId",
+      queryParameters: {"alternative": altMedId},
     );
 
     return response;
@@ -391,21 +397,33 @@ class RemoteDataSource {
     required String pharmaceuticalcomposition,
     required String companyName,
     required String price,
+    required String imagePath,
     required bool isallowedwithoutprescription,
     // required String barcode,
   }) async {
+    FormData formData;
+
+    final bodyMap = {
+      "name": name,
+      "pharmaceuticalTiter": pharmaceuticaltiter,
+      "pharmaceuticalIndications": pharmaceuticalindications,
+      "pharmaceuticalComposition": pharmaceuticalcomposition,
+      "company_Name": companyName,
+      "price": price,
+      "isAllowedWithoutPrescription": isallowedwithoutprescription,
+    };
+
+    if (imagePath.isNotEmpty) {
+      bodyMap['image'] = await MultipartFile.fromFile(
+        imagePath,
+        filename: imagePath.split("/").last,
+      );
+    }
+
+    formData = FormData.fromMap(bodyMap);
     final response = await baseDio.post(
       subUrl: "/pharmacist/update-medicine-details/$medId",
-      data: {
-        "name": name,
-        "pharmaceuticalTiter": pharmaceuticaltiter,
-        "pharmaceuticalIndications": pharmaceuticalindications,
-        "pharmaceuticalComposition": pharmaceuticalcomposition,
-        "company_Name": companyName,
-        "price": price,
-        "isAllowedWithoutPrescription": isallowedwithoutprescription,
-        // "barcode": barcode,
-      },
+      data: formData,
     );
 
     return response;
@@ -464,6 +482,15 @@ class RemoteDataSource {
       data: {"fcmToken": fcmtoken, "title": title, "body": body},
 
       model: dynamic,
+    );
+
+    return response;
+  }
+
+  Future<DataState> detach({required String id}) async {
+    final response = await baseDio.post(
+      subUrl: "/pharmacist/detach/$id",
+      needToken: true,
     );
 
     return response;

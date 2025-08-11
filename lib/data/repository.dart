@@ -237,10 +237,12 @@ class Repository {
   Future<DataState> addBatch({
     required String quantity,
     required String expiredDate,
+       required String medId
   }) async {
     final response = await _remoteDataSource.addBatch(
       quantity: quantity,
       expiredDate: expiredDate,
+      medId: medId
     );
 
     return response;
@@ -278,8 +280,12 @@ class Repository {
     return response;
   }
 
-  Future<DataState> addAlternatives() async {
-    final response = await _remoteDataSource.addAlternatives();
+  Future<DataState> addAlternatives(
+     {required String medicineId,
+    required String altMedId,
+    }
+  ) async {
+    final response = await _remoteDataSource.addAlternatives(altMedId: altMedId, medicineId: medicineId);
 
     return response;
   }
@@ -311,6 +317,7 @@ class Repository {
     required String companyName,
     required String price,
     required bool isallowedwithoutprescription,
+        required String imagePath,
     // required String barcode,
   }) async {
     final response = await _remoteDataSource.updateMedicineDetails(
@@ -322,6 +329,7 @@ class Repository {
       companyName: companyName,
       price: price,
       isallowedwithoutprescription: isallowedwithoutprescription,
+      imagePath: imagePath
       // barcode: barcode,
     );
 
@@ -362,6 +370,12 @@ class Repository {
       title: title,
       body: body,
     );
+
+    return response;
+  }
+
+  Future<DataState> detach({required String id}) async {
+    final response = await _remoteDataSource.detach(id: id);
 
     return response;
   }

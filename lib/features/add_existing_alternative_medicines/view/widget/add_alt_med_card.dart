@@ -47,7 +47,7 @@ class AddAltMedCard extends StatelessWidget {
                 Text(
                   "($medTiter)",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.outlineVariant,
+                    color: AppColors.hintTextColor,
                   ),
                 ),
               ],
@@ -62,6 +62,8 @@ class AddAltMedCard extends StatelessWidget {
             ),
             SizedBox(height: 10),
             LoadingButton(
+              loadingIndicatorSize: 15,
+              loadingIndicatorStrokeWidth: 2,
               title:
                   attachStatus == AttachStatus.attached ? "Attached" : "Attach",
               isLoading: attachStatus == AttachStatus.loading,

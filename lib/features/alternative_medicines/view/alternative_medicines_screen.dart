@@ -79,7 +79,16 @@ class _AlternativeMedicinesScreenState
                         data.medicine?.alternative
                             ?.elementAtOrNull(index)
                             ?.medicine;
+                    final relationId =
+                        data.medicine?.alternative
+                            ?.elementAtOrNull(index)
+                            ?.id
+                            ?.toString();
+
+                    final isLoading =
+                        alternativesState.detachLoading[relationId] ?? false;
                     return AlternativeMedicineCard(
+                      isLoading: isLoading,
                       medName: altMed?.name ?? "",
                       medPrice: altMed?.price?.toString() ?? "",
                       medTiter: altMed?.pharmaceuticalTiter?.toString() ?? "",
@@ -91,7 +100,11 @@ class _AlternativeMedicinesScreenState
                         );
                       },
                       onDetachTap: () {
-                        //logic
+                        ref
+                            .read(
+                              alternativeMedicinesViewModelProvider.notifier,
+                            )
+                            .detach(id: relationId);
                       },
                     );
                   },

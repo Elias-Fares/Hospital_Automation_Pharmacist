@@ -3,7 +3,7 @@ part of 'add_existing_alternative_medicines_view_model.dart';
 class AddExistingAlternativeMedicinesState {
   final AsyncValue? attachResponse;
   final AsyncValue<List<MedicineModel>>? medicinesResponse;
-  final Map<int, AttachStatus> attachStatuses;
+  final Map<String, AttachStatus> attachStatuses;
 
   AddExistingAlternativeMedicinesState({
     this.attachResponse,
@@ -14,7 +14,7 @@ class AddExistingAlternativeMedicinesState {
   AddExistingAlternativeMedicinesState copyWith({
     AsyncValue? attachResponse,
     AsyncValue<List<MedicineModel>>? medicinesResponse,
-    Map<int, AttachStatus>? attachStatuses,
+    Map<String, AttachStatus>? attachStatuses,
   }) => AddExistingAlternativeMedicinesState(
     attachResponse: attachResponse ?? this.attachResponse,
     medicinesResponse: medicinesResponse ?? this.medicinesResponse,

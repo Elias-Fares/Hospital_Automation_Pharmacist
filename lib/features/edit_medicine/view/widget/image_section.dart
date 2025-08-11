@@ -2,12 +2,14 @@ part of '../edit_medicine_screen.dart';
 
 class ImageSection extends StatelessWidget {
   final String imageUrl;
+  final String imagePath;
   final void Function()? onReplaceImageTap;
 
   const ImageSection({
     super.key,
     required this.imageUrl,
     this.onReplaceImageTap,
+    required this.imagePath,
   });
 
   @override
@@ -19,12 +21,21 @@ class ImageSection extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: GeneralNetworkImage(
-              url: imageUrl,
+            child:
+                imagePath.isEmpty
+                    ? GeneralNetworkImage(
+                      url: imageUrl,
+                      boxFit: BoxFit.cover,
 
-              width: MediaQuery.sizeOf(context).width,
-              height: 380.h,
-            ),
+                      width: MediaQuery.sizeOf(context).width,
+                      height: 380.h,
+                    )
+                    : Image.file(
+                      File(imagePath),
+                      width: MediaQuery.sizeOf(context).width,
+                      height: 380.h,
+                      fit: BoxFit.cover,
+                    ),
           ),
 
           SizedBox(height: 20),

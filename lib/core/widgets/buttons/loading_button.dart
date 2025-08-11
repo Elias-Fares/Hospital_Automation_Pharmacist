@@ -12,7 +12,10 @@ class LoadingButton extends StatelessWidget {
     this.color,
     this.borderRaduis,
     this.border,
-    this.textStyle, this.height,
+    this.textStyle,
+    this.height,
+    this.loadingIndicatorSize = 25,
+    this.loadingIndicatorStrokeWidth = 3,
   });
   final String title;
   final void Function()? onTap;
@@ -23,6 +26,8 @@ class LoadingButton extends StatelessWidget {
   final BorderRadius? borderRaduis;
   final Border? border;
   final TextStyle? textStyle;
+  final double loadingIndicatorSize;
+  final double loadingIndicatorStrokeWidth;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -32,30 +37,32 @@ class LoadingButton extends StatelessWidget {
         borderRadius: borderRaduis ?? BorderRadius.circular(50),
         onTap: !(isLoading ?? false) ? onTap : () {},
         child: Container(
-          height:height ?? 45.h,
+          height: height ?? 45.h,
           width: width ?? MediaQuery.of(context).size.width,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              border: border,
-              borderRadius: borderRaduis ?? BorderRadius.circular(50)),
-          child: !(isLoading ?? false)
-              ? Text(
-                  title,
-                  style: textStyle ??
-                      Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: AppColors.white),
-                )
-              : const SizedBox(
-                  width: 25,
-                  height: 25,
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                    strokeWidth: 3,
-                    strokeCap: StrokeCap.round,
+            border: border,
+            borderRadius: borderRaduis ?? BorderRadius.circular(50),
+          ),
+          child:
+              !(isLoading ?? false)
+                  ? Text(
+                    title,
+                    style:
+                        textStyle ??
+                        Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.white,
+                        ),
+                  )
+                  : SizedBox(
+                    width: loadingIndicatorSize,
+                    height: loadingIndicatorSize,
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: loadingIndicatorStrokeWidth,
+                      strokeCap: StrokeCap.round,
+                    ),
                   ),
-                ),
         ),
       ),
     );

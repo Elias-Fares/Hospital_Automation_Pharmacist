@@ -8,6 +8,8 @@ import 'package:medicare_pharmacy/core/class/debouncer.dart';
 import 'package:medicare_pharmacy/core/enums/attach_status.dart';
 import 'package:medicare_pharmacy/core/widgets/custom_error_widget.dart';
 import 'package:medicare_pharmacy/core/widgets/custom_loading_widget.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
@@ -16,6 +18,8 @@ import 'package:medicare_pharmacy/core/widgets/buttons/custom_inkwell.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
 import 'package:medicare_pharmacy/core/widgets/general_network_image.dart';
 import 'package:medicare_pharmacy/features/add_existing_alternative_medicines/view_model/add_existing_alternative_medicines_view_model.dart';
+import 'package:medicare_pharmacy/features/alternative_medicines/view_model/alternative_medicines_view_model.dart';
+import 'package:medicare_pharmacy/features/alternative_medicines/view_model/medicine_id_provider.dart';
 import 'package:medicare_pharmacy/features/medicine_details/view/medicine_details_screen.dart';
 part 'widget/add_alt_med_card.dart';
 
@@ -56,6 +60,25 @@ class _AddExistingAlternativeMedicinesScreenState
     final addAlteState = ref.watch(
       addExistingAlternativeMedicinesViewModelProvider,
     );
+
+    final originalMedId = ref.watch(medicineIdProvider);
+
+    ref.listen(
+      addExistingAlternativeMedicinesViewModelProvider.select(
+        (value) => value.attachResponse,
+      ),
+      (previous, next) => next?.when(
+        data:
+            (data) => showSnackBarSuccessMessage(
+              context,
+              message: "This medicine attached as alternative",
+            ),
+        error:
+            (error, stackTrace) =>
+                showSnackBarErrorMessage(context, message: error.toString()),
+        loading: () {},
+      ),
+    );
     return Scaffold(
       appBar: AppBarWithSearch(
         searchTextEditingController: searchTextEditingController,
@@ -82,8 +105,16 @@ class _AddExistingAlternativeMedicinesScreenState
 
                   itemBuilder: (context, index) {
                     final med = data.elementAtOrNull(index);
+                    // final originalMedId =
+                    //     ref
+                    //         .read(
+                    //           alternativeMedicinesViewModelProvider.notifier,
+                    //         )
+                    //         .getMedicineId();
+
                     final status =
-                        addAlteState.attachStatuses[index] ??
+                        addAlteState.attachStatuses[med?.medicinesId
+                            ?.toString()] ??
                         AttachStatus.notAttached;
                     return AddAltMedCard(
                       attachStatus: status,
@@ -98,13 +129,24 @@ class _AddExistingAlternativeMedicinesScreenState
                         );
                       },
                       onAddAlt: () {
+                        // final originalMedIDD =
+                        //     ref
+                        //         .read(
+                        //           alternativeMedicinesViewModelProvider
+                        //               .notifier,
+                        //         )
+                        //         .getMedicineId();
+
                         //logic
                         ref
                             .read(
                               addExistingAlternativeMedicinesViewModelProvider
                                   .notifier,
                             )
-                            .addAlt(index);
+                            .attachMedicine(
+                              altMedId: med?.medicinesId?.toString(),
+                              medicineId: originalMedId,
+                            );
                       },
                     );
                   },

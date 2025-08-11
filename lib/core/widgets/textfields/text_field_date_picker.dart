@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import '../../function/date_format.dart';
 
-
-
 class TextFieldDatePicker extends StatelessWidget {
   const TextFieldDatePicker({
     super.key,
     required this.textEditingController,
     this.validator,
     required this.hintText,
+    this.decoration,
+    this.style,
   });
 
   final TextEditingController? textEditingController;
   final FormFieldValidator<String>? validator;
   final String hintText;
+  final InputDecoration? decoration;
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,9 @@ class TextFieldDatePicker extends StatelessWidget {
         controller: textEditingController,
         validator: validator,
         // borderStyleType: BorderStyleType.outlineInput,
+        decoration: decoration,
         readOnly: true,
+        style: style,
         onTap: () async {
           final DateTime? selectedDate = await showDatePicker(
             context: context,
@@ -37,4 +41,3 @@ class TextFieldDatePicker extends StatelessWidget {
     );
   }
 }
-

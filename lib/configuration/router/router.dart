@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medicare_pharmacy/core/constant/extra_keys.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/features/add_existing_alternative_medicines/view/add_existing_alternative_medicines_screen.dart';
 import 'package:medicare_pharmacy/features/alternative_medicines/view/alternative_medicines_screen.dart';
@@ -130,7 +131,10 @@ class AppRouter {
       GoRoute(
         path: BatchesScreen.routeName,
         builder: (context, state) {
-          return BatchesScreen();
+          final extraMap = state.extra as Map<String, dynamic>;
+          final medId = extraMap[ExtraKeys.medId] as int?;
+          final batches = extraMap[ExtraKeys.batches];
+          return BatchesScreen(medicineId: medId, batches: batches);
         },
       ),
       GoRoute(

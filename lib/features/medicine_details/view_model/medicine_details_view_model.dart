@@ -26,4 +26,6 @@ class MedicineDetailsViewModel extends _$MedicineDetailsViewModel {
       );
     }
   }
+
+
 }

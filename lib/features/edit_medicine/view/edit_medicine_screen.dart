@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medicare_pharmacy/core/constant/constant.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/custom_inkwell.dart';
 import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
 import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
@@ -104,7 +107,13 @@ class _EditMedicineScreenState extends ConsumerState<EditMedicineScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageSection(imageUrl: widget.med?.medImageUrl ?? ""),
+              ImageSection(
+                imageUrl: "${Constant.baseUrl}/${widget.med?.medImageUrl}",
+                imagePath: editState.imagePath ?? "",
+                onReplaceImageTap: () {
+                  ref.read(editMedicineViewModelProvider.notifier).pickImage();
+                },
+              ),
               SizedBox(height: 32),
               TextFormField(
                 controller: nameController,
@@ -135,6 +144,17 @@ class _EditMedicineScreenState extends ConsumerState<EditMedicineScreen> {
                 decoration: InputDecoration(label: Text("Titer")),
               ),
               SizedBox(height: 20),
+              AllownaceSection(
+                isAllowedWithoutPrescription:
+                    editState.isAllowedWithoutPrescription,
+
+                onChanged: (value) {
+                  ref
+                      .read(editMedicineViewModelProvider.notifier)
+                      .changeisAllowedWithoutPrescription(value);
+                },
+              ),
+              SizedBox(height: 20),
               TextFormField(
                 controller: phCompositionController,
                 style: Theme.of(context).textTheme.bodyMedium,
@@ -161,18 +181,6 @@ class _EditMedicineScreenState extends ConsumerState<EditMedicineScreen> {
                 ),
               ),
 
-              SizedBox(height: 20),
-
-              AllownaceSection(
-                isAllowedWithoutPrescription:
-                    editState.isAllowedWithoutPrescription,
-
-                onChanged: (value) {
-                  ref
-                      .read(editMedicineViewModelProvider.notifier)
-                      .changeisAllowedWithoutPrescription(value);
-                },
-              ),
               SizedBox(height: 20),
 
               // BatchesSection(),

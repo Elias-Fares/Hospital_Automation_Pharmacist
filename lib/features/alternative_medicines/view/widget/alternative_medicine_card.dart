@@ -8,13 +8,14 @@ class AlternativeMedicineCard extends StatelessWidget {
     required this.medTiter,
     required this.medPrice,
     this.onMedicineTap,
-    this.onDetachTap,
+    this.onDetachTap, required this.isLoading,
   });
 
   final String imageUrl;
   final String medName;
   final String medTiter;
   final String medPrice;
+  final bool isLoading;
   final void Function()? onMedicineTap;
   final void Function()? onDetachTap;
 
@@ -62,6 +63,9 @@ class AlternativeMedicineCard extends StatelessWidget {
             CustomOutlinedButton(
               title: "Detach",
               height: 30,
+              isLoading: isLoading,
+              loadingIndicatorSize: 15,
+
               onTap: onDetachTap,
             ),
           ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medicare_pharmacy/core/constant/extra_keys.dart';
 
 import 'package:medicare_pharmacy/core/widgets/cards/icon_title_navigation_button.dart';
 import 'package:medicare_pharmacy/core/widgets/floating_action_button_with_faded_elevation.dart';
@@ -61,8 +62,14 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
                       ? "Prescription not required"
                       : "Prescription required",
 
-              // TODO add batch count
-              batchesCount: 2,
+              batchesCount:
+                  widget
+                      .med
+                      ?.pharmacyMedicines
+                      ?.firstOrNull
+                      ?.medicineBatches
+                      ?.length ??
+                  0,
 
               onBatchesTap: () {},
             ),
@@ -71,7 +78,19 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
 
             MedicineDetailsNavigationSection(
               onAddBatchTap: () {
-                context.push(BatchesScreen.routeName);
+                context.push(
+                  BatchesScreen.routeName,
+
+                  extra: {
+                    ExtraKeys.medId: widget.med?.medicinesId,
+                    ExtraKeys.batches:
+                        widget
+                            .med
+                            ?.pharmacyMedicines
+                            ?.firstOrNull
+                            ?.medicineBatches,
+                  },
+                );
               },
               onAlternativeTap: () {
                 context.push(
@@ -132,7 +151,7 @@ class MedicineDetailsNavigationSection extends StatelessWidget {
           IconTitleNavigationButton(
             iconPath: Res.trashIcon,
             title: "Delete medicine",
-            onTap: onEditMedicineDetailsTap,
+            onTap: onDeleteMedTap,
             textColor: AppColors.error,
           ),
         ],
