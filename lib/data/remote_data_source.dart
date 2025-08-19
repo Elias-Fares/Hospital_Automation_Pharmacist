@@ -1,8 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:medicare_pharmacy/core/base_dio/base_dio.dart' show BaseDio;
 import 'package:medicare_pharmacy/core/base_dio/data_state.dart';
+import 'package:medicare_pharmacy/data/models/inventory_model.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/data/models/medicine_with_alts_model.dart';
+import 'package:medicare_pharmacy/data/models/order_model.dart';
+import 'package:medicare_pharmacy/data/models/pharmacy_medicine_model.dart';
+import 'package:medicare_pharmacy/data/models/prescription_model.dart';
+import 'package:medicare_pharmacy/data/models/profile_model.dart';
 
 class RemoteDataSource {
   final BaseDio baseDio;
@@ -192,10 +197,11 @@ class RemoteDataSource {
   }
 
   Future<DataState> showPhProfile() async {
-    final response = await baseDio.get(
+    final response = await baseDio.get<ProfileModel>(
       subUrl: "/pharmacist/show-profile",
 
-      model: dynamic,
+      model: ProfileModel(),
+      needToken: true,
     );
 
     return response;
@@ -207,8 +213,50 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> addMedicine() async {
-    final response = await baseDio.post(subUrl: "/pharmacist/add-medicine");
+  Future<DataState> addMedicine({
+    required String name,
+    required String pharmaceuticaltiter,
+    required String pharmaceuticalindications,
+    required String pharmaceuticalcomposition,
+    required String companyName,
+    required String price,
+    required String imagePath,
+    required String quantity,
+    required String lowBound,
+    required String barcode,
+    required String expiredAt,
+    required bool isallowedwithoutprescription,
+  }) async {
+    FormData formData;
+
+    final bodyMap = {
+      "name": name,
+      "expiredAt": expiredAt,
+      "pharmaceuticalTiter": pharmaceuticaltiter,
+      "pharmaceuticalIndications": pharmaceuticalindications,
+      "pharmaceuticalComposition": pharmaceuticalcomposition,
+      "company_Name": companyName,
+      "price": price,
+      "isAllowedWithoutPrescription": isallowedwithoutprescription,
+      "barcode": barcode,
+      "lowbound": lowBound,
+      "quantity": quantity,
+    };
+
+    if (imagePath.isNotEmpty) {
+      bodyMap["image"] = MultipartFile.fromFile(
+        imagePath,
+        filename: imagePath.split("/").last,
+      );
+    }
+
+    formData = FormData.fromMap(bodyMap);
+
+    final response = await baseDio.post(
+      subUrl: "/pharmacist/add-medicine",
+
+      data: formData,
+    );
 
     return response;
   }
@@ -307,9 +355,9 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> despenseMedicine() async {
+  Future<DataState> despenseMedicine({required String medicineId}) async {
     final response = await baseDio.post(
-      subUrl: "/pharmacist/despense-medicine/1",
+      subUrl: "/pharmacist/despense-medicine/$medicineId",
     );
 
     return response;
@@ -327,11 +375,12 @@ class RemoteDataSource {
     required String code,
     required String view,
   }) async {
-    final response = await baseDio.get(
+    final response = await baseDio.get<PrescriptionModel>(
       subUrl: "/pharmacist/searchPrescription",
 
       queryParameters: {"code": code, "view": view},
-      model: dynamic,
+      model: PrescriptionModel(),
+      needToken: true,
     );
 
     return response;
@@ -361,29 +410,41 @@ class RemoteDataSource {
   }
 
   Future<DataState> showOrders() async {
-    final response = await baseDio.get(
+    final response = await baseDio.get<OrderModel>(
       subUrl: "/pharmacist/show-orders",
 
-      model: dynamic,
+      model: OrderModel(),
+      needToken: true,
+      isListOfModel: true,
     );
 
     return response;
   }
 
   Future<DataState> dailyInventory() async {
-    final response = await baseDio.get(
+    final response = await baseDio.baseGet<InventoryModel>(
       subUrl: "/pharmacist/daily-inventory",
 
-      model: dynamic,
+      model: InventoryModel(),
     );
 
     return response;
   }
 
-  Future<DataState> markedAsBought({required String count}) async {
+  Future<DataState> markedAsBought({
+    required int count,
+    required String medicineId,
+    String? altMedicineId,
+  }) async {
+    final dataMap = <String, dynamic>{"count": count};
+
+    if (altMedicineId != null && altMedicineId.isNotEmpty) {
+      dataMap["alt"] = altMedicineId;
+    }
     final response = await baseDio.post(
-      subUrl: "/pharmacist/marked-as-bought/1",
-      data: {"count": count},
+      subUrl: "/pharmacist/marked-as-bought/$medicineId",
+      data: dataMap,
+      needToken: true,
     );
 
     return response;
@@ -398,6 +459,7 @@ class RemoteDataSource {
     required String companyName,
     required String price,
     required String imagePath,
+    required String lowbound,
     required bool isallowedwithoutprescription,
     // required String barcode,
   }) async {
@@ -411,6 +473,7 @@ class RemoteDataSource {
       "company_Name": companyName,
       "price": price,
       "isAllowedWithoutPrescription": isallowedwithoutprescription,
+      "lowbound": lowbound,
     };
 
     if (imagePath.isNotEmpty) {
@@ -491,6 +554,16 @@ class RemoteDataSource {
     final response = await baseDio.post(
       subUrl: "/pharmacist/detach/$id",
       needToken: true,
+    );
+
+    return response;
+  }
+
+  Future<DataState> getMedicineBatches({required String id}) async {
+    final response = await baseDio.get<PharmacyMedicine>(
+      subUrl: "/pharmacist/get-medicine-batches/$id",
+      needToken: true,
+      model: PharmacyMedicine(),
     );
 
     return response;

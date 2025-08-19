@@ -1,13 +1,14 @@
 part of 'pharmacy_profile_view_model.dart';
 
 class PharmacyProfileState {
-  final AsyncValue<PharmacyDetailsModel>? pharmacyDetailsResponse;
+  final AsyncValue<ProfileModel>? pharmacyDetailsResponse;
 
   PharmacyProfileState({this.pharmacyDetailsResponse});
 
-  PharmacyProfileState copyWith(
-          {AsyncValue<PharmacyDetailsModel>? pharmacyDetailsResponse}) =>
-      PharmacyProfileState(
-          pharmacyDetailsResponse:
-              pharmacyDetailsResponse ?? this.pharmacyDetailsResponse);
+  PharmacyProfileState copyWith({
+    AsyncValue<ProfileModel>? pharmacyDetailsResponse,
+  }) => PharmacyProfileState(
+    pharmacyDetailsResponse:
+        pharmacyDetailsResponse ?? this.pharmacyDetailsResponse,
+  );
 }

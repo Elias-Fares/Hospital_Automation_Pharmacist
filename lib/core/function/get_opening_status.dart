@@ -6,9 +6,10 @@ String getOpeningStatus(List<WorkDay> workDays) {
   final currentTimeInMinutes = now.hour * 60 + now.minute;
 
   // Filter the work days that match today
-  final todayWorkSlots = workDays
-      .where((day) => day.day?.toUpperCase() == currentWeekday)
-      .toList();
+  final todayWorkSlots =
+      workDays
+          .where((day) => day.day?.toUpperCase() == currentWeekday)
+          .toList();
 
   if (todayWorkSlots.isEmpty) {
     return "Closed";
@@ -21,7 +22,7 @@ String getOpeningStatus(List<WorkDay> workDays) {
     if (startMinutes != null && endMinutes != null) {
       if (currentTimeInMinutes >= startMinutes &&
           currentTimeInMinutes <= endMinutes) {
-        return "Open";
+        return "Opened";
       }
     }
   }
@@ -38,7 +39,7 @@ String _weekdayToString(int weekday) {
     "THURSDAY",
     "FRIDAY",
     "SATURDAY",
-    "SUNDAY"
+    "SUNDAY",
   ];
   return days[weekday - 1];
 }

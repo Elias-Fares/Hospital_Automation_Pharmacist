@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medicare_pharmacy/core/class/debouncer.dart';
+import 'package:medicare_pharmacy/core/constant/constant.dart' show Constant;
 import 'package:medicare_pharmacy/core/enums/attach_status.dart';
 import 'package:medicare_pharmacy/core/widgets/custom_error_widget.dart';
 import 'package:medicare_pharmacy/core/widgets/custom_loading_widget.dart';
@@ -121,7 +122,7 @@ class _AddExistingAlternativeMedicinesScreenState
                       medName: med?.name ?? "",
                       medPrice: med?.price?.toString() ?? "",
                       medTiter: med?.pharmaceuticalTiter?.toString() ?? "",
-                      imageUrl: med?.medImageUrl ?? "",
+                      imageUrl: "${Constant.baseUrl}/${med?.medImageUrl ?? ""}",
                       onMedicineTap: () {
                         context.push(
                           MedicineDetailsScreen.routeName,

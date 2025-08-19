@@ -174,8 +174,34 @@ class Repository {
     return response;
   }
 
-  Future<DataState> addMedicine() async {
-    final response = await _remoteDataSource.addMedicine();
+  Future<DataState> addMedicine({
+    required String name,
+    required String pharmaceuticaltiter,
+    required String pharmaceuticalindications,
+    required String pharmaceuticalcomposition,
+    required String companyName,
+    required String price,
+    required String imagePath,
+    required String quantity,
+    required String lowBound,
+    required String barcode,
+    required String expiredAt,
+    required bool isallowedwithoutprescription,
+  }) async {
+    final response = await _remoteDataSource.addMedicine(
+      name: name,
+      pharmaceuticaltiter: pharmaceuticaltiter,
+      pharmaceuticalindications: pharmaceuticalindications,
+      pharmaceuticalcomposition: pharmaceuticalcomposition,
+      companyName: companyName,
+      price: price,
+      imagePath: imagePath,
+      quantity: quantity,
+      lowBound: lowBound,
+      barcode: barcode,
+      expiredAt: expiredAt,
+      isallowedwithoutprescription: isallowedwithoutprescription,
+    );
 
     return response;
   }
@@ -237,19 +263,21 @@ class Repository {
   Future<DataState> addBatch({
     required String quantity,
     required String expiredDate,
-       required String medId
+    required String medId,
   }) async {
     final response = await _remoteDataSource.addBatch(
       quantity: quantity,
       expiredDate: expiredDate,
-      medId: medId
+      medId: medId,
     );
 
     return response;
   }
 
-  Future<DataState> despenseMedicine() async {
-    final response = await _remoteDataSource.despenseMedicine();
+  Future<DataState> despenseMedicine({required String medicineId}) async {
+    final response = await _remoteDataSource.despenseMedicine(
+      medicineId: medicineId,
+    );
 
     return response;
   }
@@ -280,12 +308,14 @@ class Repository {
     return response;
   }
 
-  Future<DataState> addAlternatives(
-     {required String medicineId,
+  Future<DataState> addAlternatives({
+    required String medicineId,
     required String altMedId,
-    }
-  ) async {
-    final response = await _remoteDataSource.addAlternatives(altMedId: altMedId, medicineId: medicineId);
+  }) async {
+    final response = await _remoteDataSource.addAlternatives(
+      altMedId: altMedId,
+      medicineId: medicineId,
+    );
 
     return response;
   }
@@ -302,8 +332,16 @@ class Repository {
     return response;
   }
 
-  Future<DataState> markedAsBought({required String count}) async {
-    final response = await _remoteDataSource.markedAsBought(count: count);
+  Future<DataState> markedAsBought({
+    required int count,
+    required String medicineId,
+      String? altMedicineId,
+  }) async {
+    final response = await _remoteDataSource.markedAsBought(
+      count: count,
+      medicineId: medicineId,
+      altMedicineId: altMedicineId
+    );
 
     return response;
   }
@@ -316,8 +354,9 @@ class Repository {
     required String pharmaceuticalcomposition,
     required String companyName,
     required String price,
+    required String lowbound,
     required bool isallowedwithoutprescription,
-        required String imagePath,
+    required String imagePath,
     // required String barcode,
   }) async {
     final response = await _remoteDataSource.updateMedicineDetails(
@@ -329,7 +368,8 @@ class Repository {
       companyName: companyName,
       price: price,
       isallowedwithoutprescription: isallowedwithoutprescription,
-      imagePath: imagePath
+      imagePath: imagePath,
+      lowbound: lowbound,
       // barcode: barcode,
     );
 
@@ -376,6 +416,12 @@ class Repository {
 
   Future<DataState> detach({required String id}) async {
     final response = await _remoteDataSource.detach(id: id);
+
+    return response;
+  }
+
+  Future<DataState> getMedicineBatches({required String id}) async {
+    final response = await _remoteDataSource.getMedicineBatches(id: id);
 
     return response;
   }

@@ -9,6 +9,7 @@ class AltMedDispenseCard extends StatelessWidget {
     required this.medPrice,
     this.onMedicineTap,
     this.onDespenseTap,
+    required this.dispenceStatus,
   });
 
   final String imageUrl;
@@ -17,6 +18,7 @@ class AltMedDispenseCard extends StatelessWidget {
   final String medPrice;
   final void Function()? onMedicineTap;
   final void Function()? onDespenseTap;
+  final DispenceStatus dispenceStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class AltMedDispenseCard extends StatelessWidget {
                 Text(
                   "($medTiter)",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.outlineVariant,
+                    color: AppColors.hintTextColor,
                   ),
                 ),
               ],
@@ -60,10 +62,22 @@ class AltMedDispenseCard extends StatelessWidget {
             ),
             SizedBox(height: 10),
             CustomOutlinedButton(
-              title: "Dispense Alternative",
+              isLoading: dispenceStatus == DispenceStatus.loading,
+              loadingIndicatorSize: 15,
+              loadingIndicatorStrokeWidth: 2,
+              title:
+                  dispenceStatus == DispenceStatus.notDispenced
+                      ? "Dispense Alternative"
+                      : "Dispenced",
               height: 30,
-              backgroundColor: AppColors.white,
-              onTap: onDespenseTap,
+              backgroundColor:
+                  dispenceStatus == DispenceStatus.dispenced
+                      ? AppColors.outlineVariant
+                      : AppColors.white,
+              onTap:
+                  dispenceStatus == DispenceStatus.dispenced
+                      ? null
+                      : onDespenseTap,
             ),
           ],
         ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medicare_pharmacy/core/constant/extra_keys.dart';
+import 'package:medicare_pharmacy/core/models/prescription_medicine_model.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/features/add_existing_alternative_medicines/view/add_existing_alternative_medicines_screen.dart';
+import 'package:medicare_pharmacy/features/add_new_medicine/view/add_new_medicine_screen.dart';
 import 'package:medicare_pharmacy/features/alternative_medicines/view/alternative_medicines_screen.dart';
 
 import 'package:medicare_pharmacy/features/auth/view/screens/add_pharmacy_address_screen.dart';
@@ -133,8 +135,13 @@ class AppRouter {
         builder: (context, state) {
           final extraMap = state.extra as Map<String, dynamic>;
           final medId = extraMap[ExtraKeys.medId] as int?;
-          final batches = extraMap[ExtraKeys.batches];
-          return BatchesScreen(medicineId: medId, batches: batches);
+          // final batches = extraMap[ExtraKeys.batches];
+          final pharmacyMedicineId =
+              extraMap[ExtraKeys.pharmacyMedicineId] as int?;
+          return BatchesScreen(
+            medicineId: medId,
+            pharmacyMedicineId: pharmacyMedicineId,
+          );
         },
       ),
       GoRoute(
@@ -158,13 +165,21 @@ class AppRouter {
       GoRoute(
         path: DispenseMedicinesScreen.routeName,
         builder: (context, state) {
-          return DispenseMedicinesScreen();
+          final medicines = state.extra as List<PrescriptionMedicine>?;
+          return DispenseMedicinesScreen(medicines: medicines);
         },
       ),
       GoRoute(
         path: DispenseAltMedicinesScreen.routeName,
         builder: (context, state) {
-          return DispenseAltMedicinesScreen();
+          final extraMap = state.extra as Map<String, dynamic>;
+          final medId = extraMap[ExtraKeys.medId] as int?;
+          final prescriptionMedicineId =
+              extraMap[ExtraKeys.prescriptionMedicineId] as int?;
+          return DispenseAltMedicinesScreen(
+            medId: medId,
+            prescriptionMedicineId: prescriptionMedicineId,
+          );
         },
       ),
       GoRoute(
@@ -183,6 +198,12 @@ class AppRouter {
         path: SpecifySaleAmountScreen.routeName,
         builder: (context, state) {
           return SpecifySaleAmountScreen();
+        },
+      ),
+      GoRoute(
+        path: AddNewMedicineScreen.routeName,
+        builder: (context, state) {
+          return AddNewMedicineScreen();
         },
       ),
     ],

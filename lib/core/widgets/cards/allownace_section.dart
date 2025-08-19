@@ -1,4 +1,8 @@
-part of '../edit_medicine_screen.dart';
+
+
+import 'package:flutter/material.dart';
+import 'package:medicare_pharmacy/core/style/app_colors.dart';
+import 'package:medicare_pharmacy/core/widgets/buttons/custom_inkwell.dart';
 
 class AllownaceSection extends StatelessWidget {
   const AllownaceSection({

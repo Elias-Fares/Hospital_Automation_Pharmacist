@@ -16,6 +16,7 @@ class BatchesViewModel extends _$BatchesViewModel {
     required String quantity,
     required String expiredDate,
     required String? medId,
+    required String? pharmacyMedicineId,
   }) async {
     if (medId == null) {
       return;
@@ -29,9 +30,31 @@ class BatchesViewModel extends _$BatchesViewModel {
 
     if (response is DataSuccess) {
       state = state.copyWith(addBatchResponse: AsyncValue.data(response.data));
+      getMedicineBatches(pharmacyMedicineId: pharmacyMedicineId);
     } else {
       state = state.copyWith(
         addBatchResponse: AsyncValue.error(
+          response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
+          StackTrace.current,
+        ),
+      );
+    }
+  }
+
+  Future<void> getMedicineBatches({required String? pharmacyMedicineId}) async {
+    if (pharmacyMedicineId == null) {
+      return;
+    }
+    state = state.copyWith(getBatchesResponse: AsyncValue.loading());
+    final response = await _repository.getMedicineBatches(id: pharmacyMedicineId);
+
+    if (response is DataSuccess) {
+      state = state.copyWith(
+        getBatchesResponse: AsyncValue.data(response.data),
+      );
+    } else {
+      state = state.copyWith(
+        getBatchesResponse: AsyncValue.error(
           response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
           StackTrace.current,
         ),

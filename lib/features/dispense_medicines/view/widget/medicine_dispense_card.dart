@@ -9,9 +9,10 @@ class MedicineDispenseCard extends StatelessWidget {
     required this.medPrice,
     this.onMedicineTap,
     this.onDespenseTap,
-    required this.dispenseAlt,
+    required this.showDispenseAlt,
     required this.altsCount,
     this.onAltTap,
+    required this.dispenceStatus,
   });
 
   final String imageUrl;
@@ -21,15 +22,17 @@ class MedicineDispenseCard extends StatelessWidget {
   final void Function()? onMedicineTap;
   final void Function()? onDespenseTap;
   final void Function()? onAltTap;
-  final bool dispenseAlt;
+  final bool showDispenseAlt;
   final int altsCount;
+  final DispenceStatus dispenceStatus;
 
   @override
   Widget build(BuildContext context) {
     return CustomInkwell(
       onTap: onMedicineTap,
+      color: AppColors.white,
+      borderRadius: BorderRadius.circular(8),
       child: Container(
-        decoration: containerCardDecoration(),
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +54,7 @@ class MedicineDispenseCard extends StatelessWidget {
                 Text(
                   "($medTiter)",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.outlineVariant,
+                    color: AppColors.hintTextColor,
                   ),
                 ),
               ],
@@ -65,7 +68,7 @@ class MedicineDispenseCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            dispenseAlt
+            (showDispenseAlt)
                 ? CustomInkwell(
                   onTap: onAltTap,
                   color: AppColors.backgroundColor,
@@ -100,9 +103,22 @@ class MedicineDispenseCard extends StatelessWidget {
                   ),
                 )
                 : LoadingButton(
-                  title: "Mark as dispensed",
+                  isLoading: dispenceStatus == DispenceStatus.loading,
+                  loadingIndicatorSize: 15,
+                  loadingIndicatorStrokeWidth: 2,
+                  title:
+                      dispenceStatus == DispenceStatus.notDispenced
+                          ? "Mark as dispensed"
+                          : "Dispenced",
                   height: 30,
-                  onTap: onDespenseTap,
+                  color:
+                      dispenceStatus == DispenceStatus.dispenced
+                          ? AppColors.outlineVariant
+                          : AppColors.primary,
+                  onTap:
+                      dispenceStatus == DispenceStatus.dispenced
+                          ? null
+                          : onDespenseTap,
                 ),
           ],
         ),

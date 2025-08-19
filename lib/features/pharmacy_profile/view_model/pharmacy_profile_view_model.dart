@@ -1,4 +1,6 @@
 import 'package:medicare_pharmacy/data/models/pharmacy_details_model.dart';
+import 'package:medicare_pharmacy/data/models/profile_model.dart';
+import 'package:medicare_pharmacy/data/repository.dart';
 
 import '../../../configuration/service_locator.dart';
 import '../../../core/base_dio/data_state.dart';
@@ -12,23 +14,23 @@ class PharmacyProfileViewModel extends _$PharmacyProfileViewModel {
   @override
   PharmacyProfileState build() => PharmacyProfileState();
 
-  // final _pharmacyRepository = getIt<PharmaciesRepository>();
+  final _repository = getIt<Repository>();
 
-  //   Future<void> getPharmacyDetails({required String id}) async {
-  //   state = state.copyWith(pharmacyDetailsResponse: const AsyncValue.loading());
+    Future<void> showPharmacyProfile() async {
+    state = state.copyWith(pharmacyDetailsResponse: const AsyncValue.loading());
 
-  //   final response = await _pharmacyRepository.getPharmacyDetails(id: id);
+    final response = await _repository.showPhProfile();
 
-  //   if (response is DataSuccess) {
-  //     state =
-  //         state.copyWith(pharmacyDetailsResponse: AsyncValue.data(response.data));
-  //   } else {
-  //     state = state.copyWith(
-  //         pharmacyDetailsResponse: AsyncValue.error(
-  //             response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
-  //             StackTrace.current));
-  //   }
-  // }
+    if (response is DataSuccess) {
+      state =
+          state.copyWith(pharmacyDetailsResponse: AsyncValue.data(response.data));
+    } else {
+      state = state.copyWith(
+          pharmacyDetailsResponse: AsyncValue.error(
+              response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
+              StackTrace.current));
+    }
+  }
 
 
 }

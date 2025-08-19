@@ -1,11 +1,17 @@
+part of'update_price_view_model.dart';
+
 class UpdatePriceState {
-  final List<String> selectedMedsIds;
+  final List<MedEntity> selectedMeds;
+    final AsyncValue<List<MedicineModel>>? medicinesResponse;
+  
 
-  UpdatePriceState({required this.selectedMedsIds});
 
-  UpdatePriceState copyWith({List<String>? selectedMedsIds}) {
+  UpdatePriceState({required this.selectedMeds, this.medicinesResponse});
+
+  UpdatePriceState copyWith({List<MedEntity>? selectedMeds,  AsyncValue<List<MedicineModel>>? medicinesResponse}) {
     return UpdatePriceState(
-      selectedMedsIds: selectedMedsIds ?? this.selectedMedsIds,
+      selectedMeds: selectedMeds ?? this.selectedMeds,
+      medicinesResponse: medicinesResponse ?? this.medicinesResponse
     );
   }
 }

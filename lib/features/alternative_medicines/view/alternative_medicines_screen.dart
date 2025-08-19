@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medicare_pharmacy/core/constant/constant.dart';
 import 'package:medicare_pharmacy/core/widgets/custom_error_widget.dart';
 import 'package:medicare_pharmacy/core/widgets/custom_loading_widget.dart';
 import 'package:medicare_pharmacy/core/widgets/floating_action_button_with_faded_elevation.dart';
@@ -92,7 +93,8 @@ class _AlternativeMedicinesScreenState
                       medName: altMed?.name ?? "",
                       medPrice: altMed?.price?.toString() ?? "",
                       medTiter: altMed?.pharmaceuticalTiter?.toString() ?? "",
-                      imageUrl: altMed?.medImageUrl ?? "",
+                      imageUrl:
+                          "${Constant.baseUrl}/${altMed?.medImageUrl ?? ""}",
                       onMedicineTap: () {
                         context.push(
                           MedicineDetailsScreen.routeName,

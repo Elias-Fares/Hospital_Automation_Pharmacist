@@ -13,9 +13,7 @@ class EditMedicineViewModel extends _$EditMedicineViewModel {
   EditMedicineState build() =>
       EditMedicineState(isAllowedWithoutPrescription: false);
 
-  void changeisAllowedWithoutPrescription(bool value) {
-    state = state.copyWith(isAllowedWithoutPrescription: value);
-  }
+
 
   final _repository = getIt<Repository>();
 
@@ -27,6 +25,7 @@ class EditMedicineViewModel extends _$EditMedicineViewModel {
     required String pharmaceuticalcomposition,
     required String companyName,
     required String price,
+    required String lowBound,
   }) async {
     state = state.copyWith(editMedResponse: AsyncValue.loading());
     final response = await _repository.updateMedicineDetails(
@@ -38,6 +37,7 @@ class EditMedicineViewModel extends _$EditMedicineViewModel {
       companyName: companyName,
       price: price,
       isallowedwithoutprescription: state.isAllowedWithoutPrescription,
+      lowbound: lowBound,
       imagePath: state.imagePath ?? "",
     );
 
@@ -61,5 +61,9 @@ class EditMedicineViewModel extends _$EditMedicineViewModel {
     } else {
       checkStoragePermisson();
     }
+  }
+
+    void changeisAllowedWithoutPrescription(bool value) {
+    state = state.copyWith(isAllowedWithoutPrescription: value);
   }
 }

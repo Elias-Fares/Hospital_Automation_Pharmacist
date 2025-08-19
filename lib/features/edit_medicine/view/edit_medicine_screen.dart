@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medicare_pharmacy/core/constant/constant.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/custom_inkwell.dart';
+import 'package:medicare_pharmacy/core/widgets/cards/allownace_section.dart';
 import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
 import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
@@ -21,7 +22,7 @@ import 'package:medicare_pharmacy/features/edit_medicine/view_model/edit_medicin
 import 'package:medicare_pharmacy/features/main/view/main_screen.dart';
 import 'package:medicare_pharmacy/features/medicine_details/view_model/medicine_details_view_model.dart';
 import 'package:medicare_pharmacy/features/medicines/view_model/medicines_view_model.dart';
-part 'widget/allownace_section.dart';
+
 part 'widget/batches_section.dart';
 part 'widget/image_section.dart';
 
@@ -60,7 +61,9 @@ class _EditMedicineScreenState extends ConsumerState<EditMedicineScreen> {
     phIndicationController = TextEditingController(
       text: widget.med?.pharmaceuticalIndications,
     );
-    lowBoundController = TextEditingController(text: "TODO");
+    lowBoundController = TextEditingController(
+      text: widget.med?.pharmacyMedicines?.first.lowbound?.toString() ?? "",
+    );
     companyController = TextEditingController(text: widget.med?.companyName);
 
     Future.microtask(() {
@@ -144,6 +147,16 @@ class _EditMedicineScreenState extends ConsumerState<EditMedicineScreen> {
                 decoration: InputDecoration(label: Text("Titer")),
               ),
               SizedBox(height: 20),
+              TextFormField(
+                controller: lowBoundController,
+                style: Theme.of(context).textTheme.bodyMedium,
+                keyboardType: TextInputType.number,
+                validator:
+                    (value) =>
+                        FieldsValidator.validateEmpty(value: value ?? ""),
+                decoration: InputDecoration(label: Text("Low Bound")),
+              ),
+              SizedBox(height: 20),
               AllownaceSection(
                 isAllowedWithoutPrescription:
                     editState.isAllowedWithoutPrescription,
@@ -214,6 +227,7 @@ class _EditMedicineScreenState extends ConsumerState<EditMedicineScreen> {
                                   phCompositionController.text,
                               companyName: companyController.text,
                               price: priceController.text,
+                              lowBound: lowBoundController.text,
                             );
                       },
                     ),

@@ -1,26 +1,30 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medicare_pharmacy/data/models/medicine_model.dart';
+import 'package:medicare_pharmacy/core/constant/constant.dart';
+import 'package:medicare_pharmacy/core/constant/extra_keys.dart';
+import 'package:medicare_pharmacy/core/enums/dispence_status.dart';
+import 'package:medicare_pharmacy/core/models/prescription_medicine_model.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
-import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
-import 'package:medicare_pharmacy/core/widgets/appbars/app_bar_with_search.dart';
+import 'package:medicare_pharmacy/core/validators/fields_validator.dart';
 import 'package:medicare_pharmacy/core/widgets/appbars/sub_app_bar.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/custom_inkwell.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/custom_outlined_button.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
-import 'package:medicare_pharmacy/core/widgets/cards/icon_container.dart';
 import 'package:medicare_pharmacy/core/widgets/general_network_image.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
 import 'package:medicare_pharmacy/features/dispense_alt_medicines/view/dispense_alt_medicines_screen.dart';
+import 'package:medicare_pharmacy/features/dispense_medicines/view_model/dispense_medicines_view_model.dart';
 import 'package:medicare_pharmacy/features/medicine_details/view/medicine_details_screen.dart';
 part 'widget/medicine_dispense_card.dart';
+part 'widget/specify_count_dialog.dart';
 
 class DispenseMedicinesScreen extends ConsumerStatefulWidget {
-  const DispenseMedicinesScreen({super.key});
+  const DispenseMedicinesScreen({super.key, required this.medicines});
   static const routeName = "/dispense_medicines_screen";
+  final List<PrescriptionMedicine>? medicines;
 
   @override
   ConsumerState<DispenseMedicinesScreen> createState() =>
@@ -29,54 +33,26 @@ class DispenseMedicinesScreen extends ConsumerStatefulWidget {
 
 class _DispenseMedicinesScreenState
     extends ConsumerState<DispenseMedicinesScreen> {
-  // final searchTextEditingController = TextEditingController();
-  final jsonString = """ {
-            "medicinesId": 3,
-            "name": "nospa",
-            "expiredAt": "2026-04-04T00:00:00.000Z",
-            "pharmaceuticalTiter": 300,
-            "pharmaceuticalIndications": "for stomachache",
-            "pharmaceuticalComposition": "antispa 500 mg",
-            "company_Name": "OPM",
-            "price": 11000,
-            "isAllowedWithoutPrescription": true,
-            "barcode": "123457",
-            "medImageUrl":  "https://tse4.mm.bing.net/th/id/OIP.E6GBbEWNpCzxm1XBVtUCcwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
-            "createdAt": "2025-06-25T18:44:19.000Z",
-            "updatedAt": "2025-06-25T18:44:19.000Z",
-            "pharmacy_medicines": [
-                {
-                    "pharmacy_medicineId": 4,
-                    "lowbound": 4,
-                    "createdAt": "2025-06-25T18:54:35.000Z",
-                    "updatedAt": "2025-06-25T18:54:35.000Z",
-                    "medicine_id": 3,
-                    "pharmacy_id": 1,
-                    "medicine_batches": [
-                        {
-                            "medicine_batchId": 4,
-                            "quantity": 15,
-                            "expired_date": "2025-09-09",
-                            "createdAt": "2025-06-25T18:54:35.000Z",
-                            "updatedAt": "2025-06-25T18:54:35.000Z",
-                            "pharmacy_medicine_id": 4
-                        }
-                    ]
-                }
-            ]
-        }""";
-
-  late MedicineModel fakeMedModel;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    fakeMedModel = MedicineModel.fromJson(json.decode(jsonString));
-  }
-
   @override
   Widget build(BuildContext context) {
+    final dispenseMedsState = ref.watch(dispenseMedicinesViewModelProvider);
+
+    ref.listen(
+      dispenseMedicinesViewModelProvider.select(
+        (value) => value.markAsDispencedResponse,
+      ),
+      (previous, next) => next?.when(
+        data:
+            (data) => showSnackBarSuccessMessage(
+              context,
+              message: "The medicine dispenced successfully",
+            ),
+        error:
+            (error, stackTrace) =>
+                showSnackBarErrorMessage(context, message: error.toString()),
+        loading: () {},
+      ),
+    );
     return Scaffold(
       // appBar: AppBarWithSearch(
       //   searchTextEditingController: searchTextEditingController,
@@ -91,30 +67,58 @@ class _DispenseMedicinesScreenState
           mainAxisSpacing: 8,
           crossAxisSpacing: 8,
         ),
-        itemCount: 3,
+        itemCount: widget.medicines?.length ?? 0,
 
-        itemBuilder:
-            (context, index) => MedicineDispenseCard(
-              dispenseAlt: index % 2 == 1,
-              altsCount: 3,
-              medName: fakeMedModel.name ?? "",
-              medPrice: fakeMedModel.price?.toString() ?? "",
-              medTiter: fakeMedModel.pharmaceuticalTiter?.toString() ?? "",
-              imageUrl: fakeMedModel.medImageUrl ?? "",
-              onMedicineTap: () {
-                context.push(
-                  MedicineDetailsScreen.routeName,
-                  extra: fakeMedModel,
-                );
-              },
-              // onAddAlt: () {
-              //   //logic
-              // },
-              onDespenseTap: () {},
-              onAltTap: () {
-                context.push(DispenseAltMedicinesScreen.routeName);
-              },
-            ),
+        itemBuilder: (context, index) {
+          final prescriptionMedicine = widget.medicines?.elementAtOrNull(index);
+          var status =
+              dispenseMedsState.dispenceStatus[prescriptionMedicine
+                  ?.prescriptionMedicinesId
+                  ?.toString()] ??
+              DispenceStatus.notDispenced;
+
+          // this condition to check whether the medicine is already dispenced or not
+          if (prescriptionMedicine?.pharmacyId != null) {
+            status = DispenceStatus.dispenced;
+          }
+
+          final med = prescriptionMedicine?.medicine;
+
+          final needAlt = ref
+              .read(dispenseMedicinesViewModelProvider.notifier)
+              .needAlt(medicine: med?.pharmacyMedicines?.firstOrNull);
+
+          return MedicineDispenseCard(
+            showDispenseAlt: (needAlt && status != DispenceStatus.dispenced),
+            dispenceStatus: status,
+            altsCount: 3,
+            medName: med?.name ?? "",
+            medPrice: med?.price?.toString() ?? "",
+            medTiter: med?.pharmaceuticalTiter?.toString() ?? "",
+            imageUrl: "${Constant.baseUrl}/${med?.medImageUrl ?? ""}",
+            onMedicineTap: () {
+              context.push(MedicineDetailsScreen.routeName, extra: med);
+            },
+
+            onDespenseTap: () {
+              SpecifyCountDialog.builder(
+                context,
+                pharmacyMedicineId:
+                    prescriptionMedicine?.prescriptionMedicinesId,
+              );
+            },
+            onAltTap: () {
+              context.push(
+                DispenseAltMedicinesScreen.routeName,
+                extra: {
+                  ExtraKeys.medId: med?.medicinesId,
+                  ExtraKeys.prescriptionMedicineId:
+                      prescriptionMedicine?.prescriptionMedicinesId,
+                },
+              );
+            },
+          );
+        },
       ),
     );
   }

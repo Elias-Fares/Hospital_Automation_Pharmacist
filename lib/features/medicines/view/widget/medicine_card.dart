@@ -43,7 +43,7 @@ class MedicineCard extends StatelessWidget {
                 Text(
                   "($medTiter)",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.outlineVariant,
+                    color: AppColors.hintTextColor,
                   ),
                 ),
               ],

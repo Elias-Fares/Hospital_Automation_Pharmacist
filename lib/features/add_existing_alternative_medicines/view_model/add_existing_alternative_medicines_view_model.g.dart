@@ -47,7 +47,7 @@ final class AddExistingAlternativeMedicinesViewModelProvider
 }
 
 String _$addExistingAlternativeMedicinesViewModelHash() =>
-    r'33694a4b770c8600f0d133aa56be3a1c89a0c185';
+    r'1aa1e0c68f275709a29d690c5221d321c122a687';
 
 abstract class _$AddExistingAlternativeMedicinesViewModel
     extends $Notifier<AddExistingAlternativeMedicinesState> {

@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medicare_pharmacy/core/constant/constant.dart';
+import 'package:medicare_pharmacy/core/entities/med_entity.dart';
+import 'package:medicare_pharmacy/core/widgets/custom_error_widget.dart';
+import 'package:medicare_pharmacy/core/widgets/custom_loading_widget.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
@@ -27,49 +31,12 @@ class UpdatePriceScreen extends ConsumerStatefulWidget {
 class _UpdatePriceScreenState extends ConsumerState<UpdatePriceScreen> {
   final searchTextEditingController = TextEditingController();
 
-  final jsonString = """ {
-            "medicinesId": 3,
-            "name": "nospa",
-            "expiredAt": "2026-04-04T00:00:00.000Z",
-            "pharmaceuticalTiter": 300,
-            "pharmaceuticalIndications": "for stomachache",
-            "pharmaceuticalComposition": "antispa 500 mg",
-            "company_Name": "OPM",
-            "price": 11000,
-            "isAllowedWithoutPrescription": true,
-            "barcode": "123457",
-            "medImageUrl":  "https://tse4.mm.bing.net/th/id/OIP.E6GBbEWNpCzxm1XBVtUCcwHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
-            "createdAt": "2025-06-25T18:44:19.000Z",
-            "updatedAt": "2025-06-25T18:44:19.000Z",
-            "pharmacy_medicines": [
-                {
-                    "pharmacy_medicineId": 4,
-                    "lowbound": 4,
-                    "createdAt": "2025-06-25T18:54:35.000Z",
-                    "updatedAt": "2025-06-25T18:54:35.000Z",
-                    "medicine_id": 3,
-                    "pharmacy_id": 1,
-                    "medicine_batches": [
-                        {
-                            "medicine_batchId": 4,
-                            "quantity": 15,
-                            "expired_date": "2025-09-09",
-                            "createdAt": "2025-06-25T18:54:35.000Z",
-                            "updatedAt": "2025-06-25T18:54:35.000Z",
-                            "pharmacy_medicine_id": 4
-                        }
-                    ]
-                }
-            ]
-        }""";
-
-  late MedicineModel fakeMedModel;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
-    fakeMedModel = MedicineModel.fromJson(json.decode(jsonString));
+    Future.microtask(() {
+      ref.read(updatePriceViewModelProvider.notifier).getMedicines();
+    });
   }
 
   @override
@@ -94,61 +61,86 @@ class _UpdatePriceScreenState extends ConsumerState<UpdatePriceScreen> {
           children: [
             SizedBox(height: 10),
             SizedBox(
-              height: updatePriceState.selectedMedsIds.isEmpty ? 0 : 35,
+              height: updatePriceState.selectedMeds.isEmpty ? 0 : 35,
               child: ListView.builder(
-                itemCount: 8,
+                itemCount: updatePriceState.selectedMeds.length,
                 shrinkWrap: true,
 
                 padding: EdgeInsets.symmetric(horizontal: 16),
 
                 scrollDirection: Axis.horizontal,
 
-                itemBuilder:
-                    (context, index) =>
-                        updatePriceState.selectedMedsIds.contains(
-                              index.toString(),
-                            )
-                            ? SelectedMedChip(
-                              medName: fakeMedModel.name ?? "",
+                itemBuilder: (context, index) {
+                  final medEntity = updatePriceState.selectedMeds.elementAt(
+                    index,
+                  );
+                  return SelectedMedChip(
+                    medName: medEntity.name,
 
-                              onDeleteTap: () {
-                                ref
-                                    .read(updatePriceViewModelProvider.notifier)
-                                    .removeMedicineId(index.toString());
-                              },
-                            )
-                            : SizedBox.shrink(),
+                    onDeleteTap: () {
+                      ref
+                          .read(updatePriceViewModelProvider.notifier)
+                          .removeMedicineId(medEntity);
+                    },
+                  );
+                },
               ),
             ),
             SizedBox(height: 10),
-            GridView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: .9,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-              ),
-              itemCount: 8,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder:
-                  (context, index) => UpdateMedCard(
-                    isSelected: updatePriceState.selectedMedsIds.contains(
-                      index.toString(),
-                    ),
-                    medName: fakeMedModel.name ?? "",
-                    medPrice: fakeMedModel.price?.toString() ?? "",
-                    medTiter:
-                        fakeMedModel.pharmaceuticalTiter?.toString() ?? "",
-                    imageUrl: fakeMedModel.medImageUrl ?? "",
-                    onMedicineTap: () {
-                      ref
-                          .read(updatePriceViewModelProvider.notifier)
-                          .handleOnMedTap(id: index.toString());
-                    },
-                  ),
-            ),
+            updatePriceState.medicinesResponse?.when(
+                  loading: () => CustomLoadingWidget(height: 300.h),
+                  error:
+                      (error, stackTrace) => CustomErrorWidget(
+                        message: error.toString(),
+                        height: 300,
+                        onTryAgainTap: () {
+                          ref
+                              .read(updatePriceViewModelProvider.notifier)
+                              .getMedicines();
+                        },
+                      ),
+
+                  data:
+                      (data) => GridView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: .9,
+                          mainAxisSpacing: 12,
+                          crossAxisSpacing: 12,
+                        ),
+                        itemCount: data.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final med = data.elementAt(index);
+                          return UpdateMedCard(
+                            isSelected: updatePriceState.selectedMeds.contains(
+                              MedEntity(
+                                id: med.medicinesId?.toString() ?? "",
+                                name: med.name ?? "",
+                              ),
+                            ),
+                            medName: med.name ?? "",
+                            medPrice: med.price?.toString() ?? "",
+                            medTiter: med.pharmaceuticalTiter?.toString() ?? "",
+                            imageUrl:
+                                "${Constant.baseUrl}/${med.medImageUrl ?? ""}",
+                            onMedicineTap: () {
+                              ref
+                                  .read(updatePriceViewModelProvider.notifier)
+                                  .handleOnMedTap(
+                                    entity: MedEntity(
+                                      id: med.medicinesId?.toString() ?? "",
+                                      name: med.name ?? "",
+                                    ),
+                                  );
+                            },
+                          );
+                        },
+                      ),
+                ) ??
+                SizedBox.shrink(),
 
             SizedBox(height: 90),
           ],

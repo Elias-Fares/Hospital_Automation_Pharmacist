@@ -20,12 +20,8 @@ part 'widget/pharmacy_profile_details_section.dart';
 part 'widget/pharmacy_profile_navigation_section.dart';
 
 class PharmacyProfileScreen extends ConsumerStatefulWidget {
-  const PharmacyProfileScreen({
-    super.key,
-    this.pharmacyId,
-  });
+  const PharmacyProfileScreen({super.key});
   static const routeName = "/pharmacy_profile_screen";
-  final int? pharmacyId;
 
   @override
   ConsumerState<PharmacyProfileScreen> createState() =>
@@ -37,16 +33,9 @@ class _PharmacyProfileScreenState extends ConsumerState<PharmacyProfileScreen> {
   void initState() {
     super.initState();
 
-    Future.microtask(
-      () {
-        if (widget.pharmacyId == null) {
-          return;
-        }
-        // ref
-        //     .read(pharmacyProfileViewModelProvider.notifier)
-        //     .getPharmacyDetails(id: widget.pharmacyId.toString());
-      },
-    );
+    Future.microtask(() {
+      ref.read(pharmacyProfileViewModelProvider.notifier).showPharmacyProfile();
+    });
   }
 
   @override
@@ -57,12 +46,25 @@ class _PharmacyProfileScreenState extends ConsumerState<PharmacyProfileScreen> {
         titleWidget: AppBarTitleWidget(
           title: joinStrings([
             pharmacyProfile
-                .pharmacyDetailsResponse?.asData?.value.user?.firstName,
+                .pharmacyDetailsResponse
+                ?.asData
+                ?.value
+                .user
+                ?.firstName,
             pharmacyProfile
-                .pharmacyDetailsResponse?.asData?.value.user?.lastName,
+                .pharmacyDetailsResponse
+                ?.asData
+                ?.value
+                .user
+                ?.lastName,
           ]),
-          imagePath: pharmacyProfile
-              .pharmacyDetailsResponse?.asData?.value.user?.imgurl,
+          imagePath:
+              pharmacyProfile
+                  .pharmacyDetailsResponse
+                  ?.asData
+                  ?.value
+                  .user
+                  ?.imgurl,
           subtitle: pharmacyProfile.pharmacyDetailsResponse?.asData?.value.name,
         ),
       ),
@@ -70,42 +72,38 @@ class _PharmacyProfileScreenState extends ConsumerState<PharmacyProfileScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             pharmacyProfile.pharmacyDetailsResponse?.when(
-                  data: (data) => PharmacyProfileDetailsSection(
-                      // currentState: getOpeningStatus(data.workDays ?? []),
-                      currentState: "",
-                      pharmacyaddress: joinStrings([
-                        data.addressGovernorate,
-                        data.addressCity,
-                        data.addressRegion,
-                        data.addressStreet,
-                      ], joinChart: " - "),
-                      residentialsAddress: "",
-                      phoneNumber: data.phoneNumber ?? "",
-                      // emailAddress: data.user?.email ?? "",
-                      // availabilitySchedule: data.workDays ?? []
-                      emailAddress: "",
-                      availabilitySchedule: [],
+                  data:
+                      (data) => PharmacyProfileDetailsSection(
+                        currentState: getOpeningStatus(data.workDays ?? []),
+
+                        pharmacyaddress: joinStrings([
+                          data.addressGovernorate,
+                          data.addressCity,
+                          data.addressRegion,
+                          data.addressStreet,
+                        ], joinChart: " - "),
+                        residentialsAddress: "",
+                        phoneNumber: data.phoneNumber ?? "",
+                        // emailAddress: data.user?.email ?? "",
+                        availabilitySchedule: (data.workDays ?? <WorkDay>[]),
+                        emailAddress: "",
                       ),
-                  error: (error, stackTrace) => CustomErrorWidget(
-                    message: error.toString(),
-                    onTryAgainTap: () {
-                      // ref
-                      //     .read(pharmacyProfileViewModelProvider.notifier)
-                      //     .getPharmacyDetails(id: widget.pharmacyId.toString());
-                    },
-                  ),
-                  loading: () => CustomLoadingWidget(
-                    height: 300.h,
-                  ),
+                  error:
+                      (error, stackTrace) => CustomErrorWidget(
+                        height: 400.h,
+                        message: error.toString(),
+                        onTryAgainTap: () {
+                          ref
+                              .read(pharmacyProfileViewModelProvider.notifier)
+                              .showPharmacyProfile();
+                        },
+                      ),
+                  loading: () => CustomLoadingWidget(height: 300.h),
                 ) ??
                 const SizedBox.shrink(),
-            const SizedBox(
-              height: 24,
-            ),
+            const SizedBox(height: 24),
             // (!(pharmacyProfile.pharmacyDetailsResponse?.isLoading ?? false))
             //     ? PharmacyProfileNavigationSection(
             //         onPrescriptionTap: () {},
@@ -113,9 +111,7 @@ class _PharmacyProfileScreenState extends ConsumerState<PharmacyProfileScreen> {
             //         onContractHistortTap: () {},
             //       )
             //     : const SizedBox.shrink(),
-            const SizedBox(
-              height: 40,
-            )
+            const SizedBox(height: 40),
           ],
         ),
       ),

@@ -1,13 +1,14 @@
 part of '../batches_screen.dart';
 
 class AddBatchDialog extends ConsumerStatefulWidget {
-  const AddBatchDialog({super.key, required this.medicineId});
+  const AddBatchDialog({super.key, required this.medicineId, required this.pharmacyMedicineId});
   final int? medicineId;
+  final int? pharmacyMedicineId;
 
-  static builder(BuildContext context, {required int? medicineId}) {
+  static builder(BuildContext context, {required int? medicineId, required int? pharmacyMedicineId}) {
     showDialog(
       context: context,
-      builder: (context) => AddBatchDialog(medicineId: medicineId),
+      builder: (context) => AddBatchDialog(medicineId: medicineId, pharmacyMedicineId: pharmacyMedicineId,),
     );
   }
 
@@ -102,6 +103,7 @@ class _AddBatchDialogState extends ConsumerState<AddBatchDialog> {
                         quantity: newQuantityController.text,
                         expiredDate: expirationDateController.text,
                         medId: widget.medicineId?.toString(),
+                        pharmacyMedicineId: widget.pharmacyMedicineId?.toString(),
                       );
                 },
               ),
