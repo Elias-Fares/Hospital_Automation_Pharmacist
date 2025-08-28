@@ -8,7 +8,11 @@ enum ParamsValues {
   child,
   doctor,
   details,
-  pharmacy
+  pharmacy,
+  down,
+  up,
+  
+
 }
 
 extension ParamsValuesExtension on ParamsValues {
@@ -34,6 +38,10 @@ extension ParamsValuesExtension on ParamsValues {
         return "details";
       case ParamsValues.pharmacy:
         return "pharmacy";
+      case ParamsValues.down:
+        return "down";
+      case ParamsValues.up:
+        return "up";
     }
   }
 }

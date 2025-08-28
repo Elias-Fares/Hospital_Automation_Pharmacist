@@ -12,7 +12,7 @@ class AppBarWithSearch extends StatelessWidget implements PreferredSizeWidget {
   });
   final TextEditingController searchTextEditingController;
   final void Function()? onEditingComplete;
-  final void Function(String)? onChanged;
+  final void Function(String value)? onChanged;
   final List<Widget>? actions;
 
   @override

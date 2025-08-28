@@ -24,10 +24,15 @@ part 'widget/medicine_details_navigation_section.dart';
 part 'widget/medicine_details_widget.dart';
 
 class MedicineDetailsScreen extends ConsumerStatefulWidget {
-  const MedicineDetailsScreen({super.key, this.med});
+  const MedicineDetailsScreen({
+    super.key,
+    this.med,
+    this.comingFromScan = false,
+  });
   static const routeName = "/medicine_details_screen";
 
   final MedicineModel? med;
+  final bool comingFromScan;
 
   @override
   ConsumerState<MedicineDetailsScreen> createState() =>
@@ -40,12 +45,18 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
     return Scaffold(
       appBar: const SubAppBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // floatingActionButton: FloatingActionButtonFadedElevation(
-      //   title: "Sell",
-      //   onTap: () {
-      //     context.push(SpecifySaleAmountScreen.routeName);
-      //   },
-      // ),
+      floatingActionButton:
+          widget.comingFromScan
+              ? FloatingActionButtonFadedElevation(
+                title: "Sell",
+                onTap: () {
+                  context.push(SpecifySaleAmountScreen.routeName, extra:{
+                    ExtraKeys.medicinePrice :widget.med?.price ,
+                    ExtraKeys.medId : widget.med?.medicinesId?.toString()
+                  });
+                },
+              )
+              : SizedBox.shrink(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
@@ -56,12 +67,14 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
                   "${widget.med?.price?.toString() ?? ""} ${Constant.appCurrency}",
               imageUrl: "${Constant.baseUrl}/${widget.med?.medImageUrl ?? ""}",
               // imageUrl: "${Constant.baseUrl}/${widget.med?.medImageUrl ?? ""}",
+              // titer: widget.med?.pharmaceuticalTiter?.toString() ?? "",
               titer: widget.med?.pharmaceuticalTiter?.toString() ?? "",
               composition: widget.med?.pharmaceuticalComposition ?? "",
               indication: widget.med?.pharmaceuticalIndications ?? "",
               company: widget.med?.companyName ?? "",
               lowBound:
-                  widget.med?.pharmacyMedicines?.first.lowbound?.toString() ??
+                  widget.med?.pharmacyMedicines?.firstOrNull?.lowbound
+                      ?.toString() ??
                   "",
               allownace:
                   widget.med?.isAllowedWithoutPrescription! == true
@@ -82,9 +95,10 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
                   BatchesScreen.routeName,
 
                   extra: {
-                    ExtraKeys.pharmacyMedicineId: widget.med?.pharmacyMedicines?.first.pharmacyMedicineId,
+                    ExtraKeys.pharmacyMedicineId:
+                        widget.med?.pharmacyMedicines?.first.pharmacyMedicineId,
                     ExtraKeys.medId: widget.med?.medicinesId,
-                    
+
                     // ExtraKeys.batches:
                     //     widget
                     //         .med
@@ -98,7 +112,7 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
 
             SizedBox(height: 24),
 
-            MedicineDetailsNavigationSection(
+          MedicineDetailsNavigationSection(
               onAddBatchTap: () {
                 // context.push(
                 //   BatchesScreen.routeName,

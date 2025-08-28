@@ -47,6 +47,7 @@ class AppColors {
   static const Color surfaceContainerLow = Color(0xFFF2F2FA);
   static const Color hintTextColor = Color(0xFF99999F);
   static const Color backgroundLight = Color(0xFFF9F9FA);
+  static const Color chartColor = Color(0xFF7AB3EB);
 
   static const Color shimmerColor = Color.fromARGB(255, 245, 245, 245);
   static const Color baserColor = Color.fromARGB(255, 224, 224, 224);

@@ -38,7 +38,7 @@ final class ScannerViewModelProvider
   }
 }
 
-String _$scannerViewModelHash() => r'e3de7b44d5d41118a34e4e20a73d2b2ff63b83c3';
+String _$scannerViewModelHash() => r'fb6a617dd669332bf91606c89161c54e93a56ead';
 
 abstract class _$ScannerViewModel extends $Notifier<ScannerState> {
   ScannerState build();

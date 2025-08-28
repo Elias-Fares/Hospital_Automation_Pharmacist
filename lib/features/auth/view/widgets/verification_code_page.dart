@@ -74,11 +74,6 @@ class VerificationCodePage extends StatelessWidget {
                 decoration: const InputDecoration(
                     filled: true, fillColor: AppColors.white),
                 borderWidth: 1,
-                // onCodeChanged: onCodeChanged,
-                // onSubmit: (value) {
-                //   debugPrint("debugger$value");
-                //   showSnackBarSuccessMessage(context, message: value);
-                // },
                 onSubmit: onSubmit,
               ),
               const SizedBox(height: 40),

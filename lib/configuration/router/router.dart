@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:medicare_pharmacy/core/constant/extra_keys.dart';
 import 'package:medicare_pharmacy/core/models/prescription_medicine_model.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
+import 'package:medicare_pharmacy/data/models/profile_model.dart';
 import 'package:medicare_pharmacy/features/add_existing_alternative_medicines/view/add_existing_alternative_medicines_screen.dart';
 import 'package:medicare_pharmacy/features/add_new_medicine/view/add_new_medicine_screen.dart';
 import 'package:medicare_pharmacy/features/alternative_medicines/view/alternative_medicines_screen.dart';
@@ -19,6 +20,7 @@ import 'package:medicare_pharmacy/features/dispense/view/dispense_screen.dart';
 import 'package:medicare_pharmacy/features/dispense_alt_medicines/view/dispense_alt_medicines_screen.dart';
 import 'package:medicare_pharmacy/features/dispense_medicines/view/dispense_medicines_screen.dart';
 import 'package:medicare_pharmacy/features/edit_medicine/view/edit_medicine_screen.dart';
+import 'package:medicare_pharmacy/features/edit_profile/view/edit_profile_screen.dart';
 import 'package:medicare_pharmacy/features/inventory/view/inventory_screen.dart';
 import 'package:medicare_pharmacy/features/main/view/main_screen.dart';
 import 'package:medicare_pharmacy/features/medicine_details/view/medicine_details_screen.dart';
@@ -29,6 +31,7 @@ import 'package:medicare_pharmacy/features/permission_required/view/permission_r
 import 'package:medicare_pharmacy/features/pharmacy_profile/view/pharmacy_profile_screen.dart';
 import 'package:medicare_pharmacy/features/scanner/view/scanner_screen.dart';
 import 'package:medicare_pharmacy/features/specify_sale_amount/view/specify_sale_amount_screen.dart';
+import 'package:medicare_pharmacy/features/statistics/view/statistics_screen.dart';
 import 'package:medicare_pharmacy/features/successful_verification/view/successful_verification_screen.dart';
 import 'package:medicare_pharmacy/features/update_price/view/update_price_screen.dart';
 
@@ -107,7 +110,15 @@ class AppRouter {
         path: MedicineDetailsScreen.routeName,
         builder: (context, state) {
           final med = state.extra as MedicineModel?;
-          return MedicineDetailsScreen(med: med);
+          final comingFromScanner =
+              bool.tryParse(
+                state.uri.queryParameters[ExtraKeys.comingFromScanner] ?? "",
+              ) ??
+              false;
+          return MedicineDetailsScreen(
+            med: med,
+            comingFromScan: comingFromScanner,
+          );
         },
       ),
       GoRoute(
@@ -197,13 +208,32 @@ class AppRouter {
       GoRoute(
         path: SpecifySaleAmountScreen.routeName,
         builder: (context, state) {
-          return SpecifySaleAmountScreen();
+          final extraMap = state.extra as Map<String, dynamic>;
+          final price = extraMap[ExtraKeys.medicinePrice] as int?;
+          final medId = extraMap[ExtraKeys.medId] as String?;
+          return SpecifySaleAmountScreen(
+            medicinePrice: price?.toDouble() ?? 0.0,
+            medicineId: medId ?? "",
+          );
         },
       ),
       GoRoute(
         path: AddNewMedicineScreen.routeName,
         builder: (context, state) {
           return AddNewMedicineScreen();
+        },
+      ),
+      GoRoute(
+        path: EditProfileScreen.routeName,
+        builder: (context, state) {
+          final userProfileData = state.extra as ProfileModel?;
+          return EditProfileScreen(userProfileData: userProfileData);
+        },
+      ),
+      GoRoute(
+        path: StatisticsScreen.routeName,
+        builder: (context, state) {
+          return StatisticsScreen();
         },
       ),
     ],

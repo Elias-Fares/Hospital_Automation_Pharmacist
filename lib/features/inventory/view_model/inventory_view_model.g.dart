@@ -39,7 +39,7 @@ final class InventoryViewModelProvider
 }
 
 String _$inventoryViewModelHash() =>
-    r'c77f5b95b1e70da555d40d58ba3a470a5049a079';
+    r'6c6c7e93bf84cad60fc060fa87a3c6e41f1b88e4';
 
 abstract class _$InventoryViewModel extends $Notifier<InventoryState> {
   InventoryState build();

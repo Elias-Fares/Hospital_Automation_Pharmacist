@@ -13,9 +13,11 @@ class OrdersViewModel extends _$OrdersViewModel {
 
   final _repository = getIt<Repository>();
 
-  Future<void> getOrders() async {
+  Future<void> getOrders(
+    {String? medicineName, String? date}
+  ) async {
     state = state.copyWith(ordersResponse: AsyncValue.loading());
-    final response = await _repository.showOrders();
+    final response = await _repository.showOrders(date: date, medicineName: medicineName);
 
     if (response is DataSuccess) {
       state = state.copyWith(ordersResponse: AsyncValue.data(response.data));

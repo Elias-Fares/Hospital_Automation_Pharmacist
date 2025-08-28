@@ -39,7 +39,7 @@ final class UpdatePriceViewModelProvider
 }
 
 String _$updatePriceViewModelHash() =>
-    r'bb26eb7644790d3c9d3927858c410576b587348e';
+    r'152df98180e7be94d6cf7ef5067ead40d9ba60b0';
 
 abstract class _$UpdatePriceViewModel extends $Notifier<UpdatePriceState> {
   UpdatePriceState build();

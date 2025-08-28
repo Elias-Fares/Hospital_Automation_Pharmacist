@@ -38,7 +38,7 @@ final class DispenseViewModelProvider
   }
 }
 
-String _$dispenseViewModelHash() => r'b5637df7e37cb838f7e64f936006a4d25dd41aaf';
+String _$dispenseViewModelHash() => r'2248f7aa2fc81c0147bab549edc9641472dd4f23';
 
 abstract class _$DispenseViewModel extends $Notifier<DispenseState> {
   DispenseState build();

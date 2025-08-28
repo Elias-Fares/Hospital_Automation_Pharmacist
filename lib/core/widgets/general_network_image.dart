@@ -46,7 +46,7 @@ class GeneralNetworkImage extends StatelessWidget {
       );
     } else {
   
-      return NetworkImagePngv2(
+      return CustomCachedNetworkImage(
         url: newUrl,
         height: height,
         width: width,

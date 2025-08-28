@@ -8,6 +8,7 @@ import 'package:medicare_pharmacy/data/models/order_model.dart';
 import 'package:medicare_pharmacy/data/models/pharmacy_medicine_model.dart';
 import 'package:medicare_pharmacy/data/models/prescription_model.dart';
 import 'package:medicare_pharmacy/data/models/profile_model.dart';
+import 'package:medicare_pharmacy/data/models/selling_model.dart';
 
 class RemoteDataSource {
   final BaseDio baseDio;
@@ -207,8 +208,36 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> editprofilecopy() async {
-    final response = await baseDio.post(subUrl: "/employee/edit-profile");
+  Future<DataState> editPharmacyProfile({
+    required String email,
+    required String firstName,
+    required String middleName,
+    required String lastName,
+    required String phoneNumber,
+    required String addressGovernate,
+    required String addressRegion,
+    required String addressCity,
+    required String addressStreet,
+    required String addressNote,
+    required String gender,
+  }) async {
+    final response = await baseDio.basePost(
+      subUrl: "/employee/edit-profile",
+      data: {
+        "email": email,
+        "first_name": firstName,
+        "last_name": lastName,
+        "middle_name": middleName,
+        "phone_number": phoneNumber,
+        "address_governorate": addressGovernate,
+        "address_city": addressCity,
+        "address_region": addressRegion,
+        "address_street": addressStreet,
+        "address_note": addressNote,
+        "gender": gender,
+      },
+      needToken: true,
+    );
 
     return response;
   }
@@ -281,11 +310,12 @@ class RemoteDataSource {
   Future<DataState> getMedicineDetailsByBarcode({
     required String barcode,
   }) async {
-    final response = await baseDio.get(
+    final response = await baseDio.get<MedicineModel>(
       subUrl: "/pharmacist/get-medicine-details-by-barcode",
 
       queryParameters: {"barcode": barcode},
-      model: dynamic,
+      model: MedicineModel(),
+      needToken: true,
     );
 
     return response;
@@ -326,17 +356,37 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> updatePricePercentage() async {
+  Future<DataState> updatePricePercentage({
+    required List<int> medicineIds,
+    required double percentage,
+    required String type,
+  }) async {
     final response = await baseDio.post(
       subUrl: "/pharmacist/update-price-percentage",
+      data: FormData.fromMap({
+        "ids": medicineIds.toString(),
+        "percentage": percentage.toInt(),
+        "key": type,
+      }, ListFormat.multiCompatible),
+
+      needToken: true,
     );
 
     return response;
   }
 
-  Future<DataState> saleProcessAmount() async {
+  Future<DataState> saleProcessAmount({
+    required List<String> medicineIds,
+    required List<int> ammountIds,
+    required String state,
+  }) async {
     final response = await baseDio.post(
       subUrl: "/pharmacist/sale-process-amount",
+      data: {
+        "ids": medicineIds.toString(),
+        "ammountsIds": ammountIds.toString(),
+        "state": state,
+      },
     );
 
     return response;
@@ -409,13 +459,21 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> showOrders() async {
+  Future<DataState> showOrders({String? medicineName, String? date}) async {
+    final queryMap = <String, dynamic>{};
+    if (medicineName != null) {
+      queryMap["name"] = medicineName;
+    }
+    if (date != null) {
+      queryMap["date"] = date;
+    }
     final response = await baseDio.get<OrderModel>(
       subUrl: "/pharmacist/show-orders",
 
       model: OrderModel(),
       needToken: true,
       isListOfModel: true,
+      queryParameters: queryMap,
     );
 
     return response;
@@ -493,10 +551,11 @@ class RemoteDataSource {
   }
 
   Future<DataState> maximinMinimumSellings() async {
-    final response = await baseDio.get(
+    final response = await baseDio.baseGet<SellingModel>(
       subUrl: "/pharmacist/maximin-minimum-sellings",
 
-      model: dynamic,
+      model: SellingModel(),
+      needToken: true,
     );
 
     return response;

@@ -2,6 +2,7 @@ import 'package:medicare_pharmacy/features/inventory/view/inventory_screen.dart'
 import 'package:medicare_pharmacy/features/notifications/view/notifications_screen.dart';
 import 'package:medicare_pharmacy/features/orders/view/orders_screen.dart';
 import 'package:medicare_pharmacy/features/pharmacy_profile/view/pharmacy_profile_screen.dart';
+import 'package:medicare_pharmacy/features/statistics/view/statistics_screen.dart';
 import 'package:medicare_pharmacy/features/update_price/view/update_price_screen.dart';
 
 import '../../../configuration/res.dart';
@@ -41,11 +42,15 @@ class AppDrawerModel {
         title: "Inventory",
         routeName: InventoryScreen.routeName,
       ),
+      // AppDrawerElement(
+      //   iconPath: Res.prescriptionsIcon,
+      //   title: "Dispensed Prescriptions",
+      // ),
       AppDrawerElement(
-        iconPath: Res.prescriptionsIcon,
-        title: "Dispensed Prescriptions",
+        iconPath: Res.statsIcon,
+        title: "Statistics",
+        routeName: StatisticsScreen.routeName,
       ),
-      AppDrawerElement(iconPath: Res.statsIcon, title: "Statistics"),
       AppDrawerElement(
         iconPath: Res.ordersIcon,
         title: "Orders",

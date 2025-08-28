@@ -62,7 +62,7 @@ class _EditMedicineScreenState extends ConsumerState<EditMedicineScreen> {
       text: widget.med?.pharmaceuticalIndications,
     );
     lowBoundController = TextEditingController(
-      text: widget.med?.pharmacyMedicines?.first.lowbound?.toString() ?? "",
+      text: widget.med?.pharmacyMedicines?.firstOrNull?.lowbound?.toString() ?? "",
     );
     companyController = TextEditingController(text: widget.med?.companyName);
 

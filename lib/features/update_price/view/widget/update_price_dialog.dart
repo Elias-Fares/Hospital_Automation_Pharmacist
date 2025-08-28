@@ -1,6 +1,6 @@
 part of '../update_price_screen.dart';
 
-class UpdatePriceDialog extends StatefulWidget {
+class UpdatePriceDialog extends ConsumerStatefulWidget {
   const UpdatePriceDialog({super.key});
 
   static builder(BuildContext context) {
@@ -8,44 +8,67 @@ class UpdatePriceDialog extends StatefulWidget {
   }
 
   @override
-  State<UpdatePriceDialog> createState() => _UpdatePriceDialogState();
+  ConsumerState<UpdatePriceDialog> createState() => _UpdatePriceDialogState();
 }
 
-class _UpdatePriceDialogState extends State<UpdatePriceDialog> {
+class _UpdatePriceDialogState extends ConsumerState<UpdatePriceDialog> {
   final TextEditingController percentageController = TextEditingController();
 
   Widget _buildElement({
     required bool condition,
     required String text,
     required IconData icon,
+    required void Function() onTap,
   }) {
-    return Container(
-      width: 50,
-      height: 50,
-      padding: EdgeInsets.all(8),
-      decoration: containerCardDecoration().copyWith(
-        color: condition ? AppColors.primaryContainer : AppColors.white,
-        border: Border.all(
-          color: condition ? AppColors.primary : AppColors.transparent,
-        ),
+    return CustomInkwell(
+      onTap: onTap,
+      color: condition ? AppColors.primaryContainer : AppColors.white,
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        color: condition ? AppColors.primary : AppColors.transparent,
       ),
-      child: Column(
-        children: [
-          Icon(icon, size: 16, color: AppColors.onPrimaryContainer),
-          SizedBox(width: 8),
-          Text(
-            text,
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
-          ),
-        ],
+      child: Container(
+        width: 50,
+        height: 50,
+        padding: EdgeInsets.all(8),
+
+        child: Column(
+          children: [
+            Icon(icon, size: 16, color: AppColors.onPrimaryContainer),
+            SizedBox(width: 8),
+            Text(
+              text,
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final updateState = ref.watch(updatePriceViewModelProvider);
+    ref.listen(
+      updatePriceViewModelProvider.select((value) => value.updatePriceResponse),
+      (previous, next) {
+        next?.when(
+          data: (data) {
+            showSnackBarSuccessMessage(
+              context,
+              message: "Prices Updated Successfully",
+            );
+            context.pop();
+          },
+          error: (error, stackTrace) {
+            showSnackBarErrorMessage(context, message: next.error.toString());
+          },
+          loading: () {},
+        );
+      },
+    );
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
 
@@ -70,25 +93,35 @@ class _UpdatePriceDialogState extends State<UpdatePriceDialog> {
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              
+
               children: [
                 _buildElement(
-                  condition: true,
+                  condition: updateState.updateType == ParamsValues.up,
                   text: "Up",
                   icon: Icons.arrow_upward,
+                  onTap: () {
+                    ref
+                        .read(updatePriceViewModelProvider.notifier)
+                        .onUpdateTypeChanged(ParamsValues.up);
+                  },
                 ),
                 SizedBox(width: 15),
                 _buildElement(
-                  condition: false,
+                  condition: updateState.updateType == ParamsValues.down,
                   text: "Down",
                   icon: Icons.arrow_downward,
+                  onTap: () {
+                    ref
+                        .read(updatePriceViewModelProvider.notifier)
+                        .onUpdateTypeChanged(ParamsValues.down);
+                  },
                 ),
               ],
             ),
             SizedBox(height: 20),
             TextFormField(
               controller: percentageController,
-
+              keyboardType: TextInputType.number,
               style: Theme.of(context).textTheme.bodyMedium,
               decoration: InputDecoration(
                 label: Text("Percentage"),
@@ -98,7 +131,18 @@ class _UpdatePriceDialogState extends State<UpdatePriceDialog> {
 
             Spacer(),
 
-            CustomOutlinedButton(title: "Update Price"),
+            CustomOutlinedButton(
+              title: "Update Price",
+              isLoading: updateState.updatePriceResponse?.isLoading ?? false,
+              onTap: () {
+                ref
+                    .read(updatePriceViewModelProvider.notifier)
+                    .updatePrice(
+                      percentage:
+                          double.tryParse(percentageController.text) ?? 0,
+                    );
+              },
+            ),
             SizedBox(height: 20),
           ],
         ),

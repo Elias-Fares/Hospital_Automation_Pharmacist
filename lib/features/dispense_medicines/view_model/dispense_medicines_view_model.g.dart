@@ -41,7 +41,7 @@ final class DispenseMedicinesViewModelProvider
 }
 
 String _$dispenseMedicinesViewModelHash() =>
-    r'c05849be831d7cc113b45767a38fc2bd70baf565';
+    r'd9ec25631136a55ebd3e984052f0349757fdf7b9';
 
 abstract class _$DispenseMedicinesViewModel
     extends $Notifier<DispenseMedicinesState> {

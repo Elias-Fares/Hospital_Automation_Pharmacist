@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class MedEntity extends Equatable {
-  final String id;
+  final int id;
   final String name;
 
   const MedEntity({required this.id, required this.name});

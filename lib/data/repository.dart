@@ -168,8 +168,32 @@ class Repository {
     return response;
   }
 
-  Future<DataState> editprofilecopy() async {
-    final response = await _remoteDataSource.editprofilecopy();
+  Future<DataState> editPharmacyProfile({
+    required String email,
+    required String firstName,
+    required String middleName,
+    required String lastName,
+    required String phoneNumber,
+    required String addressGovernate,
+    required String addressRegion,
+    required String addressCity,
+    required String addressStreet,
+    required String addressNote,
+    required String gender,
+  }) async {
+    final response = _remoteDataSource.editPharmacyProfile(
+      email: email,
+      firstName: firstName,
+      middleName: middleName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
+      addressGovernate: addressGovernate,
+      addressRegion: addressRegion,
+      addressCity: addressCity,
+      addressStreet: addressStreet,
+      addressNote: addressNote,
+      gender: gender,
+    );
 
     return response;
   }
@@ -248,14 +272,30 @@ class Repository {
     return response;
   }
 
-  Future<DataState> updatePricePercentage() async {
-    final response = await _remoteDataSource.updatePricePercentage();
+  Future<DataState> updatePricePercentage({
+    required List<int> medicineIds,
+    required double percentage,
+    required String type,
+  }) async {
+    final response = await _remoteDataSource.updatePricePercentage(
+      medicineIds: medicineIds,
+      percentage: percentage,
+      type: type,
+    );
 
     return response;
   }
 
-  Future<DataState> saleProcessAmount() async {
-    final response = await _remoteDataSource.saleProcessAmount();
+  Future<DataState> saleProcessAmount({
+    required List<String> medicineIds,
+    required List<int> ammountIds,
+    required String state,
+  }) async {
+    final response = await _remoteDataSource.saleProcessAmount(
+      ammountIds: ammountIds,
+      medicineIds: medicineIds,
+      state: state,
+    );
 
     return response;
   }
@@ -320,8 +360,11 @@ class Repository {
     return response;
   }
 
-  Future<DataState> showOrders() async {
-    final response = await _remoteDataSource.showOrders();
+  Future<DataState> showOrders({String? medicineName, String? date}) async {
+    final response = await _remoteDataSource.showOrders(
+      date: date,
+      medicineName: medicineName,
+    );
 
     return response;
   }
@@ -335,12 +378,12 @@ class Repository {
   Future<DataState> markedAsBought({
     required int count,
     required String medicineId,
-      String? altMedicineId,
+    String? altMedicineId,
   }) async {
     final response = await _remoteDataSource.markedAsBought(
       count: count,
       medicineId: medicineId,
-      altMedicineId: altMedicineId
+      altMedicineId: altMedicineId,
     );
 
     return response;

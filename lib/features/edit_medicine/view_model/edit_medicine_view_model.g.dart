@@ -39,7 +39,7 @@ final class EditMedicineViewModelProvider
 }
 
 String _$editMedicineViewModelHash() =>
-    r'4271775827987c14625834deb55fff26d3315fe0';
+    r'422a3d1d624f4368132c44842e065de88d0e29b9';
 
 abstract class _$EditMedicineViewModel extends $Notifier<EditMedicineState> {
   EditMedicineState build();

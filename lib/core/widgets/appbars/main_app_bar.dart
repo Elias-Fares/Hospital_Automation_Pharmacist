@@ -13,14 +13,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: AppColors.backgroundColor,
       elevation: 0,
       leading: IconButton(
-          onPressed: () {
-            mainScreenScaffoldKey.currentState?.openDrawer();
-            
-          },
-   
-          icon: const Icon(Icons.menu, color: Colors.black)),
+        onPressed: openDrawer,
+
+        icon: const Icon(Icons.menu, color: Colors.black),
+      ),
       titleSpacing: 0,
-    
+
       title: const Text('MediCare', style: TextStyle(color: Colors.black)),
     );
   }

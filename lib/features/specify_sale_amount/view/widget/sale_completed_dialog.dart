@@ -1,17 +1,22 @@
 part of '../specify_sale_amount_screen.dart';
 
-class SaleCompletedDialog extends StatefulWidget {
-  const SaleCompletedDialog({super.key});
+class SaleCompletedDialog extends ConsumerStatefulWidget {
+  const SaleCompletedDialog({super.key, required this.reciptPrice});
+  final String reciptPrice;
 
-  static builder(BuildContext context) {
-    showDialog(context: context, builder: (context) => SaleCompletedDialog());
+  static builder(BuildContext context, {required String reciptPrice}) {
+    showDialog(
+      context: context,
+      builder: (context) => SaleCompletedDialog(reciptPrice: reciptPrice),
+    );
   }
 
   @override
-  State<SaleCompletedDialog> createState() => _SaleCompletedDialogState();
+  ConsumerState<SaleCompletedDialog> createState() =>
+      _SaleCompletedDialogState();
 }
 
-class _SaleCompletedDialogState extends State<SaleCompletedDialog> {
+class _SaleCompletedDialogState extends ConsumerState<SaleCompletedDialog> {
   final TextEditingController newQuantityController = TextEditingController();
   final TextEditingController expirationDateController =
       TextEditingController();
@@ -45,14 +50,14 @@ class _SaleCompletedDialogState extends State<SaleCompletedDialog> {
             ),
             SizedBox(height: 32),
             Text(
-              "Sale Process Completed",
+              "Confirm Sale Process",
               style: Theme.of(
                 context,
               ).textTheme.titleMedium?.copyWith(color: AppColors.primary),
             ),
             SizedBox(height: 8),
             Text(
-              "Receipt: 22 500 S.P",
+              "Receipt: ${widget.reciptPrice} S.P",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             SizedBox(height: 24),
@@ -61,21 +66,33 @@ class _SaleCompletedDialogState extends State<SaleCompletedDialog> {
               children: [
                 Expanded(
                   child: CustomOutlinedButton(
-                    title: "New Sale",
+                    title: "Add More",
+                    icon: Icon(Icons.add, color: AppColors.primary),
                     backgroundColor: AppColors.white,
                     onTap: () {
-                      // context.pushReplacement(MainScreen.routeName);
-                      // Navigator.of(context).popUntil();
-                      // context.go(MainScreen.routeName);
-                      // GoRouter.of(context).pop
-                      Navigator.of(context).popUntil(
-                        (route) => route.settings.name == MainScreen.routeName,
-                      );
+                      // // context.pushReplacement(MainScreen.routeName);
+                      // // Navigator.of(context).popUntil();
+                      // // context.go(MainScreen.routeName);
+                      // // GoRouter.of(context).pop
+                      // Navigator.of(context).popUntil(
+                      //   (route) => route.settings.name == MainScreen.routeName,
+                      // );
+                      context.push(ScannerScreen.routeName);
                     },
                   ),
                 ),
                 SizedBox(width: 15),
-                Expanded(child: LoadingButton(title: "Add more")),
+                Expanded(
+                  child: LoadingButton(
+                    title: "Confirm",
+
+                    onTap: () {
+                      ref
+                          .read(specifySaleAmountViewModelProvider.notifier)
+                          .sellRequest();
+                    },
+                  ),
+                ),
               ],
             ),
             SizedBox(height: 24),

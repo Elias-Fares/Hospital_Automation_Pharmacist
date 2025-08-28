@@ -6,7 +6,7 @@ import 'package:shimmer/shimmer.dart';
 ///Create an image or provide a widget or path to a fallback value
 ///[failWidget] the widget to show if loading of image faild
 ///[placeHolderWhileLoading] the widget to show while loading the image
-class NetworkImagePngv2 extends StatelessWidget {
+class CustomCachedNetworkImage extends StatelessWidget {
   // static Widget fallbackFlag = Center(
   //     child: const Icon(Icons.image_not_supported_rounded,
   //         color: AppColors.lighterGrey));
@@ -50,7 +50,7 @@ class NetworkImagePngv2 extends StatelessWidget {
   //   return placeHolderWhileLoading ?? loadingDefault;
   // }
 
-  const NetworkImagePngv2({
+  const CustomCachedNetworkImage({
     super.key,
     required this.url,
     this.failWidget,
@@ -88,3 +88,53 @@ class NetworkImagePngv2 extends StatelessWidget {
     );
   }
 }
+
+// class CustomCachedNetworkImage extends StatelessWidget {
+//   final Widget? failWidget;
+//   final String url;
+//   final BoxFit boxFit;
+//   final bool matchTextDirection;
+//   final double? height;
+//   final double? width;
+//   final Widget? placeHolderWhileLoading;
+//   final Color? color;
+
+//   const CustomCachedNetworkImage({
+//     super.key,
+//     required this.url,
+//     this.failWidget,
+//     this.height = 50,
+//     this.width = 50,
+//     this.matchTextDirection = true,
+//     this.boxFit = BoxFit.cover,
+//     this.placeHolderWhileLoading,
+//     this.color,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return CachedNetworkImage(
+//       imageUrl: url,
+//       height: height,
+//       matchTextDirection: matchTextDirection,
+//       fit: boxFit,
+//       width: width,
+//       placeholder:
+//           (context, url) =>
+//               placeHolderWhileLoading ??
+//               Shimmer.fromColors(
+//                 baseColor: AppColors.baserColor,
+//                 highlightColor: AppColors.shimmerColor,
+
+//                 child: Container(
+//                   width: width,
+//                   height: height,
+//                   color: AppColors.shimmerColor,
+//                 ),
+//               ),
+//       errorWidget:
+//           (context, url, error) =>
+//               failWidget ?? Icon(Icons.image_not_supported_outlined),
+//     );
+//   }
+// }

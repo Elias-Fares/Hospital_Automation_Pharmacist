@@ -39,7 +39,7 @@ final class PharmacyProfileViewModelProvider
 }
 
 String _$pharmacyProfileViewModelHash() =>
-    r'ab356b096fbb1ae70dced4ffee4ec77b720dce87';
+    r'b76662a87f9231f5832b971fa6a4050c6bad89f5';
 
 abstract class _$PharmacyProfileViewModel
     extends $Notifier<PharmacyProfileState> {

@@ -3,10 +3,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medicare_pharmacy/core/class/debouncer.dart';
 import 'package:medicare_pharmacy/core/constant/constant.dart';
 import 'package:medicare_pharmacy/core/entities/med_entity.dart';
+import 'package:medicare_pharmacy/core/enums/params_values.dart';
 import 'package:medicare_pharmacy/core/widgets/custom_error_widget.dart';
 import 'package:medicare_pharmacy/core/widgets/custom_loading_widget.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
@@ -30,6 +35,7 @@ class UpdatePriceScreen extends ConsumerStatefulWidget {
 
 class _UpdatePriceScreenState extends ConsumerState<UpdatePriceScreen> {
   final searchTextEditingController = TextEditingController();
+  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   void initState() {
@@ -45,6 +51,13 @@ class _UpdatePriceScreenState extends ConsumerState<UpdatePriceScreen> {
     return Scaffold(
       appBar: AppBarWithSearch(
         searchTextEditingController: searchTextEditingController,
+        onChanged: (value) {
+          _debouncer.run(() {
+            ref
+                .read(updatePriceViewModelProvider.notifier)
+                .getMedicines(name: value);
+          });
+        },
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -88,15 +101,18 @@ class _UpdatePriceScreenState extends ConsumerState<UpdatePriceScreen> {
             ),
             SizedBox(height: 10),
             updatePriceState.medicinesResponse?.when(
-                  loading: () => CustomLoadingWidget(height: 300.h),
+                  loading: () => CustomLoadingWidget(height: 1.sh * .75),
                   error:
                       (error, stackTrace) => CustomErrorWidget(
                         message: error.toString(),
-                        height: 300,
+                        // height: 300,
+                        height: 1.sh * .75,
                         onTryAgainTap: () {
                           ref
                               .read(updatePriceViewModelProvider.notifier)
-                              .getMedicines();
+                              .getMedicines(
+                                name: searchTextEditingController.text,
+                              );
                         },
                       ),
 
@@ -117,7 +133,7 @@ class _UpdatePriceScreenState extends ConsumerState<UpdatePriceScreen> {
                           return UpdateMedCard(
                             isSelected: updatePriceState.selectedMeds.contains(
                               MedEntity(
-                                id: med.medicinesId?.toString() ?? "",
+                                id: med.medicinesId ?? -1,
                                 name: med.name ?? "",
                               ),
                             ),
@@ -131,7 +147,7 @@ class _UpdatePriceScreenState extends ConsumerState<UpdatePriceScreen> {
                                   .read(updatePriceViewModelProvider.notifier)
                                   .handleOnMedTap(
                                     entity: MedEntity(
-                                      id: med.medicinesId?.toString() ?? "",
+                                      id: med.medicinesId ?? -1,
                                       name: med.name ?? "",
                                     ),
                                   );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:medicare_pharmacy/core/class/debouncer.dart';
 import 'package:medicare_pharmacy/core/constant/constant.dart';
+import 'package:medicare_pharmacy/core/function/date_format.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
 import 'package:medicare_pharmacy/core/widgets/appbars/app_bar_with_search.dart';
@@ -22,6 +24,7 @@ class OrdersScreen extends ConsumerStatefulWidget {
 
 class _OrdersScreenState extends ConsumerState<OrdersScreen> {
   final searchTextEditingController = TextEditingController();
+  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   void initState() {
@@ -37,9 +40,26 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
     return Scaffold(
       appBar: AppBarWithSearch(
         searchTextEditingController: searchTextEditingController,
+        onChanged: (value) {
+          _debouncer.run(() {
+            ref
+                .read(ordersViewModelProvider.notifier)
+                .getOrders(medicineName: value.isNotEmpty ? value : null);
+          });
+        },
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              final date = await showDatePicker(
+                context: context,
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2100),
+              );
+
+              ref
+                  .read(ordersViewModelProvider.notifier)
+                  .getOrders(date: date?.getYearMonthDay());
+            },
             icon: Icon(
               Icons.calendar_month_outlined,
               color: AppColors.textColor,

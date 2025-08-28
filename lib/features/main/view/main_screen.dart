@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -50,12 +51,14 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       key: mainScreenScaffoldKey,
       body: _screens.elementAt(mainState.selectedIndex),
       drawer: AppDrawerScreen(mainScreenKey: mainScreenScaffoldKey),
+
       appBar: MainAppBar(
-        openDrawer: () {
+        openDrawer: () async {
           Scaffold.of(context).openDrawer();
+          // final tolken = await FirebaseMessaging.instance.getToken();
+          // debugPrint("token ${tolken ?? ""}");
         },
       ),
-
       floatingActionButton:
           mainState.selectedIndex == 2
               ? FloatingActionButton(

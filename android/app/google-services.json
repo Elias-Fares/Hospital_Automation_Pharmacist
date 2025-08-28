@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "75182383589",
+    "project_id": "dispensarynotifications",
+    "storage_bucket": "dispensarynotifications.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75182383589:android:4e477015a4e6e51ff74f0c",
+        "android_client_info": {
+          "package_name": "com.example.medicare_pharmacy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdHyZb1povxN5vxdUeBp5JPx3sACzVgv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
