@@ -54,9 +54,10 @@ class _MainScreenState extends ConsumerState<MainScreen> {
 
       appBar: MainAppBar(
         openDrawer: () async {
-          Scaffold.of(context).openDrawer();
+          // Scaffold.of(context).openDrawer();
           // final tolken = await FirebaseMessaging.instance.getToken();
           // debugPrint("token ${tolken ?? ""}");
+          mainScreenScaffoldKey.currentState?.openDrawer();
         },
       ),
       floatingActionButton:
