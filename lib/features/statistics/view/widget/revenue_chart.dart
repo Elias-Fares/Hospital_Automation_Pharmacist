@@ -1,22 +1,18 @@
 part of '../statistics_screen.dart';
 
 class RevenueChart extends StatelessWidget {
-  final List<double> revenueData = const [
-    6.2,
-    9.6,
-    9.0,
-    5.3,
-    6.8,
-    2.7,
-    5.6,
-    8.4,
-    11.0,
-    9.4,
-    7.8,
-    8.1,
-  ];
+  const RevenueChart({
+    super.key,
+    this.onYearTap,
+    required this.initialYear,
+    this.response,
+    this.fetchRevenueTryAgain,
+  });
 
-  const RevenueChart({super.key});
+  final void Function(int?)? onYearTap;
+  final void Function()? fetchRevenueTryAgain;
+  final int initialYear;
+  final AsyncValue<List<MonthlyRevenuModel>>? response;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +48,7 @@ class RevenueChart extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Text(
-                    "Revenue is in millions.",
+                    "Revenue is in S.P.",
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: AppColors.hintTextColor,
                     ),
@@ -60,18 +56,22 @@ class RevenueChart extends StatelessWidget {
                 ],
               ),
               Spacer(),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade500),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  "2025",
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
-                ),
+              DropdownButton<int>(
+                value: initialYear,
+                borderRadius: BorderRadius.circular(12),
+                
+                items: List.generate(5, (index) {
+                  final year = 2024 + index;
+
+                  return DropdownMenuItem<int>(
+                    value: year,
+                    child: Text(
+                      year.toString(),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  );
+                }),
+                onChanged: onYearTap,
               ),
             ],
           ),
@@ -79,157 +79,128 @@ class RevenueChart extends StatelessWidget {
           SizedBox(
             width: 1.sw,
             height: 1.sh * 0.4,
-            child: BarChart(
-              BarChartData(
-                maxY: 12,
-                gridData: FlGridData(
-                  show: true,
-                  horizontalInterval: 1,
-                  drawVerticalLine: false,
-                  getDrawingHorizontalLine:
-                      (value) =>
-                          FlLine(color: Colors.grey.shade300, strokeWidth: 0.5),
-                  drawHorizontalLine: true,
-                ),
-                borderData: FlBorderData(
-                  border: Border(
-                    left: BorderSide(
-                      color: AppColors.onSurfaceContainer,
-                      width: .5,
-                    ),
-                    bottom: BorderSide(
-                      color: AppColors.onSurfaceContainer,
-                      width: .5,
-                    ),
-                  ),
-                ),
-                titlesData: FlTitlesData(
-                  leftTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 30,
-                      interval: 2,
-                      getTitlesWidget: (value, meta) {
-                        if (value % 2 == 0 && value > 0) {
-                          return Text(
-                            value.toInt().toString(),
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black54,
+            child: response?.when(
+              data:
+                  (data) => BarChart(
+                    BarChartData(
+                      maxY: 12,
+                      gridData: FlGridData(
+                        show: true,
+                        horizontalInterval: 1,
+                        drawVerticalLine: false,
+                        getDrawingHorizontalLine:
+                            (value) => FlLine(
+                              color: Colors.grey.shade300,
+                              strokeWidth: 0.5,
                             ),
-                          );
-                        }
-                        return Container();
-                      },
-                    ),
-                  ),
-                  bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      getTitlesWidget: (value, meta) {
-                        const months = [
-                          'Jan',
-                          'Feb',
-                          'Mar',
-                          'Apr',
-                          'May',
-                          'Jun',
-                          'Jul',
-                          'Aug',
-                          'Sep',
-                          'Oct',
-                          'Nov',
-                          'Dec',
-                        ];
-                        if (value.toInt() >= 0 &&
-                            value.toInt() < months.length) {
-                          return Text(
-                            months[value.toInt()],
-                            style: Theme.of(
-                              context,
-                            ).textTheme.bodySmall?.copyWith(
-                              color: AppColors.onSecondaryContainer,
-                            ),
-                          );
-                        }
-                        return SizedBox.shrink();
-                      },
-                    ),
-                  ),
-                  rightTitles: AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  topTitles: AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                ),
-                barGroups:
-                    revenueData.asMap().entries.map((entry) {
-                      int index = entry.key;
-                      double value = entry.value;
-                      return BarChartGroupData(
-                        x: index,
-                        barRods: [
-                          BarChartRodData(
-                            toY: value,
-                            color: AppColors.chartColor,
-                            width: 14,
-                            borderRadius: BorderRadius.circular(0),
+                        drawHorizontalLine: true,
+                      ),
+                      borderData: FlBorderData(
+                        border: Border(
+                          left: BorderSide(
+                            color: AppColors.onSurfaceContainer,
+                            width: .5,
                           ),
-                        ],
-                      );
-                    }).toList(),
-              ),
+                          bottom: BorderSide(
+                            color: AppColors.onSurfaceContainer,
+                            width: .5,
+                          ),
+                        ),
+                      ),
+                      titlesData: FlTitlesData(
+                        leftTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            reservedSize: 20,
+
+                            getTitlesWidget: (value, meta) {
+                              if (value > 0) {
+                                return Text(
+                                  value.toInt().toString(),
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.black54,
+                                  ),
+                                );
+                              }
+                              return Container();
+                            },
+                          ),
+                        ),
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            getTitlesWidget: (value, meta) {
+                              final months =
+                                  data
+                                      .map(
+                                        (e) => e.month?.substring(0, 3) ?? "",
+                                      )
+                                      .toList();
+                              if (value.toInt() >= 0 &&
+                                  value.toInt() < months.length) {
+                                return Text(
+                                  months[value.toInt()],
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.bodySmall?.copyWith(
+                                    color: AppColors.onSecondaryContainer,
+                                  ),
+                                );
+                              }
+                              return SizedBox.shrink();
+                            },
+                          ),
+                        ),
+                        rightTitles: AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                        topTitles: AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                      ),
+                      barGroups:
+                          data.asMap().entries.map((entry) {
+                            int index = entry.key;
+                            double value =
+                                double.tryParse(
+                                  entry.value.monthlyRevenu?.monthlyRevenue
+                                          ?.toString() ??
+                                      "0.0",
+                                ) ??
+                                0.0;
+
+                            if (value > 0.0) {
+                              value = value / 1000000;
+                            }
+
+                            return BarChartGroupData(
+                              x: index,
+                              barRods: [
+                                BarChartRodData(
+                                  toY: value,
+                                  color: AppColors.chartColor,
+                                  width: 14,
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                              ],
+                            );
+                          }).toList(),
+                    ),
+                  ),
+              error:
+                  (error, stackTrace) => CustomErrorWidget(
+                    message: error.toString(),
+                    onTryAgainTap: fetchRevenueTryAgain,
+                  ),
+              loading:
+                  () => LoadingCard(borderRadius: BorderRadius.circular(12)),
             ),
           ),
 
           const SizedBox(height: 10),
-
-          // Buttons
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CustomInkwell(
-                color: AppColors.onPrimaryContainerBlue.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(30),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  child: Text(
-                    "Monthly",
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.onPrimaryContainerBlue,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 6),
-              CustomInkwell(
-                color: AppColors.onPrimaryContainerBlue.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(30),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  child: Text(
-                    "Yearly",
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.onPrimaryContainerBlue,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     );
   }
 }
-
-

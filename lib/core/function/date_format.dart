@@ -18,4 +18,14 @@ extension DateExtension on DateTime {
 
     return result;
   }
+
+  String getYearMonth({String commaShape = "-"}) {
+    final stringDate = toIso8601String().split("T").first;
+
+    if (stringDate.length > 7) {
+      return stringDate.substring(0, 7);
+    } else {
+      return "";
+    }
+  }
 }

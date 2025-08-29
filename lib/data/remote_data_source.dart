@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:medicare_pharmacy/core/base_dio/base_dio.dart' show BaseDio;
 import 'package:medicare_pharmacy/core/base_dio/data_state.dart';
+import 'package:medicare_pharmacy/core/function/date_format.dart';
 import 'package:medicare_pharmacy/data/models/inventory_model.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/data/models/medicine_with_alts_model.dart';
+import 'package:medicare_pharmacy/data/models/monthly_revenu_model.dart';
 import 'package:medicare_pharmacy/data/models/order_model.dart';
 import 'package:medicare_pharmacy/data/models/pharmacy_medicine_model.dart';
 import 'package:medicare_pharmacy/data/models/prescription_model.dart';
@@ -550,23 +552,27 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> maximinMinimumSellings() async {
+  Future<DataState> maximinMinimumSellings({required DateTime date}) async {
     final response = await baseDio.baseGet<SellingModel>(
       subUrl: "/pharmacist/maximin-minimum-sellings",
 
       model: SellingModel(),
+
+      queryParameters: {"date": date.getYearMonth()},
       needToken: true,
     );
 
     return response;
   }
 
-  Future<DataState> monthlyRevenu({required String date}) async {
-    final response = await baseDio.get(
+  Future<DataState> monthlyRevenu({required int year}) async {
+    final response = await baseDio.get<MonthlyRevenuModel>(
       subUrl: "/pharmacist/monthly-revenu",
 
-      queryParameters: {"date": date},
-      model: dynamic,
+      queryParameters: {"year": year.toString()},
+      model: MonthlyRevenuModel(),
+      isListOfModel: true,
+      needToken: true,
     );
 
     return response;

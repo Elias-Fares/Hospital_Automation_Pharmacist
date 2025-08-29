@@ -419,14 +419,14 @@ class Repository {
     return response;
   }
 
-  Future<DataState> maximinMinimumSellings() async {
-    final response = await _remoteDataSource.maximinMinimumSellings();
+  Future<DataState> maximinMinimumSellings({required DateTime date}) async {
+    final response = await _remoteDataSource.maximinMinimumSellings(date : date);
 
     return response;
   }
 
-  Future<DataState> monthlyRevenu({required String date}) async {
-    final response = await _remoteDataSource.monthlyRevenu(date: date);
+  Future<DataState> monthlyRevenu({required int year}) async {
+    final response = await _remoteDataSource.monthlyRevenu(year: year);
 
     return response;
   }
