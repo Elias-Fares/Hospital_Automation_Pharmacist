@@ -5,6 +5,17 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'dart:convert';
 
+// Top-level background handler must be outside any class or method.
+// It must also be a static function.
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // It's crucial to re-initialize everything needed for the isolate.
+  // This includes Firebase, which is why we call NotificationService.init()
+  // in the background handler itself.
+  await NotificationService.setupChannelsAndPlugin();
+  NotificationService.showNotification(message);
+}
+
 class NotificationService {
   // Channels (expandable for multiple types)
   static late AndroidNotificationChannel reminderChannel;
@@ -22,25 +33,26 @@ class NotificationService {
     // Request notification permissions (Android 13+)
     await Permission.notification.request();
 
-    // Setup channels & plugin
+    // Setup channels and plugin. This must be done here for the main app isolate.
     await setupChannelsAndPlugin();
 
-    // Register background handler
+    // Register the top-level background handler.
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-    // Foreground messages
+    // Listen for foreground messages and show a local notification.
     FirebaseMessaging.onMessage.listen((message) {
       showNotification(message);
     });
 
-    // Handle taps when app is in background or terminated
+    // Handle taps when app is in the background.
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
       _handleNotificationTap(message.data);
     });
 
-    // Handle app launch from terminated state
+    // Handle app launch from a terminated state via notification tap.
     final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
+      // Small delay to allow the UI to build before navigating.
       await Future.delayed(const Duration(milliseconds: 500));
       _handleNotificationTap(initialMessage.data);
     }
@@ -48,20 +60,9 @@ class NotificationService {
     isInitialized = true;
   }
 
-  /// Background handler
-  @pragma('vm:entry-point')
-  static Future<void> _firebaseMessagingBackgroundHandler(
-    RemoteMessage message,
-  ) async {
-    await setupChannelsAndPlugin();
-    showNotification(message);
-  }
-
-  /// Setup channels and plugin
+  /// Setup channels and plugin. This is called from both the main isolate
+  /// and the background isolate.
   static Future<void> setupChannelsAndPlugin() async {
-    if (isInitialized) {
-      return;
-    }
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
     // Reminder channel
@@ -80,24 +81,24 @@ class NotificationService {
       importance: Importance.max,
     );
 
-    // Create channels on Android
-    final androidPlugin =
-        flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin
-            >();
-    await androidPlugin?.createNotificationChannel(reminderChannel);
-    await androidPlugin?.createNotificationChannel(warningChannel);
+    // Create channels on Android.
+    final androidPlugin = flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
+    if (androidPlugin != null) {
+      await androidPlugin.createNotificationChannel(reminderChannel);
+      await androidPlugin.createNotificationChannel(warningChannel);
+    }
 
-    // iOS foreground presentation
+    // iOS foreground presentation options.
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+      alert: true,
+      badge: true,
+      sound: true,
+    );
 
-    // Initialize plugin
+    // Initialize the plugin with platform-specific settings.
     const androidSettings = AndroidInitializationSettings('launch_background');
     const iOSSettings = DarwinInitializationSettings();
     const initSettings = InitializationSettings(
@@ -110,27 +111,26 @@ class NotificationService {
       onDidReceiveNotificationResponse: (details) {
         if (details.payload != null) {
           try {
-            final data = json.decode(details.payload!);
+            // Decode the payload from a JSON string back to a Map.
+            final data = json.decode(details.payload!) as Map<String, dynamic>;
             _handleNotificationTap(data);
-          } catch (_) {}
+          } catch (_) {
+            debugPrint('Failed to decode notification payload');
+          }
         }
       },
     );
-
-    isInitialized = false;
   }
 
-  /// Show notification
+  /// Show a local notification using the provided RemoteMessage.
   static Future<void> showNotification(RemoteMessage message) async {
     final notification = message.notification;
     final android = message.notification?.android;
 
     if (notification != null && android != null && !kIsWeb) {
-      // Decide channel based on some data (default to reminderChannel)
-      final channelId =
+      // Determine the channel based on message data.
+      final channel =
           message.data['type'] == 'warning' ? warningChannel : reminderChannel;
-      final channelName = channelId.name;
-      final channelDescription = channelId.description;
 
       await flutterLocalNotificationsPlugin.show(
         notification.hashCode,
@@ -138,117 +138,37 @@ class NotificationService {
         notification.body,
         NotificationDetails(
           android: AndroidNotificationDetails(
-            channelId.id,
-            channelName,
-            channelDescription: channelDescription,
+            channel.id,
+            channel.name,
+            channelDescription: channel.description,
             icon: 'launch_background',
           ),
         ),
-        payload: json.encode(message.data), // store data for tap handling
+        // Store the message data as a JSON string in the payload.
+        payload: json.encode(message.data),
       );
     }
   }
 
-  /// Handle notification tap
+  /// Handle notification tap by navigating or performing an action.
   static void _handleNotificationTap(Map<String, dynamic> data) {
     if (data.isEmpty) return;
 
-    // Example: handle orderId in notification payload
-    final orderId = data['orderId']?.toString() ?? '';
-    debugPrint('Notification tapped, orderId: $orderId');
-
-    // TODO: navigate or store data using your preferred state management
+    // TODO: Implement navigation logic here.
+    // Use a Navigator key or a routing service to navigate to a specific screen
+    // based on the content of the `data` map.
+    debugPrint('Notification tapped with data: $data');
   }
 
-  /// Reset notifications and badge
+  /// Reset all notifications and badge count.
   static Future<void> resetNotifications() async {
     await flutterLocalNotificationsPlugin.cancelAll();
   }
 
-  /// Get FCM token
+  /// Get the Firebase Cloud Messaging (FCM) token.
   static Future<String?> getFCMToken() async {
     final token = await FirebaseMessaging.instance.getToken();
     if (kDebugMode) debugPrint('FCM token: $token');
     return token;
   }
 }
-
-
-// class NotificationService {
-//   static late AndroidNotificationChannel channel;
-//   static bool isFlutterLocalNotificationsInitialized = false;
-
-//   static late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
-
-//   static Future<void> init() async {
-//      await Permission.notification.request();
-//     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-//     await setupFlutterNotifications();
-
-//     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-//       showFlutterNotification(message);
-//     });
-
-//     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-//       debugPrint('Notification tapped: ${message.data}');
-    
-//     });
-//   }
-
-//   @pragma('vm:entry-point')
-//   static Future<void> _firebaseMessagingBackgroundHandler(
-//     RemoteMessage message,
-//   ) async {
-//     await setupFlutterNotifications();
-//     showFlutterNotification(message);
-//   }
-
-//   static Future<void> setupFlutterNotifications() async {
-//     if (isFlutterLocalNotificationsInitialized) {
-//       return;
-//     }
-//     channel = const AndroidNotificationChannel(
-//       'reminder_channel', // id
-//       'Reminder', // title
-//       description:
-//           'This channel is used for reminder notifications.', // description
-//       importance: Importance.high,
-//     );
-
-//     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-//     await flutterLocalNotificationsPlugin
-//         .resolvePlatformSpecificImplementation<
-//           AndroidFlutterLocalNotificationsPlugin
-//         >()
-//         ?.createNotificationChannel(channel);
-
-//     await FirebaseMessaging.instance
-//         .setForegroundNotificationPresentationOptions(
-//           alert: true,
-//           badge: true,
-//           sound: true,
-//         );
-//     isFlutterLocalNotificationsInitialized = true;
-//   }
-
-//   static void showFlutterNotification(RemoteMessage message) {
-//     RemoteNotification? notification = message.notification;
-//     AndroidNotification? android = message.notification?.android;
-//     if (notification != null && android != null && !kIsWeb) {
-//       flutterLocalNotificationsPlugin.show(
-//         notification.hashCode,
-//         notification.title,
-//         notification.body,
-//         NotificationDetails(
-//           android: AndroidNotificationDetails(
-//             channel.id,
-//             channel.name,
-//             channelDescription: channel.description,
-//             icon: 'launch_background',
-//           ),
-//         ),
-//       );
-//     }
-//   }
-// }
