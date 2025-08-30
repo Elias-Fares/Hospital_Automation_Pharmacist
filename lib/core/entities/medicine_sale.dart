@@ -1,18 +1,15 @@
 import 'package:equatable/equatable.dart';
+import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 
-class MedicineSale {
-  String medicineId;
-  double unitPrice;
-  int quantity;
+class MedicineOrder {
+  final MedicineModel medicineModel;
+  final int quantity;
 
-  MedicineSale({
-    required this.medicineId,
-    required this.unitPrice,
-    required this.quantity,
-  });
+  MedicineOrder({required this.medicineModel, required this.quantity});
 
-  @override
-  String toString() {
-    return "( $medicineId , $unitPrice , $quantity )";
-  }
+  MedicineOrder copyWith({MedicineModel? medicineModel, int? quantity}) =>
+      MedicineOrder(
+        medicineModel: medicineModel ?? this.medicineModel,
+        quantity: quantity ?? this.quantity,
+      );
 }

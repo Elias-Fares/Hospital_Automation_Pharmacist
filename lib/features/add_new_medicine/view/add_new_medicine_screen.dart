@@ -14,11 +14,11 @@ import 'package:medicare_pharmacy/core/widgets/buttons/custom_outlined_button.da
 import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
 import 'package:medicare_pharmacy/core/widgets/cards/allownace_section.dart';
 import 'package:medicare_pharmacy/core/widgets/general_image_asset.dart';
+import 'package:medicare_pharmacy/core/widgets/scan_code_dialog.dart';
 import 'package:medicare_pharmacy/features/add_new_medicine/view_model/add_new_medicine_view_model.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 part 'widget/image_section.dart';
-part 'widget/scan_code_dialog.dart';
 
 class AddNewMedicineScreen extends ConsumerStatefulWidget {
   const AddNewMedicineScreen({super.key});
@@ -165,8 +165,9 @@ class _AddNewMedicineScreenState extends ConsumerState<AddNewMedicineScreen> {
               ),
               SizedBox(height: 20),
               TextFormField(
-                onTap: () {
-                  ScanCodeDialog.builder(context, codeController: codeController);
+                onTap: () async {
+                  codeController.text =
+                      (await ScanCodeDialog.builder(context)) ?? "";
                 },
                 controller: codeController,
                 readOnly: true,

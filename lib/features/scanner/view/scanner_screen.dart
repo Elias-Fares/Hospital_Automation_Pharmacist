@@ -40,6 +40,7 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with RouteAware {
   @override
   void dispose() {
     AppRouter.routeObserver.unsubscribe(this);
+    _mobileScannerController.dispose();
     super.dispose();
   }
 
@@ -91,8 +92,8 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with RouteAware {
           _mobileScannerController.stop();
         },
         error: (error, stackTrace) {
-          showSnackBarErrorMessage(context, message: error.toString());
           _mobileScannerController.start();
+          showSnackBarErrorMessage(context, message: error.toString());
         },
         loading: () {},
       ),
@@ -112,9 +113,12 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with RouteAware {
 
                   await ref
                       .read(scannerViewModelProvider.notifier)
-                      .getMedicineByBarcode(
-                        code: result.barcodes.first.rawValue ?? "",
-                      );
+                      .getMedicineByBarcode(code: "1234556");
+                  // await ref
+                  //     .read(scannerViewModelProvider.notifier)
+                  //     .getMedicineByBarcode(
+                  //       code: result.barcodes.first.rawValue ?? "",
+                  //     );
                 },
               ),
             ),

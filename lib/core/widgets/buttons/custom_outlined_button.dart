@@ -17,7 +17,7 @@ class CustomOutlinedButton extends StatelessWidget {
     this.icon,
     this.isLoading = false,
     this.loadingIndicatorSize = 25,
-    this.loadingIndicatorStrokeWidth = 3,
+    this.loadingIndicatorStrokeWidth = 3, this.titleTextStyle,
   });
   final String title;
   final Color? borderColor;
@@ -31,6 +31,7 @@ class CustomOutlinedButton extends StatelessWidget {
   final bool isLoading;
   final double loadingIndicatorSize;
   final double loadingIndicatorStrokeWidth;
+  final TextStyle? titleTextStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,7 @@ class CustomOutlinedButton extends StatelessWidget {
                     if (icon != null) ...[icon!, SizedBox(width: 5)],
                     Text(
                       title,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      style: titleTextStyle ?? Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: textColor ?? AppColors.primary,
                       ),
                     ),

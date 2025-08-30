@@ -45,18 +45,25 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
     return Scaffold(
       appBar: const SubAppBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton:
-          widget.comingFromScan
-              ? FloatingActionButtonFadedElevation(
-                title: "Sell",
-                onTap: () {
-                  context.push(SpecifySaleAmountScreen.routeName, extra:{
-                    ExtraKeys.medicinePrice :widget.med?.price ,
-                    ExtraKeys.medId : widget.med?.medicinesId?.toString()
-                  });
-                },
-              )
-              : SizedBox.shrink(),
+      floatingActionButton: FloatingActionButtonFadedElevation(
+        title: "Sell",
+        onTap: () {
+          context.push(SpecifySaleAmountScreen.routeName, extra: widget.med);
+        },
+      ),
+
+      // floatingActionButton:
+      //     widget.comingFromScan
+      //         ? FloatingActionButtonFadedElevation(
+      //           title: "Sell",
+      //           onTap: () {
+      //             context.push(
+      //               SpecifySaleAmountScreen.routeName,
+      //               extra: widget.med,
+      //             );
+      //           },
+      //         )
+      //         : SizedBox.shrink(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
@@ -112,7 +119,7 @@ class _MedicineDetailsScreenState extends ConsumerState<MedicineDetailsScreen> {
 
             SizedBox(height: 24),
 
-          MedicineDetailsNavigationSection(
+            MedicineDetailsNavigationSection(
               onAddBatchTap: () {
                 // context.push(
                 //   BatchesScreen.routeName,

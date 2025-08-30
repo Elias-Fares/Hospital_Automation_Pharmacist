@@ -208,12 +208,9 @@ class AppRouter {
       GoRoute(
         path: SpecifySaleAmountScreen.routeName,
         builder: (context, state) {
-          final extraMap = state.extra as Map<String, dynamic>;
-          final price = extraMap[ExtraKeys.medicinePrice] as int?;
-          final medId = extraMap[ExtraKeys.medId] as String?;
+          final medicineModel = state.extra as MedicineModel?;
           return SpecifySaleAmountScreen(
-            medicinePrice: price?.toDouble() ?? 0.0,
-            medicineId: medId ?? "",
+            medicineModel: medicineModel,
           );
         },
       ),

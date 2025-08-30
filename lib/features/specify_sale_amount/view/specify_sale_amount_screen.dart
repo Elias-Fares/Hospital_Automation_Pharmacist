@@ -1,31 +1,40 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medicare_pharmacy/configuration/res.dart';
 import 'package:medicare_pharmacy/configuration/router/router_utils.dart';
+import 'package:medicare_pharmacy/core/constant/constant.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
 import 'package:medicare_pharmacy/core/validators/fields_validator.dart';
 import 'package:medicare_pharmacy/core/widgets/appbars/sub_app_bar.dart';
+import 'package:medicare_pharmacy/core/widgets/buttons/custom_inkwell.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/custom_outlined_button.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
+import 'package:medicare_pharmacy/core/widgets/cards/loading_card.dart';
+import 'package:medicare_pharmacy/core/widgets/floating_action_button_with_faded_elevation.dart';
 import 'package:medicare_pharmacy/core/widgets/general_image_asset.dart';
-import 'package:medicare_pharmacy/features/main/view/main_screen.dart';
+import 'package:medicare_pharmacy/core/widgets/general_network_image.dart';
+import 'package:medicare_pharmacy/core/widgets/scan_code_dialog.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
+import 'package:medicare_pharmacy/data/models/medicine_model.dart';
+import 'package:medicare_pharmacy/features/medicine_details/view/medicine_details_screen.dart';
+
 import 'package:medicare_pharmacy/features/scanner/view/scanner_screen.dart';
 import 'package:medicare_pharmacy/features/specify_sale_amount/view_model/specify_sale_amount_view_model.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'widget/sale_completed_dialog.dart';
+part 'widget/medicine_order_card.dart';
+part 'widget/add_new_medicine_order_card.dart';
+part 'widget/specify_sale_amount_dialog.dart';
 
 class SpecifySaleAmountScreen extends ConsumerStatefulWidget {
-  const SpecifySaleAmountScreen({
-    super.key,
-    required this.medicinePrice,
-    required this.medicineId,
-  });
+  const SpecifySaleAmountScreen({super.key, required this.medicineModel});
   static const routeName = "/specify_sale_amount_screen";
-  final double medicinePrice;
-  final String medicineId;
+  final MedicineModel? medicineModel;
 
   @override
   ConsumerState<SpecifySaleAmountScreen> createState() =>
@@ -34,111 +43,147 @@ class SpecifySaleAmountScreen extends ConsumerStatefulWidget {
 
 class _SpecifySaleAmountScreenState
     extends ConsumerState<SpecifySaleAmountScreen> {
-  final amountController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   late final SpecifySaleAmountViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
-    _viewModel = ref.read(specifySaleAmountViewModelProvider.notifier);
+    Future.microtask(() {
+      _viewModel = ref.read(specifySaleAmountViewModelProvider.notifier);
+      _viewModel.addMedicineOrder(medicineModel: widget.medicineModel);
+    });
   }
 
   @override
   void dispose() {
-    _viewModel.reset();
-
-    amountController.dispose();
     debugPrint("SpecifySaleAmountScreen Disposed");
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final ordersState = ref.watch(specifySaleAmountViewModelProvider);
+
+    ref.listen(
+      specifySaleAmountViewModelProvider.select(
+        (value) => value.fetchMedicineResponse,
+      ),
+      (previous, next) => next?.when(
+        data: (data) {
+          _viewModel.addMedicineOrder(medicineModel: data);
+        },
+        error: (error, stackTrace) {
+          showSnackBarErrorMessage(context, message: error.toString());
+        },
+        loading: () {},
+      ),
+    );
+    ref.listen(
+      specifySaleAmountViewModelProvider.select(
+        (value) => value.sellingResponse,
+      ),
+      (previous, next) => next?.when(
+        data: (data) {
+          showSnackBarSuccessMessage(
+            context,
+            message: "Order sold successfully",
+          );
+        },
+        error: (error, stackTrace) {
+          showSnackBarErrorMessage(context, message: error.toString());
+        },
+        loading: () {},
+      ),
+    );
     return Scaffold(
       appBar: SubAppBar(),
-      body: Padding(
+      floatingActionButton: FloatingActionButtonFadedElevation(
+        title: "Sell",
+        
+        onTap: () {
+          _viewModel.sellRequest();
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                decoration: containerCardDecoration(),
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    SizedBox(height: 10),
-                    Text(
-                      "Specify Sale Amount",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    SizedBox(height: 12),
-                    Text(
-                      "This action updates stock levels and sales records.",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 30),
-                    TextFormField(
-                      controller: amountController,
-                      style: Theme.of(context).textTheme.bodyMedium,
+        child: Column(
+          children: [
+            SizedBox(height: 10),
 
-                      keyboardType: TextInputType.number,
-
-                      validator:
-                          (value) =>
-                              FieldsValidator.validateEmpty(value: value ?? ""),
-
-                      decoration: InputDecoration(
-                        label: Text("Amount"),
-                        fillColor: AppColors.white,
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.primary),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.hintTextColor,
-                            width: .5,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 40),
-
-                    // Spacer(),
-                    CustomOutlinedButton(
-                      title: "Sell",
-                      backgroundColor: AppColors.white,
-                      onTap: () {
-                        if (!(_formKey.currentState?.validate() ?? false)) {
-                          return;
-                        }
-
-                        _viewModel.addMedicineSale(
-                          medicineId: widget.medicineId,
-                          unitPrice: widget.medicinePrice,
-                          quantity: int.tryParse(amountController.text) ?? 0,
-                        );
-
-                        final price = _viewModel.getPrice();
-                        SaleCompletedDialog.builder(
-                          context,
-                          reciptPrice: price.toString(),
-                        );
-                      },
-                    ),
-                    SizedBox(height: 20),
-                  ],
+            Row(
+              children: [
+                Icon(
+                  Icons.monetization_on_outlined,
+                  size: 20,
+                  color: AppColors.primary,
                 ),
+                SizedBox(width: 3),
+                Text(
+                  "Total: ${ordersState.totalPrice} ${Constant.appCurrency}",
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            GridView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisExtent: 235,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
               ),
-              SizedBox(height: kToolbarHeight),
-            ],
-          ),
+              itemCount: ordersState.medicines.length + 1,
+              itemBuilder: (context, index) {
+                if (index == ordersState.medicines.length) {
+                  if (ordersState.fetchMedicineResponse?.isLoading ?? false) {
+                    return LoadingCard(borderRadius: BorderRadius.circular(8));
+                  } else {
+                    return AddNewMedicineOrderCard(
+                      onTap: () async {
+                        final scannedCode = await ScanCodeDialog.builder(
+                          context,
+                        );
+                        _viewModel.fetchMedicineByBarcode(code: "1234556");
+                      },
+                    );
+                  }
+                }
+                final medicineOrder = ordersState.medicines.elementAt(index);
+                return MedicineOrderCard(
+                  onMedicineTap: () {
+                    context.push(
+                      MedicineDetailsScreen.routeName,
+                      extra: medicineOrder.medicineModel,
+                    );
+                  },
+                  onSpecifySaleAmountTap: () async {
+                    final quantity = await SpecifySaleAmountDialog.builder(
+                      context,
+                    );
+                    if (quantity != null) {
+                      _viewModel.setQuantity(
+                        newQuantity: quantity,
+                        medicineOrderIndex: index,
+                      );
+                    }
+                  },
+                  quantity: medicineOrder.quantity,
+                  medName: medicineOrder.medicineModel.name ?? "",
+                  medPrice: medicineOrder.medicineModel.price?.toString() ?? "",
+                  medTiter:
+                      medicineOrder.medicineModel.pharmaceuticalTiter
+                          ?.toString() ??
+                      "",
+                  imageUrl:
+                      "${Constant.baseUrl}/${medicineOrder.medicineModel.medImageUrl ?? ""}",
+                );
+              },
+            ),
+
+            SizedBox(height: 30),
+          ],
         ),
       ),
     );
