@@ -463,13 +463,15 @@ class RemoteDataSource {
     if (requestType == ParamsValues.create) {
       bodyMap = {
         "request_type": requestType.value,
-        "request_objects": [
-          {
-            "day": day?.toUpperCase(),
-            "work_start_time": opensAt,
-            "work_end_time": closeAt,
-          },
-        ],
+        "request_objects": json.encode({
+          "request_objects": [
+            {
+              "day": day?.toUpperCase(),
+              "work_start_time": opensAt,
+              "work_end_time": closeAt,
+            },
+          ],
+        }),
       };
     } else if (requestType == ParamsValues.delete) {
       bodyMap = {

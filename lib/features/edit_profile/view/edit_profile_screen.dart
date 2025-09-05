@@ -10,11 +10,7 @@ import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart
 import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
 import 'package:medicare_pharmacy/core/widgets/textfields/select_option_text_field_v2.dart';
 import 'package:medicare_pharmacy/data/models/profile_model.dart';
-import 'package:medicare_pharmacy/features/pharmacy_profile/view_model/pharmacy_profile_view_model.dart';
-import '../../../core/function/join_strings.dart';
-import '../../../core/widgets/appbars/app_bar_title_widget.dart';
 import '../../../core/widgets/appbars/sub_app_bar.dart';
-import '../../../configuration/res.dart';
 import '../../../core/style/app_colors.dart';
 import '../../../core/widgets/buttons/custom_outlined_button.dart';
 import '../../../core/widgets/buttons/loading_button.dart';

@@ -32,6 +32,7 @@ class SplashViewModel extends _$SplashViewModel {
 
     if (response is DataSuccess) {
       await _repository.saveHasPermission(hasPermission: response.data.message);
+      hasPermission = response.data.message;
       state = state.copyWith(
         permissionResponse: AsyncValue.data(response.data),
       );
@@ -58,6 +59,7 @@ class SplashViewModel extends _$SplashViewModel {
           context.go(MainScreen.routeName);
         } else {
           context.go(PermissionRequiredScreen.routeName);
+          // context.go(LoginScreen.routeName);
         }
       }
     }

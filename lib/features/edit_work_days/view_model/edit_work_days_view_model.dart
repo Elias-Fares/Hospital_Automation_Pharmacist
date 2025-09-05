@@ -58,6 +58,7 @@ class EditWorkDaysViewModel extends _$EditWorkDaysViewModel {
 
     if (response is DataSuccess) {
       state = state.copyWith(addWorkDay: AsyncValue.data(response.data));
+      fetchWorkDays();
     } else {
       state = state.copyWith(
         addWorkDay: AsyncValue.error(
