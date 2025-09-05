@@ -10,7 +10,7 @@ class PharmacyProfileDetailsSection extends StatelessWidget {
     required this.residentialsAddress,
     required this.pharmacyaddress,
     required this.currentState,
-    required this.availabilitySchedule,
+    required this.availabilitySchedule, this.onEditAvailabilityScheduleTap,
   });
 
   final String residentialsAddress;
@@ -23,6 +23,8 @@ class PharmacyProfileDetailsSection extends StatelessWidget {
 
   final void Function()? onPhoneNumberTap;
   final void Function()? onEmailTap;
+  
+  final VoidCallback? onEditAvailabilityScheduleTap;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +55,28 @@ class PharmacyProfileDetailsSection extends StatelessWidget {
           // const SizedBox(
           //   height: 20,
           // ),
-          Text(
-            "Availability Schedule",
-            style: Theme.of(context).textTheme.titleMedium,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Availability Schedule",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+
+              IconButton(
+                onPressed:onEditAvailabilityScheduleTap,
+                icon: Icon(
+                  Icons.edit_outlined,
+                  color: AppColors.primary,
+                  size: 20,
+                ),
+                style: IconButton.styleFrom(
+                  backgroundColor: AppColors.outlineVariant.withValues(
+                    alpha: .5,
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 8),
           Wrap(

@@ -67,68 +67,49 @@ class SignupPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 25,
-              ),
-              Text(
-                "Sign Up",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 25),
+              Text("Sign Up", style: Theme.of(context).textTheme.titleLarge),
+              const SizedBox(height: 10),
               Text(
                 "New user? Create account here.",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(color: AppColors.hintTextColor),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.hintTextColor,
+                ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               AuthTextFormField(
                 textEditingController: firstNameTextEditingController,
                 validator: firstNameValidator,
                 label: "First Name*",
               ),
-              const SizedBox(
-                height: 22,
-              ),
-              AuthTextFormField(
-                textEditingController: lastNameTextEditingController,
-                validator: lastNameValidator,
-                label: "Last Name*",
-              ),
-              const SizedBox(
-                height: 22,
-              ),
+              const SizedBox(height: 22),
               AuthTextFormField(
                 textEditingController: middleNameTextEditingController,
                 validator: middleNameValidator,
                 label: "Middle Name*",
               ),
-              const SizedBox(
-                height: 22,
+              const SizedBox(height: 22),
+              AuthTextFormField(
+                textEditingController: lastNameTextEditingController,
+                validator: lastNameValidator,
+                label: "Last Name*",
               ),
+              const SizedBox(height: 22),
+
               AuthTextFormField(
                 textEditingController: emailTextEditingController,
                 validator: emailValidator,
                 label: "Email Address*",
                 keyboardType: TextInputType.emailAddress,
               ),
-              const SizedBox(
-                height: 22,
-              ),
+              const SizedBox(height: 22),
               AuthTextFormField(
                 textEditingController: phoneNumberTextEditingController,
                 validator: phoneNumberValidator,
                 label: "Phone Number*",
                 keyboardType: TextInputType.phone,
               ),
-              const SizedBox(
-                height: 22,
-              ),
+              const SizedBox(height: 22),
               AuthTextFormField(
                 textEditingController: passwordTextEditingController,
                 validator: passwordValidator,
@@ -136,9 +117,7 @@ class SignupPage extends StatelessWidget {
                 keyboardType: TextInputType.visiblePassword,
                 isPassword: true,
               ),
-              const SizedBox(
-                height: 22,
-              ),
+              const SizedBox(height: 22),
               AuthTextFormField(
                 textEditingController: confirmPasswordTextEditingController,
                 validator: confirmPassWordValidator,
@@ -146,42 +125,32 @@ class SignupPage extends StatelessWidget {
                 keyboardType: TextInputType.visiblePassword,
                 isPassword: true,
               ),
-              const SizedBox(
-                height: 22,
-              ),
-              Text(
-                "Gender",
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(
-                height: 14,
-              ),
+              const SizedBox(height: 22),
+              Text("Gender", style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 14),
               SelectGenderButtons(
                 selectedGender: selectedGender,
                 onGenderSelect: onGenderSelect,
               ),
-              const SizedBox(
-                height: 22,
-              ),
+              const SizedBox(height: 22),
               LoadingButton(
                 title: "Sign up",
                 onTap: signUpFunc,
                 isLoading: isLoading,
               ),
-              const SizedBox(
-                height: 22,
-              ),
+              const SizedBox(height: 22),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Already have account?"),
                   CustomTextButton(
-                      text: "Log In Here",
-                      fontWeight: FontWeight.w500,
-                      textColor: AppColors.primary,
-                      onTap: goToLogin)
+                    text: "Log In Here",
+                    fontWeight: FontWeight.w500,
+                    textColor: AppColors.primary,
+                    onTap: goToLogin,
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),

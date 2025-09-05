@@ -10,7 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'specify_sale_amount_state.dart';
 part 'specify_sale_amount_view_model.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class SpecifySaleAmountViewModel extends _$SpecifySaleAmountViewModel {
   @override
   SpecifySaleAmountState build() {

@@ -98,7 +98,7 @@ class AddPharmacyAddressPage extends StatelessWidget {
                 vertical: VisualDensity.minimumDensity,
               ),
               subtitle: const Text(
-                "YPharmacy address will be used to make it easy for patients to reach you.",
+                "Pharmacy address will be used to make it easy for patients to reach you.",
               ),
             ),
             const SizedBox(height: 30),

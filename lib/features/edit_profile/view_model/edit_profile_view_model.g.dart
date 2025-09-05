@@ -10,7 +10,7 @@ part of 'edit_profile_view_model.dart';
 const editProfileViewModelProvider = EditProfileViewModelProvider._();
 
 final class EditProfileViewModelProvider
-    extends $NotifierProvider<EditProfileViewModel, AsyncValue?> {
+    extends $NotifierProvider<EditProfileViewModel, EditProfileState> {
   const EditProfileViewModelProvider._()
     : super(
         from: null,
@@ -30,29 +30,29 @@ final class EditProfileViewModelProvider
   EditProfileViewModel create() => EditProfileViewModel();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AsyncValue? value) {
+  Override overrideWithValue(EditProfileState value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<AsyncValue?>(value),
+      providerOverride: $SyncValueProvider<EditProfileState>(value),
     );
   }
 }
 
 String _$editProfileViewModelHash() =>
-    r'ddd92446a5dbed77a0c2a7cc5450006b69b53b49';
+    r'9ebf1926118b9061e88f625ec316d587c883b1a3';
 
-abstract class _$EditProfileViewModel extends $Notifier<AsyncValue?> {
-  AsyncValue? build();
+abstract class _$EditProfileViewModel extends $Notifier<EditProfileState> {
+  EditProfileState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue?, AsyncValue?>;
+    final ref = this.ref as $Ref<EditProfileState, EditProfileState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue?, AsyncValue?>,
-              AsyncValue?,
+              AnyNotifier<EditProfileState, EditProfileState>,
+              EditProfileState,
               Object?,
               Object?
             >;

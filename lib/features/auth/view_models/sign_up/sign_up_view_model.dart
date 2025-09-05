@@ -1,3 +1,5 @@
+import 'package:medicare_pharmacy/data/repository.dart';
+
 import '../../../../configuration/service_locator.dart';
 import '../../../../core/base_dio/data_state.dart';
 import '../../../../core/enums/gender_enum.dart';
@@ -16,7 +18,7 @@ class SignUpViewModel extends _$SignUpViewModel {
     selectedGender: GenderEnum.male,
   );
 
-  // final _authRepository = getIt<AuthRepository>();
+  final _repository = getIt<Repository>();
 
   void togglePasswordVisibility() {
     // state = state.copyWith(isPasswordVisible: !state.isPasswordVisible);
@@ -30,28 +32,28 @@ class SignUpViewModel extends _$SignUpViewModel {
     required String password,
     required String phoneNumber,
   }) async {
-    // state = state.copyWith(signUpResponse: const AsyncValue.loading());
+    state = state.copyWith(signUpResponse: const AsyncValue.loading());
 
-    // final response = await _authRepository.signUp(
-    //     email: email,
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     middleName: middleName,
-    //     password: password,
-    //     phoneNumber: phoneNumber,
-    //     gender: state.selectedGender.getTitle());
-    // if (response is DataSuccess) {
-    //   state = state.copyWith(signUpResponse: AsyncValue.data(response.data));
-    //   await _authRepository.saveEmail(email: email);
-    //   await _authRepository.savePassword(password: password);
+    final response = await _repository.signUp(
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        middleName: middleName,
+        password: password,
+        phoneNumber: phoneNumber,
+        gender: state.selectedGender.getTitle());
+    if (response is DataSuccess) {
+      state = state.copyWith(signUpResponse: AsyncValue.data(response.data));
+      await _repository.saveEmail(email: email);
+      await _repository.savePassword(password: password);
 
-    //   ref.read(verifyCodeViewModelProvider.notifier).sendOTP();
-    // } else {
-    //   state = state.copyWith(
-    //       signUpResponse: AsyncValue.error(
-    //           response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
-    //           StackTrace.current));
-    // }
+      ref.read(verifyCodeViewModelProvider.notifier).sendOTP();
+    } else {
+      state = state.copyWith(
+          signUpResponse: AsyncValue.error(
+              response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
+              StackTrace.current));
+    }
   }
 
   void setGender(GenderEnum gender) {

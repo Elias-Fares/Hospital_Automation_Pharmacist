@@ -15,10 +15,16 @@ class EditProfilePage extends StatelessWidget {
     this.onDiscardPressed,
     this.onSavePressed,
     required this.noteController,
-    required this.isSaveChangesLoading, required this.genderController,
+    required this.isSaveChangesLoading,
+    required this.genderController,
+    required this.middleNameController,
+    this.profileImage,
+    this.selectedImage,
+    this.onPickImageTap,
   });
 
   final TextEditingController firstNameController;
+  final TextEditingController middleNameController;
   final TextEditingController secondNameController;
   final TextEditingController governorateController;
   final TextEditingController cityController;
@@ -29,11 +35,15 @@ class EditProfilePage extends StatelessWidget {
   final TextEditingController noteController;
   final TextEditingController genderController;
   final GlobalKey<FormState> formKey;
+  final String? profileImage;
+  final String? selectedImage;
 
   final void Function()? onDiscardPressed;
   final void Function()? onSavePressed;
 
   final bool isSaveChangesLoading;
+
+  final GestureTapCallback? onPickImageTap;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +52,61 @@ class EditProfilePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 10),
+          // const SizedBox(height: 10),
+          Center(
+            child: Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                Container(
+                  width: 100,
+                  height: 100,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.onSurfaceContainerVariant2.withValues(
+                      alpha: .3,
+                    ),
+                  ),
+                  child:
+                      (selectedImage?.isNotEmpty ?? false)
+                          ? Image.file(
+                            File(selectedImage!),
+
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          )
+                          : GeneralNetworkImage(
+                            url: "${Constant.baseUrl}/$profileImage",
+                            failWidget: Icon(
+                              Icons.person,
+                              size: 30,
+                              color: AppColors.outline,
+                            ),
+                          ),
+                ),
+
+                InkWell(
+                  onTap: onPickImageTap,
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.primary,
+                    ),
+                    child: Icon(
+                      Icons.edit_outlined,
+                      size: 15,
+                      color: AppColors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 15),
           Text(
             "Personal Information",
             style: Theme.of(context).textTheme.titleSmall,
@@ -51,6 +115,11 @@ class EditProfilePage extends StatelessWidget {
           EditProfileTextFormField(
             textEditingController: firstNameController,
             label: "First Name",
+          ),
+          const SizedBox(height: 12),
+          EditProfileTextFormField(
+            textEditingController: middleNameController,
+            label: "Middle Name",
           ),
           const SizedBox(height: 12),
           EditProfileTextFormField(
@@ -70,7 +139,7 @@ class EditProfilePage extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            "Residential Address",
+            "Pharamcy Address",
             style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(height: 10),
@@ -135,7 +204,6 @@ class EditProfilePage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 30),
-          
         ],
       ),
     );

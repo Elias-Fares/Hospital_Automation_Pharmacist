@@ -14,19 +14,21 @@ class VerificationCodePage extends StatelessWidget {
 
   final GlobalKey<FormState> formKey;
   final bool? isLoading;
+  final String email;
   // final void Function(String)? onCodeChanged;
   final void Function(String)? onSubmit;
 
-  const VerificationCodePage(
-      {super.key,
-      required this.verifyCodeValidator,
-      required this.verifyCodePress,
-      required this.resendCodePress,
-      required this.formKey,
-      this.isLoading,
-      // this.onCodeChanged
-      this.onSubmit
-      });
+  const VerificationCodePage({
+    super.key,
+    required this.verifyCodeValidator,
+    required this.verifyCodePress,
+    required this.resendCodePress,
+    required this.formKey,
+    this.isLoading,
+    // this.onCodeChanged
+    this.onSubmit,
+    required this.email
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,24 +48,27 @@ class VerificationCodePage extends StatelessWidget {
                 height: 115,
               ),
               const SizedBox(height: 15),
-              Text("Verify your email",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w600,
-                      )),
+              Text(
+                "Verify your email",
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               const SizedBox(height: 12),
               Text(
                 "Verification code sent to email",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(color: AppColors.black),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: AppColors.black),
                 textAlign: TextAlign.start,
               ),
               const SizedBox(height: 16),
-              const EmailWidget(
-                  email: "test@test.com", imgPath: Res.personePlaceHolderImage),
+               EmailWidget(
+                email: email,
+                imgPath: Res.personePlaceHolderImage,
+              ),
               const SizedBox(height: 30),
               OtpTextField(
                 numberOfFields: 4,
@@ -72,7 +77,9 @@ class VerificationCodePage extends StatelessWidget {
                 showFieldAsBox: true,
                 borderRadius: BorderRadius.circular(8),
                 decoration: const InputDecoration(
-                    filled: true, fillColor: AppColors.white),
+                  filled: true,
+                  fillColor: AppColors.white,
+                ),
                 borderWidth: 1,
                 onSubmit: onSubmit,
               ),
@@ -85,17 +92,20 @@ class VerificationCodePage extends StatelessWidget {
               const SizedBox(height: 40),
               Text(
                 "Didn’t get OTP verification code?",
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: AppColors.textColor,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(color: AppColors.textColor),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 15),
               CustomTextButton(
-                  text: "Resend Code",
-                  textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.w500, color: AppColors.textColor),
-                  onTap: resendCodePress),
+                text: "Resend Code",
+                textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.textColor,
+                ),
+                onTap: resendCodePress,
+              ),
               const SizedBox(height: 60),
             ],
           ),

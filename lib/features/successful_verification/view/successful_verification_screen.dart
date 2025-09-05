@@ -9,20 +9,31 @@ import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
 import 'package:medicare_pharmacy/core/widgets/general_image_asset.dart';
 import 'package:medicare_pharmacy/features/auth/view/screens/add_residential_address_screen.dart'
     show AddResidentialAddressScreen;
+import 'package:medicare_pharmacy/features/auth/view/screens/login_screen.dart';
+import 'package:medicare_pharmacy/features/successful_verification/view_model/successful_verification_view_model.dart';
 
-class SuccessfulVerificationScreen extends ConsumerStatefulWidget {
+class SuccessfulVerificationScreen extends ConsumerWidget {
   const SuccessfulVerificationScreen({super.key});
   static const routeName = "/successful_verification_screen";
 
   @override
-  ConsumerState<SuccessfulVerificationScreen> createState() =>
-      _SuccessfulVerificationScreenState();
-}
-
-class _SuccessfulVerificationScreenState
-    extends ConsumerState<SuccessfulVerificationScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(
+      successfulVerificationViewModelProvider.select(
+        (value) => value.autoLoginReposne,
+      ),
+      (previous, next) {
+        next?.when(
+          data: (data) {
+            context.push(AddResidentialAddressScreen.routeName);
+          },
+          error: (error, stackTrace) {
+            context.push(LoginScreen.routeName);
+          },
+          loading: () {},
+        );
+      },
+    );
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -65,8 +76,17 @@ class _SuccessfulVerificationScreenState
                   SizedBox(height: 24),
                   LoadingButton(
                     title: "Next",
+                    isLoading: ref.watch(
+                      successfulVerificationViewModelProvider.select(
+                        (value) => value.autoLoginReposne?.isLoading,
+                      ),
+                    ),
                     onTap: () {
-                      context.push(AddResidentialAddressScreen.routeName);
+                      ref
+                          .read(
+                            successfulVerificationViewModelProvider.notifier,
+                          )
+                          .autoLogin();
                     },
                   ),
 

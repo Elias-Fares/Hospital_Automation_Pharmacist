@@ -1,14 +1,70 @@
 import 'package:medicare_pharmacy/core/base_dio/data_state.dart';
+import 'package:medicare_pharmacy/core/enums/params_values.dart';
+import 'package:medicare_pharmacy/core/services/shared_preferences_service.dart';
 import 'package:medicare_pharmacy/data/remote_data_source.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Repository {
   final RemoteDataSource _remoteDataSource;
+  final SharedPreferencesService _sharedPreferencesService;
 
-  Repository({required RemoteDataSource remoteDataSource})
-    : _remoteDataSource = remoteDataSource;
+  Repository({
+    required RemoteDataSource remoteDataSource,
+    required SharedPreferencesService sharedPreferencesService,
+  }) : _remoteDataSource = remoteDataSource,
+       _sharedPreferencesService = sharedPreferencesService;
+
+  Future<void> saveToken({required String? token}) async {
+    await _sharedPreferencesService.saveToken(token: token);
+  }
+
+  Future<void> saveUserNAme({required String? userName}) async {
+    await _sharedPreferencesService.saveUserName(userName: userName);
+  }
+
+  String? getToken() {
+    return _sharedPreferencesService.getToken();
+  }
+
+  Future<void> clearToken() async {
+    await _sharedPreferencesService.clearToken();
+  }
+
+  Future<void> saveEmail({required String? email}) async {
+    await _sharedPreferencesService.saveEmail(email: email);
+  }
+
+  String? getEmail() {
+    return _sharedPreferencesService.getEmail();
+  }
+
+  Future<void> clearEmail() async {
+    await _sharedPreferencesService.clearEmail();
+  }
+
+  Future<void> savePassword({required String? password}) async {
+    await _sharedPreferencesService.savePassword(password: password);
+  }
+
+  String? getPassword() {
+    return _sharedPreferencesService.getPassword();
+  }
+
+  Future<void> clearPassword() async {
+    await _sharedPreferencesService.clearPassword();
+  }
+
+  Future<void> saveHasPermission({required bool? hasPermission}) async {
+    await _sharedPreferencesService.saveHasPermission(
+      hasPermission: hasPermission,
+    );
+  }
+
+  bool? getHasPermission() {
+    return _sharedPreferencesService.getHasPermission();
+  }
 
   Future<DataState> signUp({
-    required String role,
     required String email,
     required String password,
     required String firstName,
@@ -18,7 +74,6 @@ class Repository {
     required String gender,
   }) async {
     final response = await _remoteDataSource.signUp(
-      role: role,
       email: email,
       password: password,
       firstName: firstName,
@@ -106,8 +161,8 @@ class Repository {
     return response;
   }
 
-  Future<DataState> uploadFile() async {
-    final response = await _remoteDataSource.uploadFile();
+  Future<DataState> uploadFile({required String filePath}) async {
+    final response = await _remoteDataSource.uploadFile(filePath: filePath);
 
     return response;
   }
@@ -169,6 +224,7 @@ class Repository {
   }
 
   Future<DataState> editPharmacyProfile({
+    required String? imagePath,
     required String email,
     required String firstName,
     required String middleName,
@@ -182,6 +238,7 @@ class Repository {
     required String gender,
   }) async {
     final response = _remoteDataSource.editPharmacyProfile(
+      imagePath: imagePath,
       email: email,
       firstName: firstName,
       middleName: middleName,
@@ -322,8 +379,20 @@ class Repository {
     return response;
   }
 
-  Future<DataState> workDaysProcesses() async {
-    final response = await _remoteDataSource.workDaysProcesses();
+  Future<DataState> workDaysProcesses({
+    required ParamsValues requestType,
+    String? day,
+    String? opensAt,
+    String? closeAt,
+    String? workDayId,
+  }) async {
+    final response = await _remoteDataSource.workDaysProcesses(
+      requestType: requestType,
+      closeAt: closeAt,
+      day: day,
+      opensAt: opensAt,
+      workDayId: workDayId,
+    );
 
     return response;
   }
@@ -420,7 +489,7 @@ class Repository {
   }
 
   Future<DataState> maximinMinimumSellings({required DateTime date}) async {
-    final response = await _remoteDataSource.maximinMinimumSellings(date : date);
+    final response = await _remoteDataSource.maximinMinimumSellings(date: date);
 
     return response;
   }
@@ -465,6 +534,18 @@ class Repository {
 
   Future<DataState> getMedicineBatches({required String id}) async {
     final response = await _remoteDataSource.getMedicineBatches(id: id);
+
+    return response;
+  }
+
+  Future<DataState> showNotifications() async {
+    final response = await _remoteDataSource.showNotifications();
+
+    return response;
+  }
+
+  Future<DataState> getWorkDays() async {
+    final response = await _remoteDataSource.getWorkDays();
 
     return response;
   }

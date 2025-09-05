@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medicare_pharmacy/features/main/view/main_screen.dart';
 import '../../../../core/validators/fields_validator.dart';
 import '../../../../core/widgets/show_snack_bar_error_message.dart';
 // import '../../../appointments/view/appointments.dart';
@@ -31,13 +32,13 @@ class _LoginScreenV2State extends ConsumerState<LoginScreen> {
   void initState() {
     super.initState();
 
-    Future.microtask(
-      () {
-        if (mounted) {
-          ref.read(logInViewModelProvider.notifier).autoLogin(context: context);
-        }
-      },
-    );
+    // Future.microtask(
+    //   () {
+    //     if (mounted) {
+    //       ref.read(logInViewModelProvider.notifier).autoLogin(context: context);
+    //     }
+    //   },
+    // );
   }
 
   @override
@@ -54,49 +55,50 @@ class _LoginScreenV2State extends ConsumerState<LoginScreen> {
 
     final loginState = ref.watch(logInViewModelProvider);
 
-    ref.listen(
-      logInViewModelProvider,
-      (_, next) {
-        next?.when(
-          data: (data) {
-            // showSnackBarSuccessMessage(context, message: data["message"]);
-            // context.push(AppointmentsScreen.routeName);
-          },
-          error: (error, stackTrace) {
-            showSnackBarErrorMessage(context, message: error.toString());
-          },
-          loading: () {},
-        );
-      },
-    );
+    ref.listen(logInViewModelProvider, (_, next) {
+      next?.when(
+        data: (data) {
+          // showSnackBarSuccessMessage(context, message: data["message"]);
+          context.push(MainScreen.routeName);
+        },
+        error: (error, stackTrace) {
+          showSnackBarErrorMessage(context, message: error.toString());
+        },
+        loading: () {},
+      );
+    });
     return Scaffold(
-        body: LoginPage(
-      emailTextEditingController: emailTextEditingController,
-      passwordTextEditingController: passwordTextEditingController,
-      isLoading: loginState?.isLoading ?? false,
-      formKey: _formKey,
-      emailValidator: (val) {
-        return FieldsValidator.validateEmail(email: val ?? "");
-      },
-      //TODO implement strong password validation
-      passwordValidator: (val) {
-        return FieldsValidator.validateEmpty(value: val ?? "");
-      },
-      loginFunc: () {
-        //TODO uncomment this when test finished
-        if (!(_formKey.currentState?.validate() ?? false)) {
-          return;
-        }
-        ref.read(logInViewModelProvider.notifier).login(
-            email: emailTextEditingController.text,
-            password: passwordTextEditingController.text);
-      },
-      creatAccountFunc: () {
-        context.push(SignupScreen.routeName);
-      },
-      forgotPasswordFunc: () {
-        context.push(ResetPasswordScreen.routeName);
-      },
-    ));
+      body: LoginPage(
+        emailTextEditingController: emailTextEditingController,
+        passwordTextEditingController: passwordTextEditingController,
+        isLoading: loginState?.isLoading ?? false,
+        formKey: _formKey,
+        emailValidator: (val) {
+          return FieldsValidator.validateEmail(email: val ?? "");
+        },
+        //TODO implement strong password validation
+        passwordValidator: (val) {
+          return FieldsValidator.validateEmpty(value: val ?? "");
+        },
+        loginFunc: () {
+          //TODO uncomment this when test finished
+          if (!(_formKey.currentState?.validate() ?? false)) {
+            return;
+          }
+          ref
+              .read(logInViewModelProvider.notifier)
+              .login(
+                email: emailTextEditingController.text,
+                password: passwordTextEditingController.text,
+              );
+        },
+        creatAccountFunc: () {
+          context.push(SignupScreen.routeName);
+        },
+        forgotPasswordFunc: () {
+          context.push(ResetPasswordScreen.routeName);
+        },
+      ),
+    );
   }
 }

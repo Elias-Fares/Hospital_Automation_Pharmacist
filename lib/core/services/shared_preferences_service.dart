@@ -23,10 +23,10 @@ class SharedPreferencesService {
   String? getToken() {
     //TODO remove it after test
 
-    final testToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hcmlhbS5mYXJlcy4yMDAyQGdtYWlsLmNvbSIsInVzZXJJZCI6MTUyLCJpYXQiOjE3NTQ1NzQ5MDJ9.YxIlydJyWv7QQF0g5Ak3tEE8nJ2KSSF9wzGk0wAq7t8";
-    return testToken;
-    // return _prefs.getString(Constant.ACCESS_TOKEN);
+    // final testToken =
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hcmlhbS5mYXJlcy4yMDAyQGdtYWlsLmNvbSIsInVzZXJJZCI6MTUyLCJpYXQiOjE3NTQ1NzQ5MDJ9.YxIlydJyWv7QQF0g5Ak3tEE8nJ2KSSF9wzGk0wAq7t8";
+    // return testToken;
+    return _prefs.getString(Constant.ACCESS_TOKEN);
   }
 
   Future<void> clearToken() async {
@@ -79,5 +79,18 @@ class SharedPreferencesService {
 
   Future<void> clearUserName() async {
     await _prefs.remove(Constant.USER_NAME);
+  }
+
+  Future<void> saveHasPermission({required bool? hasPermission}) async {
+    debugPrint("HAS_PERMISSION is $hasPermission");
+
+    if (hasPermission == null) {
+      return;
+    }
+    await _prefs.setBool(Constant.HAS_PERMISSION, hasPermission);
+  }
+
+  bool? getHasPermission() {
+    return _prefs.getBool(Constant.HAS_PERMISSION);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medicare_pharmacy/configuration/res.dart';
+import 'package:medicare_pharmacy/core/enums/batch_status.dart';
 import 'package:medicare_pharmacy/core/function/date_format.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
@@ -57,7 +58,6 @@ class _BatchesScreenState extends ConsumerState<BatchesScreen> {
     final batchesState = ref.watch(batchesViewModelProvider);
     return Scaffold(
       appBar: SubAppBar(),
-
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
 
@@ -96,7 +96,11 @@ class _BatchesScreenState extends ConsumerState<BatchesScreen> {
                               itemBuilder: (context, index) {
                                 final batch = batches.medicineBatches?[index];
                                 return BatchRow(
-                                  state: index == 1 ? "expired" : "safe",
+                                  state: ref
+                                      .read(batchesViewModelProvider.notifier)
+                                      .getBatchStatus(
+                                        batchDate: batch?.expiredDate,
+                                      ),
                                   expirationDate:
                                       batch?.expiredDate?.getYearMonthDay() ??
                                       "",

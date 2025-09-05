@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 extension DateExtension on DateTime {
   DateTime getUtcDateTimeWithZeroHoure() {
     return DateTime.utc(year, month, day);
@@ -27,5 +29,11 @@ extension DateExtension on DateTime {
     } else {
       return "";
     }
+  }
+
+  String toReadableDateTime() {
+    final dateTime = DateTime.parse(toString());
+    final formatter = DateFormat("yyyy-MM-dd hh:mm a");
+    return formatter.format(dateTime.toLocal());
   }
 }

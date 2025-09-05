@@ -3,16 +3,12 @@ part of '../pharmacy_profile_screen.dart';
 class PharmacyProfileNavigationSection extends StatelessWidget {
   const PharmacyProfileNavigationSection({
     super.key,
-    required this.onPrescriptionTap,
-    required this.onMedicinesTap,
-    required this.onContractHistortTap,
+    required this.onDeactivateTap,
+    required this.onLogOutTap,
   });
 
-  final void Function() onPrescriptionTap;
-  final void Function() onMedicinesTap;
-  final void Function() onContractHistortTap;
-
-  //TODO fix the icons here
+  final void Function() onLogOutTap;
+  final void Function() onDeactivateTap;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +23,16 @@ class PharmacyProfileNavigationSection extends StatelessWidget {
           //   onTap: onPrescriptionTap,
           // ),
           IconTitleNavigationButton(
-            iconPath: Res.prescriptionsIcon,
-            title: "Medicines",
-            onTap: onContractHistortTap,
+            iconPath: Res.logOutIcon,
+
+            title: "Log out",
+            onTap: onLogOutTap,
           ),
           IconTitleNavigationButton(
-            iconPath: Res.recordIcon,
-            title: "Contract History",
-            onTap: onMedicinesTap,
+            iconPath: Res.suspendUserIcon,
+            title: "Deactivate pharmacy",
+            onTap: onDeactivateTap,
+            textColor: AppColors.error,
           ),
         ],
       ),

@@ -1,3 +1,5 @@
+import 'package:medicare_pharmacy/data/repository.dart';
+
 import '../../../../configuration/service_locator.dart';
 import '../../../../core/base_dio/data_state.dart';
 
@@ -11,7 +13,7 @@ class AddResidentialAddressViewModel extends _$AddResidentialAddressViewModel {
   AddResidentialAddressState build() =>
       AddResidentialAddressState(agreeCheckBox: false);
 
-  // final _authRepository = getIt<AuthRepository>();
+  final _repository = getIt<Repository>();
 
   Future<void> addAddress({
     required String governate,
@@ -20,22 +22,22 @@ class AddResidentialAddressViewModel extends _$AddResidentialAddressViewModel {
     required String street,
     required String note,
   }) async {
-    // state = state.copyWith(addAddressResponse: const AsyncValue.loading());
+    state = state.copyWith(addAddressResponse: const AsyncValue.loading());
 
-    // final response = await _authRepository.addAddress(
-    //     governate: governate,
-    //     city: city,
-    //     region: region,
-    //     street: street,
-    //     note: note);
-    // if (response is DataSuccess) {
-    //   state = state.copyWith(addAddressResponse: const AsyncValue.data(null));
-    // } else {
-    //   state = state.copyWith(
-    //       addAddressResponse: AsyncValue.error(
-    //           response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
-    //           StackTrace.current));
-    // }
+    final response = await _repository.addAddress(
+        addressGovernorate: governate,
+        addressCity: city,
+        addressRegion: region,
+        addressStreet: street,
+        addressNote: note);
+    if (response is DataSuccess) {
+      state = state.copyWith(addAddressResponse: const AsyncValue.data(null));
+    } else {
+      state = state.copyWith(
+          addAddressResponse: AsyncValue.error(
+              response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
+              StackTrace.current));
+    }
   }
 
   void onCheckBoxChanged(bool value) {

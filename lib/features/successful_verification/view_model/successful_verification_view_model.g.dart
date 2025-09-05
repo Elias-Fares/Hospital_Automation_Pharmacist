@@ -44,7 +44,7 @@ final class SuccessfulVerificationViewModelProvider
 }
 
 String _$successfulVerificationViewModelHash() =>
-    r'40618409484e9dbc589e1e6dbd07f8abe9de5e62';
+    r'accbd2a052bcbba8ca1b8a31496aac704ffe2271';
 
 abstract class _$SuccessfulVerificationViewModel
     extends $Notifier<SuccessfulVerificationState> {

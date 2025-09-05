@@ -44,7 +44,7 @@ final class AddResidentialAddressViewModelProvider
 }
 
 String _$addResidentialAddressViewModelHash() =>
-    r'd2d2a0811136be83235a89ebd0adffd8b1abb79b';
+    r'e9a4caed041b8a294023b2029e0c3cc6b40d1a41';
 
 abstract class _$AddResidentialAddressViewModel
     extends $Notifier<AddResidentialAddressState> {

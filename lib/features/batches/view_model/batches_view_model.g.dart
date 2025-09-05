@@ -38,7 +38,7 @@ final class BatchesViewModelProvider
   }
 }
 
-String _$batchesViewModelHash() => r'0d435a494aa16faf541ca4ed90fcf7a1ec366d29';
+String _$batchesViewModelHash() => r'11c5b344a60282d8f6566781bca824de9c84dc1b';
 
 abstract class _$BatchesViewModel extends $Notifier<BatchesState> {
   BatchesState build();

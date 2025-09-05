@@ -1,3 +1,5 @@
+import 'package:image_picker/image_picker.dart';
+import 'package:medicare_pharmacy/core/function/check_storage_permission.dart';
 import 'package:medicare_pharmacy/data/repository.dart';
 import 'package:medicare_pharmacy/features/pharmacy_profile/view_model/pharmacy_profile_view_model.dart';
 
@@ -7,11 +9,12 @@ import '../../../core/base_dio/data_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'edit_profile_view_model.g.dart';
+part 'edit_profile_state.dart';
 
 @riverpod
 class EditProfileViewModel extends _$EditProfileViewModel {
   @override
-  AsyncValue? build() => null;
+  EditProfileState build() => EditProfileState();
 
   final _repository = getIt<Repository>();
 
@@ -28,8 +31,9 @@ class EditProfileViewModel extends _$EditProfileViewModel {
     required String addressNote,
     required String gender,
   }) async {
-    state = const AsyncValue.loading();
+    state = state.copyWith(editProfileResponse: const AsyncValue.loading());
     final response = await _repository.editPharmacyProfile(
+      imagePath: state.selectedImagePath,
       email: email,
       firstName: firstName,
       middleName: middleName,
@@ -44,15 +48,31 @@ class EditProfileViewModel extends _$EditProfileViewModel {
     );
 
     if (response is DataSuccess) {
-      state = AsyncValue.data(response.data);
+      state = state.copyWith(
+        editProfileResponse: AsyncValue.data(response.data),
+      );
       await ref
           .read(pharmacyProfileViewModelProvider.notifier)
           .showPharmacyProfile();
     } else {
-      state = AsyncValue.error(
-        response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
-        StackTrace.current,
+      state = state.copyWith(
+        editProfileResponse: AsyncValue.error(
+          response.exceptionResponse?.exceptionMessages.firstOrNull ?? "",
+          StackTrace.current,
+        ),
       );
+    }
+  }
+
+  Future<void> selectImageFromGallery() async {
+    final hasPermission = await checkStoragePermisson();
+    if (!hasPermission) return;
+
+    final picker = ImagePicker();
+    final result = await picker.pickImage(source: ImageSource.gallery);
+
+    if (result != null && result.path.isNotEmpty) {
+      state = state.copyWith(selectedImagePath: result.path);
     }
   }
 }

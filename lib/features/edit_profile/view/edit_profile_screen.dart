@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medicare_pharmacy/core/constant/constant.dart';
+import 'package:medicare_pharmacy/core/widgets/general_network_image.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
 import 'package:medicare_pharmacy/core/widgets/textfields/select_option_text_field_v2.dart';
 import 'package:medicare_pharmacy/data/models/profile_model.dart';
 import 'package:medicare_pharmacy/features/pharmacy_profile/view_model/pharmacy_profile_view_model.dart';
@@ -33,6 +39,7 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   // Controllers
   late TextEditingController firstNameController;
+  late TextEditingController middleNameController;
   late TextEditingController secondNameController;
   late TextEditingController governorateController;
   late TextEditingController cityController;
@@ -51,6 +58,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
     firstNameController = TextEditingController(
       text: widget.userProfileData?.user?.firstName ?? "",
+    );
+    middleNameController = TextEditingController(
+      text: widget.userProfileData?.user?.middleName ?? "",
     );
     secondNameController = TextEditingController(
       text: widget.userProfileData?.user?.lastName ?? "",
@@ -97,15 +107,32 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final editState = ref.watch(editProfileViewModelProvider);
+
+    ref.listen(
+      editProfileViewModelProvider.select((value) => value.editProfileResponse),
+      (previous, next) => next?.when(
+        data: (data) {
+          showSnackBarSuccessMessage(
+            context,
+            message: "Profile Updated Successfully",
+          );
+        },
+        error: (error, stackTrace) {
+          showSnackBarErrorMessage(context, message: error.toString());
+        },
+        loading: () {},
+      ),
+    );
     return Scaffold(
       appBar: SubAppBar(
-        titleWidget: AppBarTitleWidget(
-          title: joinStrings([
-            widget.userProfileData?.user?.firstName,
-            widget.userProfileData?.user?.lastName,
-          ]),
-          imagePath: Res.personePlaceHolderImage,
-        ),
+        // titleWidget: AppBarTitleWidget(
+        //   // title: joinStrings([
+        //   //   widget.userProfileData?.user?.firstName,
+        //   //   widget.userProfileData?.user?.lastName,
+        //   // ]),
+        //   // imagePath: Res.personePlaceHolderImage,
+        // ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -113,6 +140,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           formKey: _editProfileFormKey,
           firstNameController: firstNameController,
           secondNameController: secondNameController,
+          middleNameController: middleNameController,
           governorateController: governorateController,
           cityController: cityController,
           regionController: regionController,
@@ -121,11 +149,22 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           emailController: emailController,
           noteController: noteController,
           genderController: genderController,
+          profileImage: widget.userProfileData?.user?.imgurl,
+          selectedImage: editState.selectedImagePath,
           isSaveChangesLoading:
-              ref.watch(editProfileViewModelProvider)?.isLoading ?? false,
+              ref
+                  .watch(editProfileViewModelProvider)
+                  .editProfileResponse
+                  ?.isLoading ??
+              false,
 
           onDiscardPressed: () {
             context.pop();
+          },
+          onPickImageTap: () {
+            ref
+                .read(editProfileViewModelProvider.notifier)
+                .selectImageFromGallery();
           },
           onSavePressed: () async {
             await ref
@@ -133,7 +172,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 .editUserProfile(
                   email: emailController.text,
                   firstName: firstNameController.text,
-                  middleName: "",
+                  middleName: middleNameController.text,
                   lastName: secondNameController.text,
                   phoneNumber: phoneController.text,
                   addressGovernate: governorateController.text,
@@ -143,8 +182,6 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   addressNote: noteController.text,
                   gender: genderController.text,
                 );
-
-
           },
         ),
       ),

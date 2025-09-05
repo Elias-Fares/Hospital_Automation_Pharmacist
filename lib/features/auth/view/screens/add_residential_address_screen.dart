@@ -56,7 +56,7 @@ class _AddResidentialAddressScreenV2State
       (_, next) {
         next?.when(
           data: (data) {
-            context.push(UploadProfileImageScreen.routeName);
+            context.push(AddPharmacyAddressScreen.routeName);
           },
           error: (error, stackTrace) {
             showSnackBarErrorMessage(context, message: error.toString());
@@ -90,20 +90,19 @@ class _AddResidentialAddressScreenV2State
               .onCheckBoxChanged(value ?? false);
         },
         submit: () {
-          // if (!(_formKey.currentState?.validate() ?? false) ||
-          //     (!addAddressState.agreeCheckBox)) {
-          //   return;
-          // }
-          // ref
-          //     .read(addResidentialAddressViewModelProvider.notifier)
-          //     .addAddress(
-          //         governate: governateTextEditingController.text,
-          //         city: cityTextEditingController.text,
-          //         region: regionTextEditingController.text,
-          //         street: streetTextEditingController.text,
-          //         note: noteTextEditingController.text);
-
-          context.push(AddPharmacyAddressScreen.routeName);
+          if (!(_formKey.currentState?.validate() ?? false) ||
+              (!addAddressState.agreeCheckBox)) {
+            return;
+          }
+          ref
+              .read(addResidentialAddressViewModelProvider.notifier)
+              .addAddress(
+                governate: governateTextEditingController.text,
+                city: cityTextEditingController.text,
+                region: regionTextEditingController.text,
+                street: streetTextEditingController.text,
+                note: noteTextEditingController.text,
+              );
         },
       ),
     );

@@ -11,6 +11,9 @@ enum ParamsValues {
   pharmacy,
   down,
   up,
+  create,
+  update,
+  delete,
   
 
 }
@@ -42,6 +45,12 @@ extension ParamsValuesExtension on ParamsValues {
         return "down";
       case ParamsValues.up:
         return "up";
+      case ParamsValues.create:
+        return "create";
+      case ParamsValues.update:
+        return "update";
+      case ParamsValues.delete:
+        return "delete";
     }
   }
 }

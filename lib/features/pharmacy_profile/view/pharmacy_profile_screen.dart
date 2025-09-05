@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medicare_pharmacy/core/constant/constant.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
+import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
 import 'package:medicare_pharmacy/core/widgets/general_image_asset.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
 import 'package:medicare_pharmacy/core/widgets/textfields/select_option_text_field_v2.dart';
+import 'package:medicare_pharmacy/features/auth/view/screens/sign_up_screen.dart';
+import 'package:medicare_pharmacy/features/auth/view/widgets/sign_up_page.dart';
 import 'package:medicare_pharmacy/features/edit_profile/view/edit_profile_screen.dart';
+import 'package:medicare_pharmacy/features/edit_work_days/view/edit_work_days_screen.dart';
 import '../../../configuration/res.dart';
 import '../../../core/function/get_opening_status.dart';
 import '../../../core/function/join_strings.dart';
@@ -24,6 +31,7 @@ import '../view_model/pharmacy_profile_view_model.dart';
 part 'widget/pharmacy_profile_details_section.dart';
 part 'widget/pharmacy_profile_navigation_section.dart';
 part 'widget/profile_edit_button.dart';
+part 'widget/deactivate_dialog.dart';
 
 class PharmacyProfileScreen extends ConsumerStatefulWidget {
   const PharmacyProfileScreen({super.key});
@@ -65,12 +73,7 @@ class _PharmacyProfileScreenState extends ConsumerState<PharmacyProfileScreen> {
                 ?.lastName,
           ]),
           imagePath:
-              pharmacyProfile
-                  .pharmacyDetailsResponse
-                  ?.asData
-                  ?.value
-                  .user
-                  ?.imgurl,
+              "${Constant.baseUrl}/${pharmacyProfile.pharmacyDetailsResponse?.asData?.value.user?.imgurl}",
           subtitle: pharmacyProfile.pharmacyDetailsResponse?.asData?.value.name,
         ),
       ),
@@ -105,9 +108,21 @@ class _PharmacyProfileScreenState extends ConsumerState<PharmacyProfileScreen> {
                           ], joinChart: " - "),
                           residentialsAddress: "",
                           phoneNumber: data.phoneNumber ?? "",
-                          // emailAddress: data.user?.email ?? "",
+                          emailAddress: data.user?.email ?? "",
                           availabilitySchedule: (data.workDays ?? <WorkDay>[]),
-                          emailAddress: "",
+                          onPhoneNumberTap: () {
+                            ref
+                                .read(pharmacyProfileViewModelProvider.notifier)
+                                .makePhoneCall(phoneNumber: data.phoneNumber);
+                          },
+                          onEmailTap: () {
+                            ref
+                                .read(pharmacyProfileViewModelProvider.notifier)
+                                .sendEmail(email: data.user?.email);
+                          },
+                          onEditAvailabilityScheduleTap: () {
+                            context.push(EditWorkDaysScreen.routeName);
+                          },
                         ),
                     error:
                         (error, stackTrace) => CustomErrorWidget(
@@ -124,13 +139,15 @@ class _PharmacyProfileScreenState extends ConsumerState<PharmacyProfileScreen> {
                   const SizedBox.shrink(),
             ),
             const SizedBox(height: 24),
-            // (!(pharmacyProfile.pharmacyDetailsResponse?.isLoading ?? false))
-            //     ? PharmacyProfileNavigationSection(
-            //         onPrescriptionTap: () {},
-            //         onMedicinesTap: () {},
-            //         onContractHistortTap: () {},
-            //       )
-            //     : const SizedBox.shrink(),
+            (!(pharmacyProfile.pharmacyDetailsResponse?.isLoading ?? false))
+                ? PharmacyProfileNavigationSection(
+                  onDeactivateTap: () async {
+                    DeactivateDialog.builder(context);
+                  },
+
+                  onLogOutTap: () {},
+                )
+                : const SizedBox.shrink(),
             const SizedBox(height: 40),
           ],
         ),

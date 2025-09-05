@@ -19,7 +19,7 @@ final class SpecifySaleAmountViewModelProvider
         argument: null,
         retry: null,
         name: r'specifySaleAmountViewModelProvider',
-        isAutoDispose: false,
+        isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +41,7 @@ final class SpecifySaleAmountViewModelProvider
 }
 
 String _$specifySaleAmountViewModelHash() =>
-    r'ab8daf8424df98744d7242283a73c7ad6693ef3a';
+    r'ae525a8d4ffb18a9004ae149b19c2e0ba99e2d4f';
 
 abstract class _$SpecifySaleAmountViewModel
     extends $Notifier<SpecifySaleAmountState> {

@@ -110,7 +110,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
             ref.read(signUpViewModelProvider.notifier).setGender(gender);
           },
           signUpFunc: () {
-            //TODO delete after test
+            // TODO delete after test
             // if (!(_formKey.currentState?.validate() ?? false)) {
             //   return;
             // }

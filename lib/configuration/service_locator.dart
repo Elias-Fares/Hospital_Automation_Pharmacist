@@ -56,6 +56,9 @@ void _initRemoteDataSource() {
 
 void _initRepository() {
   getIt.registerLazySingleton(
-    () => Repository(remoteDataSource: getIt<RemoteDataSource>()),
+    () => Repository(
+      remoteDataSource: getIt<RemoteDataSource>(),
+      sharedPreferencesService: getIt<SharedPreferencesService>(),
+    ),
   );
 }

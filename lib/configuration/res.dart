@@ -22,6 +22,7 @@ class Res {
   //Auth icons
   static const String femaleIcon = "$authIconPath/female_icon$svg";
   static const String maleIcon = "$authIconPath/male_icon$svg";
+  static const String logOutIcon = "$authIconPath/log_out$svg";
 
   //Auth images
   static const String loginImage = "$authImagePath/log_in_image$png";

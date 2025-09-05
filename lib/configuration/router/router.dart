@@ -21,6 +21,7 @@ import 'package:medicare_pharmacy/features/dispense_alt_medicines/view/dispense_
 import 'package:medicare_pharmacy/features/dispense_medicines/view/dispense_medicines_screen.dart';
 import 'package:medicare_pharmacy/features/edit_medicine/view/edit_medicine_screen.dart';
 import 'package:medicare_pharmacy/features/edit_profile/view/edit_profile_screen.dart';
+import 'package:medicare_pharmacy/features/edit_work_days/view/edit_work_days_screen.dart';
 import 'package:medicare_pharmacy/features/inventory/view/inventory_screen.dart';
 import 'package:medicare_pharmacy/features/main/view/main_screen.dart';
 import 'package:medicare_pharmacy/features/medicine_details/view/medicine_details_screen.dart';
@@ -31,15 +32,18 @@ import 'package:medicare_pharmacy/features/permission_required/view/permission_r
 import 'package:medicare_pharmacy/features/pharmacy_profile/view/pharmacy_profile_screen.dart';
 import 'package:medicare_pharmacy/features/scanner/view/scanner_screen.dart';
 import 'package:medicare_pharmacy/features/specify_sale_amount/view/specify_sale_amount_screen.dart';
+import 'package:medicare_pharmacy/features/splash/view/splash_screen.dart';
 import 'package:medicare_pharmacy/features/statistics/view/statistics_screen.dart';
 import 'package:medicare_pharmacy/features/successful_verification/view/successful_verification_screen.dart';
 import 'package:medicare_pharmacy/features/update_price/view/update_price_screen.dart';
+import 'package:medicare_pharmacy/features/upload_documents/view/upload_documents_screen.dart';
 
 import 'my_go_router_observer.dart' show MyGoRouterObserver;
 
 class AppRouter {
   AppRouter._();
-  static String initialRoute = MainScreen.routeName;
+  static String initialRoute = SplashScreen.routeName;
+  // static String initialRoute = MainScreen.routeName;
 
   static final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
 
@@ -209,9 +213,7 @@ class AppRouter {
         path: SpecifySaleAmountScreen.routeName,
         builder: (context, state) {
           final medicineModel = state.extra as MedicineModel?;
-          return SpecifySaleAmountScreen(
-            medicineModel: medicineModel,
-          );
+          return SpecifySaleAmountScreen(medicineModel: medicineModel);
         },
       ),
       GoRoute(
@@ -231,6 +233,24 @@ class AppRouter {
         path: StatisticsScreen.routeName,
         builder: (context, state) {
           return StatisticsScreen();
+        },
+      ),
+      GoRoute(
+        path: EditWorkDaysScreen.routeName,
+        builder: (context, state) {
+          return EditWorkDaysScreen();
+        },
+      ),
+      GoRoute(
+        path: UploadDocumentsScreen.routeName,
+        builder: (context, state) {
+          return UploadDocumentsScreen();
+        },
+      ),
+      GoRoute(
+        path: SplashScreen.routeName,
+        builder: (context, state) {
+          return SplashScreen();
         },
       ),
     ],

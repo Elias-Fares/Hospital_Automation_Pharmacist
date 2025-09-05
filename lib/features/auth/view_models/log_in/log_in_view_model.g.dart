@@ -38,7 +38,7 @@ final class LogInViewModelProvider
   }
 }
 
-String _$logInViewModelHash() => r'635f37f543d19e14588e0d3533f8690c9e30b7f0';
+String _$logInViewModelHash() => r'ce51573f580b4f961cf4a52bee9c933d43d1b84e';
 
 abstract class _$LogInViewModel extends $Notifier<AsyncValue?> {
   AsyncValue? build();

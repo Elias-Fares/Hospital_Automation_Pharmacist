@@ -1,12 +1,19 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:medicare_pharmacy/core/base_dio/base_dio.dart' show BaseDio;
 import 'package:medicare_pharmacy/core/base_dio/data_state.dart';
+import 'package:medicare_pharmacy/core/constant/constant.dart';
+import 'package:medicare_pharmacy/core/enums/params_values.dart';
 import 'package:medicare_pharmacy/core/function/date_format.dart';
+import 'package:medicare_pharmacy/core/models/work_day.dart';
 import 'package:medicare_pharmacy/data/models/inventory_model.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/data/models/medicine_with_alts_model.dart';
 import 'package:medicare_pharmacy/data/models/monthly_revenu_model.dart';
+import 'package:medicare_pharmacy/data/models/notification_model.dart';
 import 'package:medicare_pharmacy/data/models/order_model.dart';
+import 'package:medicare_pharmacy/data/models/permission_model.dart';
 import 'package:medicare_pharmacy/data/models/pharmacy_medicine_model.dart';
 import 'package:medicare_pharmacy/data/models/prescription_model.dart';
 import 'package:medicare_pharmacy/data/models/profile_model.dart';
@@ -18,7 +25,6 @@ class RemoteDataSource {
   RemoteDataSource({required this.baseDio});
 
   Future<DataState> signUp({
-    required String role,
     required String email,
     required String password,
     required String firstName,
@@ -30,7 +36,7 @@ class RemoteDataSource {
     final response = await baseDio.post(
       subUrl: "/pharmacist/sign-up",
       data: {
-        "role": role,
+        "role": Constant.role,
         "email": email,
         "password": password,
         "first_name": firstName,
@@ -81,7 +87,7 @@ class RemoteDataSource {
     required String email,
     required String password,
   }) async {
-    final response = await baseDio.post(
+    final response = await baseDio.basePost(
       subUrl: "/pharmacist/login",
       data: {"email": email, "password": password},
     );
@@ -121,6 +127,7 @@ class RemoteDataSource {
   }) async {
     final response = await baseDio.post(
       subUrl: "/pharmacist/add-address",
+      needToken: true,
       data: {
         "address_governorate": addressGovernorate,
         "address_city": addressCity,
@@ -133,8 +140,23 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> uploadFile() async {
-    final response = await baseDio.post(subUrl: "/pharmacist/upload-file");
+  Future<DataState> uploadFile({required String filePath}) async {
+    final bodyMap = <String, dynamic>{};
+
+    if (filePath.isNotEmpty) {
+      bodyMap["image"] = await MultipartFile.fromFile(
+        filePath,
+        filename: filePath.split("/").last,
+      );
+    }
+
+    final formBody = FormData.fromMap(bodyMap);
+
+    final response = await baseDio.post(
+      subUrl: "/pharmacist/upload-file",
+      data: formBody,
+      needToken: true,
+    );
 
     return response;
   }
@@ -146,10 +168,11 @@ class RemoteDataSource {
   }
 
   Future<DataState> userPermissions() async {
-    final response = await baseDio.get(
+    final response = await baseDio.baseGet<PermissionModel>(
       subUrl: "/pharmacist/user-permissions",
+      needToken: true,
 
-      model: dynamic,
+      model: PermissionModel(),
     );
 
     return response;
@@ -185,6 +208,7 @@ class RemoteDataSource {
   }) async {
     final response = await baseDio.post(
       subUrl: "/pharmacist/add-pharmacy",
+      needToken: true,
       data: {
         "name": name,
         "address_governorate": addressGovernorate,
@@ -211,6 +235,7 @@ class RemoteDataSource {
   }
 
   Future<DataState> editPharmacyProfile({
+    required String? imagePath,
     required String email,
     required String firstName,
     required String middleName,
@@ -223,21 +248,32 @@ class RemoteDataSource {
     required String addressNote,
     required String gender,
   }) async {
+    final bodyMap = <String, Object>{
+      "email": email,
+      "first_name": firstName,
+      "last_name": lastName,
+      "middle_name": middleName,
+      "phone_number": phoneNumber,
+      "address_governorate": addressGovernate,
+      "address_city": addressCity,
+      "address_region": addressRegion,
+      "address_street": addressStreet,
+      "address_note": addressNote,
+      "gender": gender,
+    };
+
+    if (imagePath?.isNotEmpty ?? false) {
+      bodyMap["image"] = await MultipartFile.fromFile(
+        imagePath ?? "",
+        filename: imagePath?.split("/").last ?? "",
+      );
+    }
+
+    final formBody = FormData.fromMap(bodyMap);
+
     final response = await baseDio.basePost(
-      subUrl: "/employee/edit-profile",
-      data: {
-        "email": email,
-        "first_name": firstName,
-        "last_name": lastName,
-        "middle_name": middleName,
-        "phone_number": phoneNumber,
-        "address_governorate": addressGovernate,
-        "address_city": addressCity,
-        "address_region": addressRegion,
-        "address_street": addressStreet,
-        "address_note": addressNote,
-        "gender": gender,
-      },
+      subUrl: "/pharmacist/edit-profile",
+      data: formBody,
       needToken: true,
     );
 
@@ -415,9 +451,37 @@ class RemoteDataSource {
     return response;
   }
 
-  Future<DataState> workDaysProcesses() async {
+  Future<DataState> workDaysProcesses({
+    required ParamsValues requestType,
+    String? day,
+    String? opensAt,
+    String? closeAt,
+    String? workDayId,
+  }) async {
+    Map<String, dynamic>? bodyMap;
+
+    if (requestType == ParamsValues.create) {
+      bodyMap = {
+        "request_type": requestType.value,
+        "request_objects": [
+          {
+            "day": day?.toUpperCase(),
+            "work_start_time": opensAt,
+            "work_end_time": closeAt,
+          },
+        ],
+      };
+    } else if (requestType == ParamsValues.delete) {
+      bodyMap = {
+        "request_type": requestType.value,
+        "ids": [workDayId],
+      };
+    }
+    // final formBody = FormData.fromMap(bodyMap ?? {});
     final response = await baseDio.post(
       subUrl: "/pharmacist/work-days-processes",
+      needToken: true,
+      data: bodyMap,
     );
 
     return response;
@@ -629,6 +693,30 @@ class RemoteDataSource {
       subUrl: "/pharmacist/get-medicine-batches/$id",
       needToken: true,
       model: PharmacyMedicine(),
+    );
+
+    return response;
+  }
+
+  Future<DataState> showNotifications() async {
+    final response = await baseDio.get<NotificationModel>(
+      subUrl: "/pharmacist/show-notification",
+      needToken: true,
+      model: NotificationModel(),
+      isListOfModel: true,
+      queryParameters: {"limit": 1000, "page": 1},
+    );
+
+    return response;
+  }
+
+  Future<DataState> getWorkDays() async {
+    final response = await baseDio.get<WorkDay>(
+      subUrl: "/pharmacist/get-work-days",
+      needToken: true,
+      model: WorkDay(),
+      isListOfModel: true,
+      queryParameters: {"limit": 1000, "page": 1},
     );
 
     return response;

@@ -23,12 +23,11 @@ class _VerificationCodeScreenState
     extends ConsumerState<VerificationCodeScreen> {
   String _otpCode = "";
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
-  Widget build(BuildContext context) {
-    final isVerifyLoading =
-        ref.watch(verifyCodeViewModelProvider).verifyCodeResponse?.isLoading ??
-        false;
-    ref.listen(
+  void initState() {
+    super.initState();
+    ref.listenManual(
       verifyCodeViewModelProvider.select((value) => value.sendCodeResponse),
       (previous, next) {
         next?.when(
@@ -42,13 +41,16 @@ class _VerificationCodeScreenState
         );
       },
     );
-    ref.listen(
+    ref.listenManual(
       verifyCodeViewModelProvider.select((value) => value.verifyCodeResponse),
       (previous, next) {
         next?.when(
           data: (data) {
-            showSnackBarSuccessMessage(context, message: data.toString());
-            context.push(LoginScreen.routeName);
+            showSnackBarSuccessMessage(
+              context,
+              message: "Your Email Verified Successfully :)",
+            );
+            if (mounted) context.push(SuccessfulVerificationScreen.routeName);
           },
           error: (error, stackTrace) {
             showSnackBarErrorMessage(context, message: error.toString());
@@ -57,12 +59,21 @@ class _VerificationCodeScreenState
         );
       },
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isVerifyLoading =
+        ref.watch(verifyCodeViewModelProvider).verifyCodeResponse?.isLoading ??
+        false;
+
     return Scaffold(
       appBar: AppBar(),
       resizeToAvoidBottomInset: false,
       body: VerificationCodePage(
         formKey: formKey,
         isLoading: isVerifyLoading,
+        email: ref.read(verifyCodeViewModelProvider.notifier).getEmail(),
         verifyCodeValidator: (value) {
           return FieldsValidator.validateEmpty(value: value ?? "");
         },
@@ -73,16 +84,16 @@ class _VerificationCodeScreenState
         },
         verifyCodePress: () {
           //TODO uncomment when you finish Auth
-          // debugPrint(_otpCode.length.toString());
-          // if (_otpCode.length < 4) {
-          //   return;
-          // }
-          // ref
-          //     .read(verifyCodeViewModelProvider.notifier)
-          //     .verifyOTP(otp: _otpCode);
+          debugPrint(_otpCode.length.toString());
+          if (_otpCode.length < 4) {
+            return;
+          }
+          ref
+              .read(verifyCodeViewModelProvider.notifier)
+              .verifyOTP(otp: _otpCode);
 
           //TODO delete it when u fininsh testign
-          context.push(SuccessfulVerificationScreen.routeName);
+          // context.push(SuccessfulVerificationScreen.routeName);
         },
         resendCodePress: () {
           ref.read(verifyCodeViewModelProvider.notifier).sendOTP();

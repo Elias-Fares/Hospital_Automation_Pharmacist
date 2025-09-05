@@ -9,12 +9,12 @@ class BatchRow extends StatelessWidget {
   });
   final String remainingQuantity;
   final String expirationDate;
-  final String state; // expired, warning, safe
+  final BatchStatus state; // expired, warning, safe
 
   Color _colorSelector() {
-    if (state == "expired") {
+    if (state == BatchStatus.expired) {
       return AppColors.error;
-    } else if (state == "warning") {
+    } else if (state == BatchStatus.warning) {
       return AppColors.warning;
     } else {
       return AppColors.white;
@@ -22,9 +22,9 @@ class BatchRow extends StatelessWidget {
   }
 
   Color _backgroundColorSelector() {
-    if (state == "expired") {
+    if (state == BatchStatus.expired) {
       return AppColors.error.withValues(alpha: 0.05);
-    } else if (state == "warning") {
+    } else if (state == BatchStatus.warning) {
       return AppColors.warning.withValues(alpha: 0.05);
     } else {
       return AppColors.white;
@@ -32,14 +32,14 @@ class BatchRow extends StatelessWidget {
   }
 
   Widget _iconSelector() {
-    if (state == "expired") {
+    if (state == BatchStatus.expired) {
       return GeneralImageAssets(
         path: Res.errorIcon,
         color: AppColors.error,
         width: 18,
         height: 18,
       );
-    } else if (state == "warning") {
+    } else if (state == BatchStatus.warning) {
       return GeneralImageAssets(
         path: Res.notificationIcon,
         color: AppColors.warning,
