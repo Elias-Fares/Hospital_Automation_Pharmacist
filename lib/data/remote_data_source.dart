@@ -7,6 +7,7 @@ import 'package:medicare_pharmacy/core/constant/constant.dart';
 import 'package:medicare_pharmacy/core/enums/params_values.dart';
 import 'package:medicare_pharmacy/core/function/date_format.dart';
 import 'package:medicare_pharmacy/core/models/work_day.dart';
+import 'package:medicare_pharmacy/data/models/fake_model.dart';
 import 'package:medicare_pharmacy/data/models/inventory_model.dart';
 import 'package:medicare_pharmacy/data/models/medicine_model.dart';
 import 'package:medicare_pharmacy/data/models/medicine_with_alts_model.dart';
@@ -311,7 +312,7 @@ class RemoteDataSource {
     };
 
     if (imagePath.isNotEmpty) {
-      bodyMap["image"] = MultipartFile.fromFile(
+      bodyMap["image"] = await MultipartFile.fromFile(
         imagePath,
         filename: imagePath.split("/").last,
       );
@@ -321,6 +322,7 @@ class RemoteDataSource {
 
     final response = await baseDio.post(
       subUrl: "/pharmacist/add-medicine",
+      needToken: true,
 
       data: formData,
     );
@@ -719,6 +721,17 @@ class RemoteDataSource {
       model: WorkDay(),
       isListOfModel: true,
       queryParameters: {"limit": 1000, "page": 1},
+    );
+
+    return response;
+  }
+
+  Future<DataState> notificationTrigger({required String fcm}) async {
+    final response = await baseDio.baseGet<FakeModel>(
+      subUrl: "/pharmacist/notification-trigger",
+      needToken: true,
+      data: {"fcmToken": fcm},
+      model: FakeModel(),
     );
 
     return response;

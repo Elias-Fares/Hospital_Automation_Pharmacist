@@ -97,12 +97,16 @@ class _SpecifySaleAmountScreenState
     );
     return Scaffold(
       appBar: SubAppBar(),
-      floatingActionButton: FloatingActionButtonFadedElevation(
-        title: "Sell",
-        
-        onTap: () {
-          _viewModel.sellRequest();
-        },
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: LoadingButton(
+          title: "Sell",
+          isLoading: ordersState.sellingResponse?.isLoading ?? false,
+
+          onTap: () {
+            _viewModel.sellRequest();
+          },
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SingleChildScrollView(
@@ -145,7 +149,9 @@ class _SpecifySaleAmountScreenState
                         final scannedCode = await ScanCodeDialog.builder(
                           context,
                         );
-                        _viewModel.fetchMedicineByBarcode(code: "1234556");
+                        _viewModel.fetchMedicineByBarcode(
+                          code: scannedCode ?? "",
+                        );
                       },
                     );
                   }

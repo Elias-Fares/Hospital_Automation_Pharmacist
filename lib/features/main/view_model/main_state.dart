@@ -1,8 +1,14 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 class MainState {
   final int selectedIndex;
+  final AsyncValue? notificationTrigger;
 
-  MainState({required this.selectedIndex});
+  MainState({required this.selectedIndex, this.notificationTrigger});
 
-  MainState copyWith({int? selectedIndex}) =>
-      MainState(selectedIndex: selectedIndex ?? this.selectedIndex);
+  MainState copyWith({int? selectedIndex, AsyncValue? notificationTrigger}) =>
+      MainState(
+        selectedIndex: selectedIndex ?? this.selectedIndex,
+        notificationTrigger: notificationTrigger ?? this.notificationTrigger,
+      );
 }

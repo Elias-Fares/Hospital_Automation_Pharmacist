@@ -35,15 +35,16 @@ class PharmacyProfileViewModel extends _$PharmacyProfileViewModel {
       );
     }
   }
+
   Future<void> deactivateAccount({required String deactivationReason}) async {
     state = state.copyWith(deactivateAccount: const AsyncValue.loading());
 
-    final response = await _repository.deactivateAccount(deactivationReason: deactivationReason);
+    final response = await _repository.deactivateAccount(
+      deactivationReason: deactivationReason,
+    );
 
     if (response is DataSuccess) {
-      state = state.copyWith(
-        deactivateAccount: AsyncValue.data(response.data),
-      );
+      state = state.copyWith(deactivateAccount: AsyncValue.data(response.data));
     } else {
       state = state.copyWith(
         deactivateAccount: AsyncValue.error(
@@ -66,7 +67,7 @@ class PharmacyProfileViewModel extends _$PharmacyProfileViewModel {
   }
 
   Future<void> sendEmail({required String? email}) async {
-     if (email == null) return;
+    if (email == null) return;
     final Uri emailUri = Uri(scheme: "mailto", path: email);
 
     if (await canLaunchUrl(emailUri)) {
@@ -74,5 +75,11 @@ class PharmacyProfileViewModel extends _$PharmacyProfileViewModel {
     } else {
       throw 'Could not launch $emailUri';
     }
+  }
+
+  Future<void> logout() async {
+   await _repository.clearEmail();
+   await _repository.clearPassword();
+   await _repository.clearToken();
   }
 }

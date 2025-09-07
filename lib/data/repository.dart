@@ -549,4 +549,10 @@ class Repository {
 
     return response;
   }
+
+  Future<DataState> notificationTrigger({required String fcm}) async {
+    final response = await _remoteDataSource.notificationTrigger(fcm: fcm);
+
+    return response;
+  }
 }

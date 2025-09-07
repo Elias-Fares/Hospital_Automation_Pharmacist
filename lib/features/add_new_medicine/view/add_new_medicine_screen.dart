@@ -15,6 +15,9 @@ import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
 import 'package:medicare_pharmacy/core/widgets/cards/allownace_section.dart';
 import 'package:medicare_pharmacy/core/widgets/general_image_asset.dart';
 import 'package:medicare_pharmacy/core/widgets/scan_code_dialog.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
+import 'package:medicare_pharmacy/core/widgets/textfields/text_field_date_picker.dart';
 import 'package:medicare_pharmacy/features/add_new_medicine/view_model/add_new_medicine_view_model.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -40,12 +43,31 @@ class _AddNewMedicineScreenState extends ConsumerState<AddNewMedicineScreen> {
   final TextEditingController quantityController = TextEditingController();
 
   final TextEditingController companyNameController = TextEditingController();
+  final TextEditingController expiresAtController = TextEditingController();
   final TextEditingController codeController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final addState = ref.watch(addNewMedicineViewModelProvider);
+
+    ref.listen(
+      addNewMedicineViewModelProvider.select((value) => value.addMedResponse),
+      (previous, next) {
+        next?.when(
+          data: (data) {
+            showSnackBarSuccessMessage(
+              context,
+              message: "Medicine Added Successfully",
+            );
+          },
+          error: (error, stackTrace) {
+            showSnackBarErrorMessage(context, message: error.toString());
+          },
+          loading: () {},
+        );
+      },
+    );
     return Scaffold(
       appBar: SubAppBar(),
 
@@ -57,7 +79,7 @@ class _AddNewMedicineScreenState extends ConsumerState<AddNewMedicineScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ImageSection(
-                imagePath: "",
+                imagePath: addState.imagePath ?? "",
                 onReplaceImageTap: () {
                   ref
                       .read(addNewMedicineViewModelProvider.notifier)
@@ -195,6 +217,18 @@ class _AddNewMedicineScreenState extends ConsumerState<AddNewMedicineScreen> {
                 ),
               ),
 
+              SizedBox(height: 20),
+              TextFieldDatePicker(
+                textEditingController: expiresAtController,
+                style: Theme.of(context).textTheme.bodyMedium,
+
+                validator:
+                    (value) =>
+                        FieldsValidator.validateEmpty(value: value ?? ""),
+                decoration: InputDecoration(label: Text("Expires at")),
+                hintText: "",
+              ),
+
               SizedBox(height: 30),
 
               LoadingButton(
@@ -214,6 +248,20 @@ class _AddNewMedicineScreenState extends ConsumerState<AddNewMedicineScreen> {
                   //       companyName: companyController.text,
                   //       price: priceController.text,
                   //     );
+                  ref
+                      .read(addNewMedicineViewModelProvider.notifier)
+                      .addMedicine(
+                        name: nameController.text,
+                        pharmaceuticaltiter: titerController.text,
+                        pharmaceuticalindications: phIndicationController.text,
+                        pharmaceuticalcomposition: phCompositionController.text,
+                        companyName: companyNameController.text,
+                        price: priceController.text,
+                        quantity: quantityController.text,
+                        lowBound: lowBoundController.text,
+                        barcode: codeController.text,
+                        expiredAt: expiresAtController.text,
+                      );
                 },
               ),
               SizedBox(height: 35),

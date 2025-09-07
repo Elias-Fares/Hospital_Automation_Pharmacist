@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medicare_pharmacy/configuration/service_locator.dart';
 import 'package:medicare_pharmacy/core/base_dio/data_state.dart';
@@ -16,7 +17,6 @@ class AddNewMedicineViewModel extends _$AddNewMedicineViewModel {
   final _repository = getIt<Repository>();
 
   Future<void> addMedicine({
-    required String medId,
     required String name,
     required String pharmaceuticaltiter,
     required String pharmaceuticalindications,
@@ -29,6 +29,7 @@ class AddNewMedicineViewModel extends _$AddNewMedicineViewModel {
     required String expiredAt,
   }) async {
     state = state.copyWith(addMedResponse: AsyncValue.loading());
+    debugPrint(state.imagePath);
     final response = await _repository.addMedicine(
       name: name,
       pharmaceuticaltiter: pharmaceuticaltiter,
@@ -66,7 +67,7 @@ class AddNewMedicineViewModel extends _$AddNewMedicineViewModel {
     }
   }
 
-    void changeisAllowedWithoutPrescription(bool value) {
+  void changeisAllowedWithoutPrescription(bool value) {
     state = state.copyWith(isAllowedWithoutPrescription: value);
   }
 }

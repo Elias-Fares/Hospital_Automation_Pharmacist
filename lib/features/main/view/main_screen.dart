@@ -6,6 +6,7 @@ import 'package:medicare_pharmacy/configuration/res.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/widgets/appbars/main_app_bar.dart';
 import 'package:medicare_pharmacy/core/widgets/general_image_asset.dart';
+import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
 import 'package:medicare_pharmacy/features/add_new_medicine/view/add_new_medicine_screen.dart';
 import 'package:medicare_pharmacy/features/app_drawer/view/app_drawer_screen.dart';
 import 'package:medicare_pharmacy/features/dispense/view/dispense_screen.dart';
@@ -45,8 +46,28 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      ref.read(mainViewModelProvider.notifier).notificationTrigger();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final mainState = ref.watch(mainViewModelProvider);
+
+    ref.listen(
+      mainViewModelProvider.select((value) => value.notificationTrigger),
+      (previous, next) => next?.when(
+        data: (data) {},
+        error: (error, stackTrace) {
+          showSnackBarErrorMessage(context, message: error.toString());
+        },
+        loading: () {},
+      ),
+    );
     return Scaffold(
       key: mainScreenScaffoldKey,
       body: _screens.elementAt(mainState.selectedIndex),

@@ -110,15 +110,15 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with RouteAware {
                 controller: _mobileScannerController,
                 onDetect: (result) async {
                   _mobileScannerController.pause();
-
-                  await ref
-                      .read(scannerViewModelProvider.notifier)
-                      .getMedicineByBarcode(code: "1234556");
+                  // TODO remove after tetsing
                   // await ref
                   //     .read(scannerViewModelProvider.notifier)
-                  //     .getMedicineByBarcode(
-                  //       code: result.barcodes.first.rawValue ?? "",
-                  //     );
+                  //     .getMedicineByBarcode(code: "1234556");
+                  await ref
+                      .read(scannerViewModelProvider.notifier)
+                      .getMedicineByBarcode(
+                        code: result.barcodes.first.rawValue ?? "",
+                      );
                 },
               ),
             ),

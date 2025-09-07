@@ -56,6 +56,7 @@ class _SpecifySaleAmountDialogState
                 controller: newQuantityController,
                 style: Theme.of(context).textTheme.bodyMedium,
                 decoration: InputDecoration(label: Text("Quantity")),
+                keyboardType: TextInputType.number,
                 validator:
                     (value) =>
                         FieldsValidator.validateEmpty(value: value ?? ""),

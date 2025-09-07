@@ -35,7 +35,7 @@ class TextFieldDatePicker extends StatelessWidget {
             lastDate: DateTime(2050),
           );
           textEditingController?.text =
-              selectedDate?.getYearMonthDay(commaShape: "/") ?? "";
+              selectedDate?.getYearMonthDay(commaShape: "-") ?? "";
         },
       ),
     );

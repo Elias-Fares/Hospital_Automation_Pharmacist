@@ -152,8 +152,8 @@ class PrescriptionCard extends StatelessWidget {
             keyTitle: "Doctor",
             value: doctorName,
             iconData: Icons.person_4_outlined,
-            needOnTap: true,
-            onTap: onDoctorTap,
+            // needOnTap: true,
+            // onTap: onDoctorTap,
           ),
           SizedBox(height: 20),
           IconKeyValueWidget(

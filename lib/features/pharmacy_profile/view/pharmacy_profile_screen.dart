@@ -7,10 +7,8 @@ import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/widgets/buttons/loading_button.dart';
 import 'package:medicare_pharmacy/core/widgets/general_image_asset.dart';
 import 'package:medicare_pharmacy/core/widgets/show_snack_bar_error_message.dart';
-import 'package:medicare_pharmacy/core/widgets/show_snack_bar_success_message.dart';
-import 'package:medicare_pharmacy/core/widgets/textfields/select_option_text_field_v2.dart';
+import 'package:medicare_pharmacy/features/auth/view/screens/login_screen.dart';
 import 'package:medicare_pharmacy/features/auth/view/screens/sign_up_screen.dart';
-import 'package:medicare_pharmacy/features/auth/view/widgets/sign_up_page.dart';
 import 'package:medicare_pharmacy/features/edit_profile/view/edit_profile_screen.dart';
 import 'package:medicare_pharmacy/features/edit_work_days/view/edit_work_days_screen.dart';
 import '../../../configuration/res.dart';
@@ -145,7 +143,15 @@ class _PharmacyProfileScreenState extends ConsumerState<PharmacyProfileScreen> {
                     DeactivateDialog.builder(context);
                   },
 
-                  onLogOutTap: () {},
+                  onLogOutTap: () async {
+                    await ref
+                        .read(pharmacyProfileViewModelProvider.notifier)
+                        .logout();
+
+                    if (context.mounted) {
+                      context.go(LoginScreen.routeName);
+                    }
+                  },
                 )
                 : const SizedBox.shrink(),
             const SizedBox(height: 40),
