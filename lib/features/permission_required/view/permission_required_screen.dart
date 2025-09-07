@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medicare_pharmacy/configuration/res.dart';
+import 'package:medicare_pharmacy/configuration/service_locator.dart';
 import 'package:medicare_pharmacy/core/style/app_colors.dart';
 import 'package:medicare_pharmacy/core/style/card_container_decoration.dart';
 import 'package:medicare_pharmacy/core/widgets/general_image_asset.dart';
+import 'package:medicare_pharmacy/data/repository.dart';
 
 class PermissionRequiredScreen extends ConsumerWidget {
   const PermissionRequiredScreen({super.key});
@@ -14,6 +16,11 @@ class PermissionRequiredScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     getIt<Repository>().clearToken();
+      //   },
+      // ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Column(

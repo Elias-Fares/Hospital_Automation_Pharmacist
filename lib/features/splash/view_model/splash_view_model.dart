@@ -64,4 +64,6 @@ class SplashViewModel extends _$SplashViewModel {
       }
     }
   }
+
+
 }

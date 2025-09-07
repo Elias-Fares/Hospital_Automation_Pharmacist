@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medicare_pharmacy/data/repository.dart';
+import 'package:medicare_pharmacy/features/main/view/main_screen.dart';
 import '../../../../configuration/service_locator.dart';
 import '../../../../core/base_dio/data_state.dart';
 import '../../../../core/services/shared_preferences_service.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../../permission_required/view/permission_required_screen.dart';
 part 'log_in_view_model.g.dart';
 
 @riverpod
@@ -38,6 +41,35 @@ class LogInViewModel extends _$LogInViewModel {
     return isTokenEmpty;
   }
 
+  bool? hasPermission;
 
+  Future<void> fetchPermission() async {
+    hasPermission = _repository.getHasPermission();
 
+    if (hasPermission == true) {
+      return;
+    }
+
+    final response = await _repository.userPermissions();
+
+    if (response is DataSuccess) {
+      await _repository.saveHasPermission(hasPermission: response.data.message);
+      hasPermission = response.data.message;
+    } else {
+      hasPermission = false;
+    }
+  }
+
+    Future<void> redirectionAfterLogin(BuildContext context) async {
+    await fetchPermission();
+
+    if (context.mounted) {
+      if (hasPermission == true) {
+        context.go(MainScreen.routeName);
+      } else {
+        context.go(PermissionRequiredScreen.routeName);
+        // context.go(LoginScreen.routeName);
+      }
+    }
+  }
 }

@@ -78,8 +78,9 @@ class PharmacyProfileViewModel extends _$PharmacyProfileViewModel {
   }
 
   Future<void> logout() async {
-   await _repository.clearEmail();
-   await _repository.clearPassword();
-   await _repository.clearToken();
+    await _repository.clearEmail();
+    await _repository.clearPassword();
+    await _repository.clearToken();
+    await _repository.clearHasPermission();
   }
 }

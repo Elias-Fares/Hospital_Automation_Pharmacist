@@ -93,4 +93,8 @@ class SharedPreferencesService {
   bool? getHasPermission() {
     return _prefs.getBool(Constant.HAS_PERMISSION);
   }
+
+    Future<void> clearHasPermission() async {
+    await _prefs.remove(Constant.HAS_PERMISSION);
+  }
 }

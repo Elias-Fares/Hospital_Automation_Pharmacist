@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medicare_pharmacy/features/main/view/main_screen.dart';
+import 'package:medicare_pharmacy/features/splash/view_model/splash_view_model.dart';
 import '../../../../core/validators/fields_validator.dart';
 import '../../../../core/widgets/show_snack_bar_error_message.dart';
 // import '../../../appointments/view/appointments.dart';
@@ -59,7 +60,10 @@ class _LoginScreenV2State extends ConsumerState<LoginScreen> {
       next?.when(
         data: (data) {
           // showSnackBarSuccessMessage(context, message: data["message"]);
-          context.push(MainScreen.routeName);
+          ref
+              .read(logInViewModelProvider.notifier)
+              .redirectionAfterLogin(context);
+          // context.go(MainScreen.routeName);
         },
         error: (error, stackTrace) {
           showSnackBarErrorMessage(context, message: error.toString());

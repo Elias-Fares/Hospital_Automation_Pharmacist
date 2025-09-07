@@ -145,7 +145,7 @@ class ProfileModel extends GeneralModel {
 
   @override
   GeneralModel fromJson(json) {
-    return ProfileModel.fromJson(json);
+    return ProfileModel.fromJson(json ?? {});
   }
 }
 

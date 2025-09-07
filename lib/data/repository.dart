@@ -60,6 +60,10 @@ class Repository {
     );
   }
 
+  Future<void> clearHasPermission() async {
+    await _sharedPreferencesService.clearHasPermission();
+  }
+
   bool? getHasPermission() {
     return _sharedPreferencesService.getHasPermission();
   }
