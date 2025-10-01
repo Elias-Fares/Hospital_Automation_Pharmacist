@@ -26,6 +26,21 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with RouteAware {
   final MobileScannerController _mobileScannerController =
       MobileScannerController();
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  // } // In your main.dart or app initialization
+
+  // void initializeBarcodeScanner() async {
+  //   try {
+  //     // This will trigger the module download
+  //     final scanner = BarcodeScanner();
+  //     // Don't actually use it, just initialize
+  //   } catch (e) {
+  //     // Module is downloading, ignore the error
+  //   }
+  // }
+
   @override
   void didChangeDependencies() {
     //Called when the widget is inserted into the widget tree or when inherited widgets change.
