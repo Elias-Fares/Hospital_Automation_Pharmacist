@@ -3,6 +3,7 @@
 A Flutter-based mobile application built to assist pharmacy departments in efficiently managing their medicine inventory, prescriptions, and sales analytics.  
 It enables pharmacists to handle CRUD operations on medicines and their alternatives, track batches and expiration dates, and receive notifications when stock runs low or products expire.
 
+![mockup](assets/pharmacist_app_mockups.jpg)
 ---
 
 ## 📱 Features
